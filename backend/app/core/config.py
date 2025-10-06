@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from typing import List
+from typing import List, Union
+from pydantic import field_validator
 
 
 class Settings(BaseSettings):
@@ -16,7 +17,7 @@ class Settings(BaseSettings):
     # Database - PostgreSQL only
     DATABASE_URL: str = "postgresql://postgres:Bhanu123%40@localhost:5432/health_predictor"
     
-    # CORS
+    # CORS - Can be string or list
     ALLOWED_ORIGINS: List[str] = [
         "http://localhost:5173",
         "http://localhost:3000",
@@ -27,6 +28,18 @@ class Settings(BaseSettings):
         "http://127.0.0.1:3001",
         "http://127.0.0.1:3002",
     ]
+    
+    @field_validator('ALLOWED_ORIGINS', mode='before')
+    @classmethod
+    def parse_allowed_origins(cls, v):
+        if isinstance(v, str):
+            # Handle comma-separated string format
+            if ',' in v:
+                return [origin.strip() for origin in v.split(',')]
+            # Handle single origin string
+            else:
+                return [v.strip()]
+        return v
     
     # ML Model
     MODEL_PATH: str = "../ml-model/models/disease_predictor.pkl"
