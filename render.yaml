@@ -1,0 +1,34 @@
+# Render deployment configuration for FastAPI backend
+# https://render.com/docs/yaml-spec
+
+services:
+  # Backend API Service
+  - type: web
+    name: health-symptom-predictor-backend
+    runtime: python
+    region: oregon  # Free tier region
+    plan: free      # Free tier plan
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false  # Set this manually in Render dashboard
+      - key: SECRET_KEY
+        generateValue: true  # Render will generate a secure key
+      - key: DATABASE_URL
+        fromDatabase:
+          name: health-symptom-predictor-db
+          property: connectionString
+      - key: ALLOWED_ORIGINS
+        value: https://health-symptom-predictor-frontend.onrender.com,http://localhost:3000
+    healthCheckPath: /api/chat/health
+
+databases:
+  # PostgreSQL Database
+  - name: health-symptom-predictor-db
+    plan: free      # Free tier (90 days)
+    databaseName: health_predictor
+    user: postgres
+    region: oregon
