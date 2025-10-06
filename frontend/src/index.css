@@ -10,17 +10,124 @@
   --accent: #10b981;
 }
 
+html {
+  /* Prevent text size adjustment on mobile */
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
 html, body, #root {
   height: 100%;
 }
 
 body {
   @apply bg-slate-950 text-slate-100 min-h-screen;
+  /* Improve font rendering on mobile */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.card { @apply bg-slate-900/70 border border-slate-800 rounded-xl shadow-lg; }
-.btn { @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition; }
-.btn-primary { @apply bg-cyan-500 hover:bg-cyan-400 text-slate-900; }
-.btn-ghost { @apply bg-transparent hover:bg-slate-800/60; }
-.input { @apply w-full rounded-md border border-slate-800 bg-slate-900/60 px-3 py-2 outline-none focus:ring-2 focus:ring-cyan-500; }
-.label { @apply text-sm text-slate-300; }
+/* Mobile-optimized card component */
+.card { 
+  @apply bg-slate-900/70 border border-slate-800 rounded-xl shadow-lg;
+  /* Better touch targets on mobile */
+  @apply transition-colors duration-200;
+}
+
+.card:hover {
+  @apply border-slate-700;
+}
+
+/* Mobile-optimized button component */
+.btn { 
+  @apply inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition;
+  /* Minimum touch target size (44x44px recommended) */
+  @apply min-h-[44px] touch-manipulation;
+}
+
+/* Primary button with better visibility */
+.btn-primary { 
+  @apply bg-cyan-500 hover:bg-cyan-400 text-slate-900 font-semibold;
+  @apply shadow-lg shadow-cyan-500/20;
+}
+
+.btn-primary:active {
+  @apply scale-95;
+}
+
+.btn-ghost { 
+  @apply bg-transparent hover:bg-slate-800/60;
+}
+
+.btn-ghost:active {
+  @apply bg-slate-800;
+}
+
+/* Mobile-optimized input fields */
+.input { 
+  @apply w-full rounded-md border border-slate-800 bg-slate-900/60 px-3 py-2;
+  @apply outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent;
+  @apply transition-shadow duration-200;
+  /* Better readability on mobile */
+  @apply text-base;
+  /* Minimum touch target height */
+  @apply min-h-[44px];
+}
+
+/* Prevent zoom on input focus on iOS */
+@media screen and (max-width: 768px) {
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="url"],
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+}
+
+.label { 
+  @apply text-sm text-slate-300 font-medium;
+}
+
+/* Improve tap targets for mobile */
+button, a, input, select, textarea {
+  @apply touch-manipulation;
+}
+
+/* Better scrollbar for mobile */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-slate-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-600;
+}
+
+/* Improve selection colors */
+::selection {
+  @apply bg-cyan-500 text-slate-900;
+}
+
+/* Utility for hiding scrollbar while maintaining scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
