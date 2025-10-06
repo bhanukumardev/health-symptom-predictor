@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini API Test</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0f172a;
+            color: #f1f5f9;
+        }
+        .container {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #334155;
+            border-radius: 5px;
+            background: #0f172a;
+            color: #f1f5f9;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(to right, #06b6d4, #3b82f6);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #0f172a;
+            border-radius: 5px;
+            border: 1px solid #334155;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 100px;
+        }
+        .success { color: #22c55e; }
+        .error { color: #ef4444; }
+        .info { color: #3b82f6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Gemini API Test</h1>
+        <p>Test your Gemini API key directly</p>
+        
+        <input type="text" id="apiKey" placeholder="Enter your Gemini API Key" value="AIzaSyBDKvY1G7VCiIWjqEQKx0lvKdHtXmoibvE">
+        <input type="text" id="prompt" placeholder="Enter your test prompt" value="Hello! Can you help me with a health question?">
+        <button id="testBtn" onclick="testAPI()">Test API</button>
+        
+        <div id="result">Results will appear here...</div>
+    </div>
+
+    <script type="module">
+        import { GoogleGenerativeAI } from 'https://esm.run/@google/generative-ai';
+
+        window.testAPI = async function() {
+            const apiKey = document.getElementById('apiKey').value;
+            const prompt = document.getElementById('prompt').value;
+            const resultDiv = document.getElementById('result');
+            const button = document.getElementById('testBtn');
+
+            if (!apiKey) {
+                resultDiv.innerHTML = '<span class="error">❌ Please enter an API key</span>';
+                return;
+            }
+
+            button.disabled = true;
+            resultDiv.innerHTML = '<span class="info">⏳ Testing API...</span>';
+
+            try {
+                console.log('🔑 API Key:', apiKey.substring(0, 10) + '...');
+                
+                const genAI = new GoogleGenerativeAI(apiKey);
+                const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro-latest" });
+
+                console.log('📤 Sending request...');
+                const result = await model.generateContent(prompt);
+                const response = await result.response;
+                const text = response.text();
+
+                console.log('✅ Success! Response:', text);
+                resultDiv.innerHTML = `<span class="success">✅ Success!</span>\n\n${text}`;
+            } catch (error) {
+                console.error('❌ Error:', error);
+                resultDiv.innerHTML = `<span class="error">❌ Error:</span>\n\n${error.message}\n\nDetails: ${JSON.stringify(error, null, 2)}`;
+            } finally {
+                button.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

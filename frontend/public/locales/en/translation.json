@@ -1,0 +1,184 @@
+{
+  "app": {
+    "title": "Health Predictor",
+    "tagline": "AI-Powered Health Symptom Analysis"
+  },
+  "nav": {
+    "home": "Home",
+    "predict": "Predict",
+    "chat": "Chat",
+    "history": "History",
+    "profile": "Profile",
+    "admin": "Admin",
+    "signOut": "Sign Out",
+    "signIn": "Sign In"
+  },
+  "home": {
+    "hero": {
+      "title": "AI-Powered Health Symptom Predictor",
+      "subtitle": "Get instant health insights based on your symptoms",
+      "cta": "Get Started"
+    },
+    "features": {
+      "accurate": {
+        "title": "Accurate Predictions",
+        "description": "Advanced ML algorithms for precise health assessments"
+      },
+      "multilingual": {
+        "title": "Multilingual Support",
+        "description": "Supports English, Hindi & Hinglish"
+      },
+      "secure": {
+        "title": "Secure & Private",
+        "description": "Your health data is encrypted and protected"
+      },
+      "history": {
+        "title": "Track History",
+        "description": "Monitor your health journey over time"
+      }
+    }
+  },
+  "predict": {
+    "title": "Symptom Analysis",
+    "selectSymptoms": "Select Your Symptoms",
+    "searchPlaceholder": "Search symptoms...",
+    "analyze": "Analyze Symptoms",
+    "results": "Analysis Results",
+    "confidence": "Confidence",
+    "noSymptoms": "Please select at least one symptom",
+    "analyzing": "Analyzing...",
+    "submit": "Submit",
+    "additionalDetails": "Additional details (optional)",
+    "additionalDetailsPlaceholder": "Any other symptoms or context...",
+    "selectAtLeastOne": "Select at least one symptom to continue.",
+    "predictionResults": "Prediction Results",
+    "recommendations": "Recommendations",
+    "precautions": "Precautions",
+    "feedback": {
+      "title": "Help us improve - Give Feedback",
+      "wasAccurate": "Was this prediction accurate?",
+      "yesAccurate": "Yes, Accurate",
+      "noInaccurate": "No, Inaccurate",
+      "rateOptional": "Rate this prediction (optional)",
+      "actualDiagnosis": "What was the actual diagnosis? (optional)",
+      "actualDiagnosisPlaceholder": "e.g., Flu, Strep throat...",
+      "comments": "Additional comments (optional)",
+      "commentsPlaceholder": "Share your thoughts...",
+      "submitFeedback": "Submit Feedback",
+      "submitting": "Submitting...",
+      "thankYou": "✓ Thank you for your feedback! It helps us improve our predictions."
+    }
+  },
+  "symptoms": {
+    "Fever": "Fever",
+    "Cough": "Cough",
+    "Fatigue": "Fatigue",
+    "Headache": "Headache",
+    "Nausea": "Nausea",
+    "Vomiting": "Vomiting",
+    "Diarrhea": "Diarrhea",
+    "Abdominal Pain": "Abdominal Pain",
+    "Chest Pain": "Chest Pain",
+    "Shortness of Breath": "Shortness of Breath",
+    "Sore Throat": "Sore Throat",
+    "Runny Nose": "Runny Nose",
+    "Body Aches": "Body Aches",
+    "Loss of Appetite": "Loss of Appetite",
+    "Dizziness": "Dizziness",
+    "Chills": "Chills",
+    "Sweating": "Sweating",
+    "Rash": "Rash",
+    "Joint Pain": "Joint Pain"
+  },
+  "diseases": {
+    "Common Cold": "Common Cold",
+    "Flu": "Flu",
+    "Influenza": "Influenza",
+    "COVID-19": "COVID-19",
+    "Pneumonia": "Pneumonia",
+    "Bronchitis": "Bronchitis",
+    "Asthma": "Asthma",
+    "Tuberculosis": "Tuberculosis",
+    "Malaria": "Malaria",
+    "Dengue": "Dengue",
+    "Typhoid": "Typhoid",
+    "Gastroenteritis": "Gastroenteritis",
+    "Food Poisoning": "Food Poisoning",
+    "Migraine": "Migraine",
+    "Diabetes": "Diabetes",
+    "Hypertension": "Hypertension",
+    "Heart Disease": "Heart Disease",
+    "Arthritis": "Arthritis",
+    "Allergy": "Allergy",
+    "Sinusitis": "Sinusitis",
+    "Tonsillitis": "Tonsillitis",
+    "Pharyngitis": "Pharyngitis",
+    "Laryngitis": "Laryngitis",
+    "Urinary Tract Infection": "Urinary Tract Infection",
+    "Kidney Stones": "Kidney Stones",
+    "Hepatitis": "Hepatitis",
+    "Jaundice": "Jaundice",
+    "Anemia": "Anemia",
+    "Chickenpox": "Chickenpox",
+    "Measles": "Measles",
+    "Mumps": "Mumps",
+    "Viral Fever": "Viral Fever",
+    "Bacterial Infection": "Bacterial Infection",
+    "Fungal Infection": "Fungal Infection"
+  },
+  "chat": {
+    "title": "Health Assistant",
+    "subtitle": "Chat with AI - Powered by Groq AI",
+    "features": {
+      "multilingual": {
+        "title": "Multilingual",
+        "description": "Supports English, Hindi & Hinglish"
+      },
+      "fast": {
+        "title": "Lightning Fast",
+        "description": "Powered by Groq AI & Llama 3.3"
+      },
+      "ai": {
+        "title": "AI-Powered",
+        "description": "Intelligent health guidance"
+      }
+    },
+    "placeholder": "Ask about symptoms, health tips, or medical advice...",
+    "greeting": "👋 Hello! I'm your health assistant. I can help you in **English, Hindi, or Hinglish**.\n\nमैं आपकी मदद कैसे कर सकता हूं? How can I help you today?"
+  },
+  "history": {
+    "title": "Prediction History",
+    "date": "Date",
+    "disease": "Predicted Disease",
+    "confidence": "Confidence",
+    "symptoms": "Symptoms",
+    "noHistory": "No prediction history found"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "users": "Users",
+    "predictions": "Predictions",
+    "feedback": "Feedback"
+  },
+  "footer": {
+    "madeBy": "Made with care by Bhanu Dev",
+    "tagline": "Empowering your health journey.",
+    "disclaimer": "Disclaimer: This tool provides general health information only and is not a substitute for professional medical advice, diagnosis, or treatment.",
+    "copyright": "© 2025 All rights reserved"
+  },
+  "language": {
+    "english": "English",
+    "hindi": "हिन्दी"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "delete": "Delete",
+    "edit": "Edit"
+  }
+}

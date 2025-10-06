@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Debug Tool</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #0b1220;
+            color: #fff;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        button {
+            background: #22d3ee;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px 5px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        pre {
+            background: #1e293b;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+        .info { color: #22d3ee; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Admin Debug Tool</h1>
+    
+    <h2>Step 1: Check Token</h2>
+    <button onclick="checkToken()">Check localStorage Token</button>
+    <pre id="tokenResult"></pre>
+    
+    <h2>Step 2: Test /api/auth/me</h2>
+    <button onclick="testAuthMe()">Test Admin Status API</button>
+    <pre id="authMeResult"></pre>
+    
+    <h2>Step 3: Force Admin Check</h2>
+    <button onclick="forceAdminCheck()">Force Admin Check & Reload</button>
+    <pre id="forceResult"></pre>
+
+    <script>
+        function checkToken() {
+            const token = localStorage.getItem('token');
+            const result = document.getElementById('tokenResult');
+            if (token) {
+                result.innerHTML = `<span class="success">✅ Token exists</span>\n${token.substring(0, 50)}...`;
+            } else {
+                result.innerHTML = `<span class="error">❌ No token found</span>\nPlease sign in first!`;
+            }
+        }
+
+        async function testAuthMe() {
+            const token = localStorage.getItem('token');
+            const result = document.getElementById('authMeResult');
+            
+            if (!token) {
+                result.innerHTML = `<span class="error">❌ No token</span>\nPlease sign in first!`;
+                return;
+            }
+
+            result.innerHTML = `<span class="info">⏳ Testing...</span>`;
+
+            try {
+                const response = await fetch('http://localhost:8000/api/auth/me', {
+                    headers: { 'Authorization': \`Bearer \${token}\` }
+                });
+
+                result.innerHTML = `<span class="info">Status:</span> ${response.status}\n\n`;
+
+                if (response.ok) {
+                    const user = await response.json();
+                    result.innerHTML += \`<span class="success">✅ Response:</span>\n\${JSON.stringify(user, null, 2)}\n\n\`;
+                    
+                    if (user.is_admin) {
+                        result.innerHTML += \`<span class="success">✅ IS_ADMIN = TRUE</span>\nAdmin button SHOULD appear!\`;
+                    } else {
+                        result.innerHTML += \`<span class="error">❌ IS_ADMIN = FALSE</span>\nAdmin button will NOT appear.\`;
+                    }
+                } else {
+                    const error = await response.text();
+                    result.innerHTML += \`<span class="error">❌ Error:</span>\n\${error}\`;
+                }
+            } catch (error) {
+                result.innerHTML = \`<span class="error">❌ Network Error:</span>\n\${error.message}\n\nIs backend running on port 8000?\`;
+            }
+        }
+
+        async function forceAdminCheck() {
+            const result = document.getElementById('forceResult');
+            result.innerHTML = `<span class="info">⏳ Checking...</span>`;
+
+            const token = localStorage.getItem('token');
+            if (!token) {
+                result.innerHTML = `<span class="error">❌ Not signed in</span>`;
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:8000/api/auth/me', {
+                    headers: { 'Authorization': \`Bearer \${token}\` }
+                });
+
+                if (response.ok) {
+                    const user = await response.json();
+                    if (user.is_admin) {
+                        result.innerHTML = \`<span class="success">✅ You are an admin!</span>\n\nReloading page in 2 seconds...\`;
+                        setTimeout(() => {
+                            window.location.href = 'http://localhost:3000';
+                        }, 2000);
+                    } else {
+                        result.innerHTML = \`<span class="error">❌ NOT an admin</span>\n\nYour account is not marked as admin in the database.\`;
+                    }
+                } else {
+                    result.innerHTML = \`<span class="error">❌ API Error</span>\nStatus: \${response.status}\`;
+                }
+            } catch (error) {
+                result.innerHTML = \`<span class="error">❌ Error:</span>\n\${error.message}\`;
+            }
+        }
+
+        // Auto-check on load
+        window.onload = () => {
+            checkToken();
+        };
+    </script>
+</body>
+</html>

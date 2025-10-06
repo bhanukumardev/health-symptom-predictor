@@ -1,0 +1,178 @@
+# ============================================
+# Health Symptom Predictor - Comprehensive .gitignore
+# ============================================
+
+# ============================================
+# ENVIRONMENT VARIABLES - NEVER COMMIT!
+# ============================================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+!.env.example
+!.env.sample
+
+# ============================================
+# PYTHON / BACKEND
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+backend/venv/
+
+# Database files
+*.db
+health_app.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+nosetests.xml
+coverage.xml
+*.cover
+
+# ============================================
+# NODE.JS / FRONTEND
+# ============================================
+node_modules/
+frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+*.local
+.cache/
+
+# Next.js (if used)
+/.next/
+/out/
+
+# Vercel
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# ============================================
+# IDEs & EDITORS
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.sublime-project
+.vscode-test/
+
+# ============================================
+# OPERATING SYSTEMS
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+ehthumbs_vista.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ============================================
+# PROJECT-SPECIFIC FILES
+# ============================================
+# Temporary startup scripts
+MANUAL_START.txt
+start-app.ps1
+START_HERE.md
+QUICK_*.md
+TEST_*.md
+STATUS_*.md
+SETUP_*.md
+*.md.backup
+
+# ML Models (uncomment if models are too large)
+# ml-model/models/*.pkl
+# ml-model/models/*.h5
+
+# Database
+database/*.db
+
+# Backup files
+*.bak
+*.backup
+*.old
+*.orig
+*.tmp
+*.temp
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# ============================================
+# SECURITY - NEVER COMMIT THESE!
+# ============================================
+*_API_KEY*
+*.pem
+*.key
+*.cert
+secrets/
+config/secrets.json
