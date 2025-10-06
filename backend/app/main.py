@@ -30,6 +30,10 @@ app.include_router(predictions.router, prefix="/api/predictions", tags=["Predict
 app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
 app.include_router(chat.router, prefix="/api", tags=["Chat"])
 
+# Database initialization endpoints (public access for setup)
+from app.api.endpoints.admin import router as db_init_router
+app.include_router(db_init_router, prefix="/api/setup", tags=["Database Setup"])
+
 @app.get("/")
 async def root():
     return {
