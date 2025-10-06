@@ -254,7 +254,19 @@ async def init_database(db: Session = Depends(get_db)):
         
         # Check if admin user already exists
         admin_user = db.query(User).filter(User.email == "kumarbhanu818@gmail.com").first()
-        if not admin_user:
+        if admin_user:
+            # Update existing admin user with correct credentials
+            admin_user.hashed_password = get_password_hash("Bhanu123@")
+            admin_user.is_admin = True
+            admin_user.is_active = True
+            admin_user.full_name = "Bhanu Kumar Dev"
+            admin_user.age = 21
+            admin_user.gender = "male"
+            admin_user.weight = 75.0
+            db.commit()
+            logger.info("Admin user credentials updated successfully")
+            admin_action = "updated"
+        else:
             # Create admin user
             admin_user = User(
                 email="kumarbhanu818@gmail.com",
@@ -268,6 +280,7 @@ async def init_database(db: Session = Depends(get_db)):
             db.add(admin_user)
             db.commit()
             logger.info("Admin user created successfully")
+            admin_action = "created"
         
         # Check if sample diseases exist
         sample_disease = db.query(Disease).first()
@@ -291,7 +304,9 @@ async def init_database(db: Session = Depends(get_db)):
             "status": "success",
             "details": {
                 "tables_created": True,
-                "admin_user_created": True,
+                "admin_user": admin_action,
+                "admin_email": "kumarbhanu818@gmail.com",
+                "admin_password": "Bhanu123@",
                 "sample_data_added": True
             }
         }
