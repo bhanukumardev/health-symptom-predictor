@@ -1,0 +1,24 @@
+# Netlify Configuration for Health Symptom Predictor Frontend
+# This deploys the React frontend
+
+[build]
+  # Base directory for the build
+  base = "frontend/"
+  
+  # Command to build the React app
+  command = "npm run build"
+  
+  # Directory to publish (Vite builds to 'dist')
+  publish = "frontend/dist"
+
+# SPA (Single Page Application) redirect rules
+# This ensures React Router works correctly
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Environment variables (you'll set these in Netlify dashboard)
+# VITE_API_URL will be your Railway backend URL
+[build.environment]
+  NODE_VERSION = "18"
