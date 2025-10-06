@@ -253,17 +253,17 @@ async def init_database(db: Session = Depends(get_db)):
         Base.metadata.create_all(bind=engine)
         
         # Check if admin user already exists
-        admin_user = db.query(User).filter(User.email == "admin@healthpredictor.com").first()
+        admin_user = db.query(User).filter(User.email == "kumarbhanu818@gmail.com").first()
         if not admin_user:
             # Create admin user
             admin_user = User(
-                email="admin@healthpredictor.com",
-                hashed_password=get_password_hash("admin123"),
-                full_name="System Administrator",
+                email="kumarbhanu818@gmail.com",
+                hashed_password=get_password_hash("Bhanu123@"),
+                full_name="Bhanu Kumar Dev",
                 is_admin=True,
-                age=30,
+                age=21,
                 gender="male",
-                weight=70.0
+                weight=75.0
             )
             db.add(admin_user)
             db.commit()
@@ -310,7 +310,7 @@ async def database_status(db: Session = Depends(get_db)):
         disease_count = db.query(Disease).count()
         
         # Check if admin user exists
-        admin_exists = db.query(User).filter(User.email == "admin@healthpredictor.com").first() is not None
+        admin_exists = db.query(User).filter(User.email == "kumarbhanu818@gmail.com").first() is not None
         
         return {
             "database_status": "connected",
@@ -327,3 +327,56 @@ async def database_status(db: Session = Depends(get_db)):
     except Exception as e:
         logger.error(f"Database status check failed: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Database status check failed: {str(e)}")
+
+
+@router.post("/reset-admin-password")
+async def reset_admin_password(db: Session = Depends(get_db)):
+    """Reset admin password to default (for recovery purposes)"""
+    try:
+        # Find admin user by email
+        admin_user = db.query(User).filter(User.email == "kumarbhanu818@gmail.com").first()
+        
+        if admin_user:
+            # Update password and ensure admin status
+            admin_user.hashed_password = get_password_hash("Bhanu123@")
+            admin_user.is_admin = True
+            admin_user.is_active = True
+            admin_user.full_name = "Bhanu Kumar Dev"
+            admin_user.age = 21
+            admin_user.gender = "male"
+            admin_user.weight = 75.0
+            db.commit()
+            
+            return {
+                "message": "Admin password reset successfully",
+                "email": "kumarbhanu818@gmail.com",
+                "password": "Bhanu123@",
+                "is_admin": True,
+                "status": "updated"
+            }
+        else:
+            # Create new admin user if not exists
+            admin_user = User(
+                email="kumarbhanu818@gmail.com",
+                hashed_password=get_password_hash("Bhanu123@"),
+                full_name="Bhanu Kumar Dev",
+                is_admin=True,
+                is_active=True,
+                age=21,
+                gender="male",
+                weight=75.0
+            )
+            db.add(admin_user)
+            db.commit()
+            
+            return {
+                "message": "Admin user created successfully",
+                "email": "kumarbhanu818@gmail.com",
+                "password": "Bhanu123@",
+                "is_admin": True,
+                "status": "created"
+            }
+        
+    except Exception as e:
+        logger.error(f"Admin password reset failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Admin password reset failed: {str(e)}")
