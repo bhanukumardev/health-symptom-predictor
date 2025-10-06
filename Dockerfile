@@ -22,8 +22,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend application code
 COPY backend/ ./
 
+# Copy startup script
+COPY start.sh ./
+RUN chmod +x start.sh
+
 # Expose port (Render will override with $PORT)
 EXPOSE 8000
 
-# Run the FastAPI application with PORT environment variable support
-CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
+# Run the FastAPI application via startup script
+CMD ["./start.sh"]
