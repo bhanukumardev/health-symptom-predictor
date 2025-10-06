@@ -28,8 +28,10 @@ dist/
 downloads/
 eggs/
 .eggs/
+# Python library directories only (not frontend/src/lib)
 lib/
 lib64/
+!frontend/src/lib/
 parts/
 sdist/
 var/
