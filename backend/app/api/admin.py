@@ -6,6 +6,10 @@ from app.core.database import get_db
 from app.models.models import User, Disease, Prediction, Feedback
 from app.schemas.schemas import DiseaseResponse, DiseaseCreate
 from app.api.auth import get_current_user
+from app.core.security import get_password_hash
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -237,3 +241,91 @@ def toggle_user_active(
     db.commit()
     
     return {"message": f"User active status updated", "is_active": user.is_active}
+
+
+# Database initialization endpoints (no auth required for initial setup)
+@router.post("/init-database")
+async def init_database(db: Session = Depends(get_db)):
+    """Initialize database with tables and seed data"""
+    try:
+        # Create all tables
+        from app.core.database import engine, Base
+        Base.metadata.create_all(bind=engine)
+        
+        # Check if admin user already exists
+        admin_user = db.query(User).filter(User.email == "admin@healthpredictor.com").first()
+        if not admin_user:
+            # Create admin user
+            admin_user = User(
+                username="admin",
+                email="admin@healthpredictor.com",
+                hashed_password=get_password_hash("admin123"),
+                full_name="System Administrator",
+                is_admin=True,
+                age=30,
+                gender="male",
+                weight=70.0,
+                height=175.0
+            )
+            db.add(admin_user)
+            db.commit()
+            logger.info("Admin user created successfully")
+        
+        # Check if sample diseases exist
+        sample_disease = db.query(Disease).first()
+        if not sample_disease:
+            # Add sample diseases
+            diseases = [
+                Disease(name="Common Cold", description="Viral infection of upper respiratory tract"),
+                Disease(name="Flu", description="Influenza viral infection"),
+                Disease(name="Headache", description="Pain in head or neck region"),
+                Disease(name="Fever", description="Elevated body temperature"),
+                Disease(name="Allergies", description="Immune system reaction to allergens")
+            ]
+            for disease in diseases:
+                db.add(disease)
+            
+            db.commit()
+            logger.info("Sample diseases added successfully")
+        
+        return {
+            "message": "Database initialized successfully",
+            "status": "success",
+            "details": {
+                "tables_created": True,
+                "admin_user_created": True,
+                "sample_data_added": True
+            }
+        }
+        
+    except Exception as e:
+        logger.error(f"Database initialization failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Database initialization failed: {str(e)}")
+
+
+@router.get("/database-status")
+async def database_status(db: Session = Depends(get_db)):
+    """Check database status and existing data"""
+    try:
+        # Check if tables exist and have data
+        user_count = db.query(User).count()
+        disease_count = db.query(Disease).count()
+        
+        # Check if admin user exists
+        admin_exists = db.query(User).filter(User.email == "admin@healthpredictor.com").first() is not None
+        
+        return {
+            "database_status": "connected",
+            "tables_exist": True,
+            "data_counts": {
+                "users": user_count,
+                "diseases": disease_count,
+                "predictions": db.query(Prediction).count(),
+                "feedback": db.query(Feedback).count()
+            },
+            "admin_user_exists": admin_exists
+        }
+        
+    except Exception as e:
+        logger.error(f"Database status check failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Database status check failed: {str(e)}")
