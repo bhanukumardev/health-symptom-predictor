@@ -1,6 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import List, Union
 from pydantic import field_validator
+import os
 
 
 class Settings(BaseSettings):
@@ -17,21 +18,16 @@ class Settings(BaseSettings):
     # Database - PostgreSQL only
     DATABASE_URL: str = "postgresql://postgres:Bhanu123%40@localhost:5432/health_predictor"
     
-    # CORS - Can be string or list
-    ALLOWED_ORIGINS: List[str] = [
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://localhost:3002",
-        "http://127.0.0.1:5173",
-        "http://127.0.0.1:3000",
-        "http://127.0.0.1:3001",
-        "http://127.0.0.1:3002",
-    ]
+    # CORS - Handle as Union to be more flexible
+    ALLOWED_ORIGINS: Union[str, List[str]] = "http://localhost:3000"
     
     @field_validator('ALLOWED_ORIGINS', mode='before')
     @classmethod
     def parse_allowed_origins(cls, v):
+        # If it's already a list, return it
+        if isinstance(v, list):
+            return v
+        # If it's a string, convert to list
         if isinstance(v, str):
             # Handle comma-separated string format
             if ',' in v:
@@ -39,7 +35,8 @@ class Settings(BaseSettings):
             # Handle single origin string
             else:
                 return [v.strip()]
-        return v
+        # Default fallback
+        return ["http://localhost:3000"]
     
     # ML Model
     MODEL_PATH: str = "../ml-model/models/disease_predictor.pkl"
@@ -57,6 +54,15 @@ class Settings(BaseSettings):
         case_sensitive=True,
         extra="ignore"
     )
+    
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # Ensure ALLOWED_ORIGINS is always a list after initialization
+        if isinstance(self.ALLOWED_ORIGINS, str):
+            if ',' in self.ALLOWED_ORIGINS:
+                self.ALLOWED_ORIGINS = [origin.strip() for origin in self.ALLOWED_ORIGINS.split(',')]
+            else:
+                self.ALLOWED_ORIGINS = [self.ALLOWED_ORIGINS.strip()]
 
 
 settings = Settings()
