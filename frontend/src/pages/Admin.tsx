@@ -26,7 +26,8 @@ export default function Admin() {
 
   const fetchStats = async (token: string) => {
     try {
-      const response = await fetch('http://localhost:8000/api/admin/stats', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/api/admin/stats`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 

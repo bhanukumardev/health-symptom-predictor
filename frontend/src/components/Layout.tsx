@@ -37,8 +37,10 @@ export default function Layout() {
   
   const checkAdminStatus = async (authToken: string) => {
     try {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
       console.log('🔍 Checking admin status with token:', authToken?.substring(0, 20) + '...')
-      const response = await fetch('http://localhost:8000/api/auth/me', {
+      console.log('🌐 API URL:', apiUrl)
+      const response = await fetch(`${apiUrl}/api/auth/me`, {
         headers: { 'Authorization': `Bearer ${authToken}` }
       })
       console.log('📡 Response status:', response.status)

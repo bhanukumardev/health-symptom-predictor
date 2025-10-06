@@ -27,7 +27,8 @@ export default function AdminUsers() {
 
   const fetchUsers = async (token: string) => {
     try {
-      const response = await fetch('http://localhost:8000/api/admin/users', {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/api/admin/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
 
@@ -59,7 +60,8 @@ export default function AdminUsers() {
     if (!token) return;
 
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/users/${userId}/toggle-admin`, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/api/admin/users/${userId}/toggle-admin`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -81,7 +83,8 @@ export default function AdminUsers() {
     if (!token) return;
 
     try {
-      const response = await fetch(`http://localhost:8000/api/admin/users/${userId}/toggle-active`, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${apiUrl}/api/admin/users/${userId}/toggle-active`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` }
       });
