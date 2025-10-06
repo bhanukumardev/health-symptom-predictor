@@ -257,15 +257,13 @@ async def init_database(db: Session = Depends(get_db)):
         if not admin_user:
             # Create admin user
             admin_user = User(
-                username="admin",
                 email="admin@healthpredictor.com",
                 hashed_password=get_password_hash("admin123"),
                 full_name="System Administrator",
                 is_admin=True,
                 age=30,
                 gender="male",
-                weight=70.0,
-                height=175.0
+                weight=70.0
             )
             db.add(admin_user)
             db.commit()
