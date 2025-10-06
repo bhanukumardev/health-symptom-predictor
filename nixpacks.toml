@@ -2,13 +2,13 @@
 # Tells Railway how to build and run the FastAPI backend
 
 [phases.setup]
-nixPkgs = ["python310", "postgresql"]
+nixPkgs = ["python310", "python310Packages.pip", "postgresql"]
 
 [phases.install]
-cmds = ["cd backend && pip install -r requirements.txt"]
+cmds = ["cd backend && python -m pip install --upgrade pip", "cd backend && python -m pip install -r requirements.txt"]
 
 [phases.build]
 cmds = ["echo 'Build phase complete'"]
 
 [start]
-cmd = "cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+cmd = "cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
