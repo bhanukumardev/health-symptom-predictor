@@ -3,13 +3,13 @@
 
 [build]
   # Base directory for the build
-  base = "frontend/"
+  base = "frontend"
   
   # Command to build the React app
   command = "npm run build"
   
-  # Directory to publish (Vite builds to 'dist')
-  publish = "frontend/dist"
+  # Directory to publish (Vite builds to 'dist' relative to base)
+  publish = "dist"
 
 # SPA (Single Page Application) redirect rules
 # This ensures React Router works correctly
