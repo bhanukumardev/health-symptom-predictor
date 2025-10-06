@@ -1,6 +1,11 @@
 # 🚀 Deploy to Render (100% Free - No Credit Card Required)
+#### Step 5: Wait for Deployment
+- First deployment takes ~5-10 minutes
+- Watch the logs for progress
+- Look for: "Application startup complete" ✅
+- Once live, you'll get a URL like: `https://health-symptom-predictor-backend.onrender.com`
 
-## Why Render?
+#### Step 6: Initialize Databasehy Render?
 - ✅ **Completely FREE** - No credit card, no billing, no trials
 - ✅ **Free PostgreSQL** database (90 days, auto-renews)
 - ✅ **750 hours/month** runtime (enough for most apps)
@@ -21,25 +26,45 @@
 4. **No credit card required!** ✅
 
 #### Step 2: Deploy Backend
-1. In Render Dashboard, click **"New +"** → **"Blueprint"**
+1. In Render Dashboard, click **"New +"** → **"Web Service"**
 2. Connect your GitHub repository: `bhanukumardev/health-symptom-predictor`
-3. Render will auto-detect `render.yaml` ✅
-4. Click **"Apply"**
+3. Configure the service:
+   - **Name:** `health-symptom-predictor-backend`
+   - **Region:** Oregon (US West)
+   - **Branch:** `main`
+   - **Root Directory:** `backend`
+   - **Runtime:** Docker
+   - **Instance Type:** Free
 
-Render will create:
-- ✅ **Backend service** (FastAPI)
-- ✅ **PostgreSQL database** (free tier)
-- ✅ **Auto-deploy** on git push
+Render will auto-detect the Dockerfile in the `backend/` directory ✅
 
-#### Step 3: Add Environment Variables
-After deployment starts, go to your backend service:
-1. Click your service → **"Environment"**
-2. Add **GROQ_API_KEY**:
+#### Step 3: Add PostgreSQL Database
+1. In Render Dashboard, click **"New +"** → **"PostgreSQL"**
+2. Configure:
+   - **Name:** `health-symptom-predictor-db`
+   - **Database:** `health_predictor`
+   - **Region:** Oregon (same as backend)
+   - **Plan:** Free
+3. Click **"Create Database"**
+4. Once created, copy the **Internal Database URL**
+
+#### Step 4: Link Database to Backend
+1. Go to your backend service → **"Environment"**
+2. Add environment variable:
+   - Key: `DATABASE_URL`
+   - Value: Paste the Internal Database URL from step 3
+3. Add **GROQ_API_KEY**:
    - Key: `GROQ_API_KEY`
    - Value: `your_new_groq_api_key_here` (get fresh key from https://console.groq.com/keys)
-3. Other variables are auto-configured! ✅
+4. Add **SECRET_KEY**:
+   - Key: `SECRET_KEY`
+   - Value: Generate a random 32+ character string
+5. Add **ALLOWED_ORIGINS**:
+   - Key: `ALLOWED_ORIGINS`
+   - Value: `http://localhost:3000` (update later with Netlify URL)
+6. Save - Render will auto-redeploy
 
-#### Step 4: Wait for Deployment
+#### Step 5: Wait for Deployment
 - First deployment takes ~5-10 minutes
 - Watch the logs for progress
 - Once live, you'll get a URL like: `https://health-symptom-predictor-backend.onrender.com`
