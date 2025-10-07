@@ -1,5 +1,9 @@
 import os
 from typing import List
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 
 class Settings:
@@ -13,8 +17,20 @@ class Settings:
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     
-    # Database - PostgreSQL only
+    # Database - PostgreSQL with SSL support for Render PostgreSQL v17
     DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql://postgres:password@localhost:5432/health_predictor")
+    
+    @property
+    def DATABASE_URL_WITH_SSL(self) -> str:
+        """Returns database URL with proper SSL configuration for production"""
+        db_url = self.DATABASE_URL
+        if "render.com" in db_url or "amazonaws.com" in db_url:
+            # Add SSL parameters for cloud databases
+            if "?" not in db_url:
+                db_url += "?sslmode=require"
+            else:
+                db_url += "&sslmode=require"
+        return db_url
     
     # CORS - Simple approach
     @property

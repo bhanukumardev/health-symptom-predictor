@@ -180,5 +180,24 @@
     "submit": "जमा करें",
     "delete": "मिटाएं",
     "edit": "संपादित करें"
+  },
+  "notifications": {
+    "title": "सूचनाएं",
+    "types": {
+      "personalized": "AI स्वास्थ्य सलाह",
+      "announcement": "घोषणा",
+      "direct": "सीधा संदेश"
+    },
+    "generateAI": "AI स्वास्थ्य सलाह",
+    "generating": "बना रहा है...",
+    "markAllRead": "सभी पढ़े गए चिह्नित करें",
+    "all": "सभी",
+    "unreadOnly": "केवल अपठित",
+    "noNotifications": "अभी तक कोई सूचना नहीं",
+    "noUnread": "कोई अपठित सूचना नहीं",
+    "generateHint": "व्यक्तिगत स्वास्थ्य सलाह पाने के लिए \"AI स्वास्थ्य सलाह\" पर क्लिक करें",
+    "delete": "मिटाएं",
+    "confirmDelete": "इस सूचना को हटाएं?",
+    "generateError": "AI सूचना बनाने में विफल। कृपया पुनः प्रयास करें।"
   }
 }

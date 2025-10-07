@@ -15,6 +15,7 @@ import Admin from './pages/Admin'
 import AdminUsers from './pages/AdminUsers'
 import AdminPredictions from './pages/AdminPredictions'
 import AdminFeedback from './pages/AdminFeedback'
+import Developer from './pages/Developer'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: '/history', element: <History /> },
       { path: '/chat', element: <ChatPage /> },
       { path: '/profile', element: <Profile /> },
+      { path: '/developer', element: <Developer /> },
       { path: '/admin', element: <Admin /> },
       { path: '/admin/users', element: <AdminUsers /> },
       { path: '/admin/predictions', element: <AdminPredictions /> },

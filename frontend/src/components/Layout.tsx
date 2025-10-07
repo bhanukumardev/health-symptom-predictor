@@ -2,6 +2,8 @@ import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
+import NotificationBell from './NotificationBell'
+import FloatingContactButton from './FloatingContactButton'
 
 export default function Layout() {
   const navigate = useNavigate()
@@ -93,9 +95,13 @@ export default function Layout() {
             <Link to="/chat" className="btn btn-ghost">💬 {t('nav.chat')}</Link>
             <Link to="/history" className="btn btn-ghost">{t('nav.history')}</Link>
             {token && <Link to="/profile" className="btn btn-ghost">👤 {t('nav.profile')}</Link>}
+            {!isAdmin && <Link to="/developer" className="btn btn-ghost">👨‍💻 Developer</Link>}
             {isAdmin && <Link to="/admin" className="btn btn-ghost text-cyan-400">{t('nav.admin')}</Link>}
             {token ? (
-              <button className="btn btn-ghost" onClick={onLogout}>{t('nav.signOut')}</button>
+              <>
+                <NotificationBell />
+                <button className="btn btn-ghost" onClick={onLogout}>{t('nav.signOut')}</button>
+              </>
             ) : (
               <Link to="/login" className="btn btn-ghost">{t('nav.signIn')}</Link>
             )}
@@ -104,6 +110,7 @@ export default function Layout() {
 
           {/* Mobile Menu Controls */}
           <div className="flex md:hidden items-center gap-2">
+            {token && <NotificationBell />}
             <LanguageSwitcher />
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -142,6 +149,11 @@ export default function Layout() {
               {token && (
                 <Link to="/profile" className="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 transition">
                   👤 {t('nav.profile')}
+                </Link>
+              )}
+              {!isAdmin && (
+                <Link to="/developer" className="w-full text-left px-4 py-3 rounded-lg hover:bg-slate-800 transition">
+                  👨‍💻 Developer
                 </Link>
               )}
               {isAdmin && (
@@ -245,15 +257,39 @@ export default function Layout() {
           {/* Footer Credit Section */}
           <div className="flex flex-col items-center justify-center gap-1 md:gap-2 text-xs md:text-sm text-slate-400">
             <div className="flex flex-wrap items-center justify-center gap-1 md:gap-2 text-center">
-              <span className="font-medium text-slate-300">Made with care by <span className="text-cyan-400 font-bold">Bhanu Dev</span></span>
+              <span className="font-medium text-slate-300">
+                Made with care by{' '}
+                <Link to="/developer" className="text-cyan-400 font-bold hover:text-cyan-300 transition-colors">
+                  Bhanu Dev
+                </Link>
+              </span>
               <span className="text-slate-600 hidden sm:inline">·</span>
               <span className="italic text-green-400 text-xs md:text-sm">"{t('footer.tagline')}"</span>
               <span className="text-slate-600 hidden sm:inline">·</span>
               <span className="text-slate-500 text-xs">{t('footer.copyright')}</span>
             </div>
+            <div className="flex items-center gap-3 text-xs">
+              {!isAdmin && (
+                <Link to="/developer" className="text-slate-400 hover:text-cyan-400 transition-colors">
+                  👨‍💻 Contact Developer
+                </Link>
+              )}
+              <span className="text-slate-600">·</span>
+              <a 
+                href="https://github.com/bhanukumardev/health-symptom-predictor" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-slate-400 hover:text-cyan-400 transition-colors"
+              >
+                📖 Documentation
+              </a>
+            </div>
           </div>
         </div>
       </footer>
+
+      {/* Floating Contact Button */}
+      <FloatingContactButton />
     </div>
   )
 }

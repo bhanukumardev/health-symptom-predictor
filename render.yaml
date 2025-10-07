@@ -1,0 +1,32 @@
+# Render.com Build Configuration
+# This file tells Render how to build and run your FastAPI backend
+
+# Build Command: Install dependencies
+build_command = pip install -r requirements.txt
+
+# Start Command: Run the FastAPI application
+start_command = uvicorn app.main:app --host 0.0.0.0 --port $PORT
+
+# Environment Variables Required in Render Dashboard:
+# GROQ_API_KEY=your_actual_groq_api_key_here
+# DATABASE_URL=postgresql://health_predictor_user:WtIo4HLKi9AEveEmlMFYONE3dxWJhfOd@dpg-d3hu2c1gv73c73e0l170-a.oregon-postgres.render.com/health_predictor
+# ALLOWED_ORIGINS=https://health-symptom-predictor.netlify.app,https://health-symptom-predictor.onrender.com,http://localhost:3000,http://localhost:3001
+# ENVIRONMENT=production
+# DEBUG=False
+
+# Auto-Deploy: Enable auto-deploy from main branch
+auto_deploy = true
+branch = main
+
+# Health Check: Render will check this endpoint
+health_check_path = /health
+
+# Service Configuration
+service_type = web
+runtime = python3.11
+region = oregon
+
+# Database Configuration
+database_name = health_predictor
+database_user = health_predictor_user
+database_url = postgresql://health_predictor_user:WtIo4HLKi9AEveEmlMFYONE3dxWJhfOd@dpg-d3hu2c1gv73c73e0l170-a.oregon-postgres.render.com/health_predictor

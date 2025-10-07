@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AdminNotifications from '../components/AdminNotifications';
 
 interface Stats {
   total_users: number;
@@ -14,6 +15,7 @@ export default function Admin() {
   const navigate = useNavigate();
   const [stats, setStats] = useState<Stats | null>(null);
   const [loading, setLoading] = useState(true);
+  const [showNotifications, setShowNotifications] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -158,7 +160,14 @@ export default function Admin() {
       {/* Quick Actions */}
       <div className="card p-6">
         <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          <button
+            onClick={() => setShowNotifications(true)}
+            className="btn btn-primary text-left p-4 hover:bg-cyan-700"
+          >
+            <div className="text-sm text-cyan-100">Send</div>
+            <div className="font-medium">Notifications</div>
+          </button>
           <a 
             href="/admin/users"
             className="btn btn-ghost text-left p-4 hover:bg-slate-800"
@@ -182,6 +191,12 @@ export default function Admin() {
           </a>
         </div>
       </div>
+
+      {/* Admin Notifications Modal */}
+      <AdminNotifications 
+        isOpen={showNotifications}
+        onClose={() => setShowNotifications(false)}
+      />
     </div>
   );
 }

@@ -180,5 +180,24 @@
     "submit": "Submit",
     "delete": "Delete",
     "edit": "Edit"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "types": {
+      "personalized": "AI Health Tip",
+      "announcement": "Announcement",
+      "direct": "Direct Message"
+    },
+    "generateAI": "AI Health Tip",
+    "generating": "Generating...",
+    "markAllRead": "Mark All Read",
+    "all": "All",
+    "unreadOnly": "Unread Only",
+    "noNotifications": "No notifications yet",
+    "noUnread": "No unread notifications",
+    "generateHint": "Click \"AI Health Tip\" to get personalized health advice",
+    "delete": "Delete",
+    "confirmDelete": "Delete this notification?",
+    "generateError": "Failed to generate AI notification. Please try again."
   }
 }
