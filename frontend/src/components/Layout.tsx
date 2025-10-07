@@ -86,6 +86,14 @@ export default function Layout() {
     setMobileMenuOpen(false)
   }, [location.pathname])
 
+  // Track if profile/settings panel is open (for hiding floating widget)
+  const [panelOpen, setPanelOpen] = useState(false);
+
+  // Listen for route changes to detect profile/settings panel
+  useEffect(() => {
+    setPanelOpen(location.pathname === '/profile' || location.pathname === '/settings');
+  }, [location.pathname]);
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Desktop & Mobile Header */}
@@ -189,8 +197,11 @@ export default function Layout() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 mx-auto w-full max-w-5xl px-3 py-4 md:px-4 md:py-8 pb-20 md:pb-8">
-        <Outlet />
+      <main className="flex-1 mx-auto w-full max-w-5xl px-3 py-4 md:px-4 md:py-8 pb-24 md:pb-8">
+        {/* Add extra bottom padding for mobile to avoid overlap */}
+        <div className={location.pathname === '/profile' ? 'pb-16 md:pb-0' : ''}>
+          <Outlet />
+        </div>
       </main>
 
       {/* Mobile Bottom Navigation Bar */}
@@ -298,8 +309,8 @@ export default function Layout() {
         </div>
       </footer>
 
-      {/* Floating Contact Button */}
-      <FloatingContactButton />
+  {/* Floating Contact Button - hide if profile/settings open on mobile */}
+  {!panelOpen && <FloatingContactButton />}
     </div>
   )
 }
