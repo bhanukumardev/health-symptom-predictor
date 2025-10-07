@@ -37,7 +37,7 @@ const NotificationBell: React.FC = () => {
   };
 
   return (
-    <div className="fixed top-16 right-4 sm:top-6 sm:right-6 z-50">
+    <div className="fixed top-14 right-4 sm:top-6 sm:right-6 z-50 notification-bell">
       {/* Bell Button */}
       <button
         onClick={handleToggle}
@@ -56,7 +56,7 @@ const NotificationBell: React.FC = () => {
       >
         {/* Bell Icon */}
         <svg
-          className="w-8 h-8"
+          className="w-12 h-12"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

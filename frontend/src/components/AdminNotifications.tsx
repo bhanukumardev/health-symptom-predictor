@@ -24,66 +24,35 @@ interface AdminNotificationsProps {
   onClose: () => void;
 }
 
-export default function AdminNotifications({ isOpen, onClose }: AdminNotificationsProps) {
-  const [users, setUsers] = useState<UserForNotification[]>([]);
-  const [selectedTab, setSelectedTab] = useState<'announcement' | 'direct' | 'ai'>('announcement');
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    title: '',
-    message: '',
-    selectedUserId: null as number | null
-  });
+const notificationTemplates = {
+  announcement: [
+    { title: 'System Update', message: 'We have updated the system with new features.' },
+    { title: 'Scheduled Maintenance', message: 'The system will be down for maintenance tonight.' },
+  ],
+  direct: [
+    { title: 'Personal Reminder', message: 'Please check your health dashboard for updates.' },
+    { title: 'Feedback Request', message: 'We value your feedback! Please let us know your thoughts.' },
+  ],
+};
 
-  const notificationTemplates = {
-    announcement: [
-      {
-        title: "New Health Features Available",
-        message: "We've added new prediction models and health tracking features to help you better understand your health patterns."
-      },
-      {
-        title: "System Maintenance Notice",
-        message: "Our system will undergo maintenance on [DATE] from [TIME] to [TIME]. You may experience temporary service interruptions."
-      }
-    ],
-    direct: [
-      {
-        title: "Thank You for Your Feedback",
-        message: "Hi [USER_NAME], thank you for providing valuable feedback on your recent predictions. Your input helps us improve our services."
-      },
-      {
-        title: "Health Prediction Follow-up",
-        message: "We noticed you've been actively using our prediction services. How are you feeling about the accuracy and helpfulness of our recommendations?"
-      }
-    ]
-  };
+export const AdminNotifications: React.FC<AdminNotificationsProps> = ({ isOpen, onClose }) => {
+  const [selectedTab, setSelectedTab] = useState<'announcement' | 'direct' | 'ai'>('announcement');
+  const [formData, setFormData] = useState({ title: '', message: '', selectedUserId: null });
+  const [users, setUsers] = useState<UserForNotification[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
-      fetchUsers();
+    if (isOpen && selectedTab === 'direct') {
+      getUsersForNotifications().then(setUsers);
     }
-  }, [isOpen]);
+  }, [isOpen, selectedTab]);
 
-  const fetchUsers = async () => {
-    try {
-      const usersData = await getUsersForNotifications();
-      setUsers(usersData);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-      alert('Failed to load users');
-    }
-  };
-
-  const handleSendNotification = async () => {
-    if (!formData.title || !formData.message) {
-      alert('Please fill in title and message');
-      return;
-    }
-
+  const handleSendNotification = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (selectedTab === 'direct' && !formData.selectedUserId) {
       alert('Please select a user for direct notification');
       return;
     }
-
     setLoading(true);
     try {
       const notificationData: AdminNotificationCreate = {
@@ -92,9 +61,73 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
         type: selectedTab as 'announcement' | 'direct',
         user_id: selectedTab === 'direct' ? formData.selectedUserId : null
       };
-
       await createAdminNotification(notificationData);
       alert('Notification sent successfully!');
+      setFormData({ title: '', message: '', selectedUserId: null });
+    } catch (error) {
+      console.error('Error sending notification:', error);
+      alert('Failed to send notification');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleBroadcastAI = async () => {
+    if (!confirm('This will send AI-generated health tips to all users. Continue?')) {
+      return;
+    }
+    setLoading(true);
+    try {
+      const result = await broadcastAINotificationsToAll('en');
+      alert(`AI notifications sent to ${result.total_users} users!`);
+    } catch (error) {
+      console.error('Error broadcasting AI notifications:', error);
+      alert('Failed to broadcast AI notifications');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isOpen) return null;
+      alert('Please select a user for direct notification');
+      return;
+    }
+    setLoading(true);
+    try {
+      const notificationData: AdminNotificationCreate = {
+        title: formData.title,
+        message: formData.message,
+        type: selectedTab as 'announcement' | 'direct',
+        user_id: selectedTab === 'direct' ? formData.selectedUserId : null
+      };
+      await createAdminNotification(notificationData);
+      alert('Notification sent successfully!');
+      setFormData({ title: '', message: '', selectedUserId: null });
+    } catch (error) {
+      console.error('Error sending notification:', error);
+      alert('Failed to send notification');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleBroadcastAI = async () => {
+    if (!confirm('This will send AI-generated health tips to all users. Continue?')) {
+      return;
+    }
+    setLoading(true);
+    try {
+      const result = await broadcastAINotificationsToAll('en');
+      alert(`AI notifications sent to ${result.total_users} users!`);
+    } catch (error) {
+      console.error('Error broadcasting AI notifications:', error);
+      alert('Failed to broadcast AI notifications');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (!isOpen) return null;
       
       // Reset form
       setFormData({ title: '', message: '', selectedUserId: null });
@@ -324,4 +357,3 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
       </div>
     </div>
   );
-}
