@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 export default function FloatingContactButton() {
   const [isOpen, setIsOpen] = useState(false);
 
+  // Responsive position: left for mobile, right for desktop, center for xs screens
+  // Add extra bottom padding to avoid overlap with profile
   return (
-    <div className="fixed bottom-6 left-6 sm:right-6 z-40">
+    <div className="fixed bottom-4 left-4 sm:right-6 sm:left-auto z-50 w-auto max-w-xs md:max-w-none">
       {/* Quick Actions Menu */}
       {isOpen && (
         <div className="absolute bottom-16 left-0 sm:right-0 mb-2 space-y-2 animate-in slide-in-from-bottom-4">

@@ -37,26 +37,26 @@ const NotificationBell: React.FC = () => {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50 sm:top-6 sm:right-6">
+    <div className="fixed top-16 right-4 sm:top-6 sm:right-6 z-50">
       {/* Bell Button */}
       <button
         onClick={handleToggle}
         className="
           relative
-          p-2 md:p-2.5
-          text-gray-300 
+          p-3 md:p-3.5
+          text-cyan-400 bg-slate-900 
           hover:text-white 
-          hover:bg-gray-700/50 
-          rounded-lg 
+          hover:bg-cyan-700/80 
+          rounded-full 
           transition-all
-          min-w-[44px] min-h-[44px]
+          min-w-[48px] min-h-[48px] w-12 h-12
           flex items-center justify-center
         "
         aria-label={t('notifications.title', 'Notifications')}
       >
         {/* Bell Icon */}
         <svg
-          className="w-6 h-6"
+          className="w-8 h-8"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

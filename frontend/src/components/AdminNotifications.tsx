@@ -144,7 +144,7 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
 
         <div className="p-2 sm:p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           {/* Tabs */}
-          <div className="flex flex-col sm:flex-row gap-2 mb-6">
+          <div className="flex flex-col gap-2 sm:flex-row sm:gap-2 mb-6">
             <button
               onClick={() => setSelectedTab('announcement')}
               className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
@@ -199,7 +199,7 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
               </div>
             </div>
           ) : (
-            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6">
+            <div className="flex flex-col gap-4 lg:grid lg:grid-cols-2 lg:gap-6">
               {/* Form */}
               <div className="space-y-4">
                 <div className="card p-4 sm:p-6">
