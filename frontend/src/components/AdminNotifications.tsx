@@ -126,10 +126,10 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-2 sm:p-4 z-50">
       <div className="bg-slate-900 rounded-lg w-full max-w-4xl max-h-[90vh] overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-slate-700">
+        <div className="flex items-center justify-between p-4 sm:p-6 border-b border-slate-700">
           <h2 className="text-xl font-semibold text-white flex items-center gap-2">
             <Bell className="w-5 h-5" />
             Admin Notifications
@@ -142,9 +142,9 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
           </button>
         </div>
 
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <div className="p-2 sm:p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
           {/* Tabs */}
-          <div className="flex gap-2 mb-6">
+          <div className="flex flex-col sm:flex-row gap-2 mb-6">
             <button
               onClick={() => setSelectedTab('announcement')}
               className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
@@ -183,7 +183,7 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
           {/* Content based on selected tab */}
           {selectedTab === 'ai' ? (
             <div className="space-y-4">
-              <div className="card p-6">
+              <div className="card p-4 sm:p-6">
                 <h3 className="text-lg font-medium mb-4">Broadcast AI Health Tips</h3>
                 <p className="text-slate-400 mb-4">
                   Send personalized AI-generated health tips to all users based on their prediction history and feedback.
@@ -191,7 +191,7 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
                 <button
                   onClick={handleBroadcastAI}
                   disabled={loading}
-                  className="btn btn-primary flex items-center gap-2"
+                  className="btn btn-primary flex items-center gap-2 w-full"
                 >
                   <BrainCircuit className="w-4 h-4" />
                   {loading ? 'Broadcasting...' : 'Broadcast AI Tips to All Users'}
@@ -199,10 +199,10 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
               </div>
             </div>
           ) : (
-            <div className="grid lg:grid-cols-2 gap-6">
+            <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6">
               {/* Form */}
               <div className="space-y-4">
-                <div className="card p-6">
+                <div className="card p-4 sm:p-6">
                   <h3 className="text-lg font-medium mb-4">
                     {selectedTab === 'announcement' ? 'Create Announcement' : 'Send Direct Message'}
                   </h3>
@@ -233,7 +233,7 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
                     {/* Templates */}
                     <div>
                       <label className="block text-sm font-medium mb-2">Quick Templates</label>
-                      <div className="space-y-2">
+                      <div className="flex flex-col space-y-2">
                         {notificationTemplates[selectedTab].map((template, index) => (
                           <button
                             key={index}
@@ -287,7 +287,7 @@ export default function AdminNotifications({ isOpen, onClose }: AdminNotificatio
               </div>
 
               {/* Users List */}
-              <div className="card p-6">
+              <div className="card p-4 sm:p-6">
                 <h3 className="text-lg font-medium mb-4">Users Overview</h3>
                 <div className="space-y-3 max-h-96 overflow-y-auto">
                   {users.map(user => (

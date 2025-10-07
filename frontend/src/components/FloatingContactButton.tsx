@@ -6,10 +6,10 @@ export default function FloatingContactButton() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="fixed bottom-6 left-6 sm:right-6 z-40">
       {/* Quick Actions Menu */}
       {isOpen && (
-        <div className="absolute bottom-16 right-0 mb-2 space-y-2 animate-in slide-in-from-bottom-4">
+        <div className="absolute bottom-16 left-0 sm:right-0 mb-2 space-y-2 animate-in slide-in-from-bottom-4">
           <Link
             to="/developer"
             onClick={() => setIsOpen(false)}

@@ -23,12 +23,24 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
   const [generating, setGenerating] = useState(false);
   const [showUnreadOnly, setShowUnreadOnly] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [firstName, setFirstName] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
       fetchNotifications();
     }
   }, [isOpen, showUnreadOnly]);
+
+  // Load first name from localStorage for a lightweight greeting in the header
+  useEffect(() => {
+    try {
+      const full = localStorage.getItem('user_full_name') || '';
+      const f = full.trim().split(/\s+/)[0] || '';
+      setFirstName(f || null);
+    } catch {
+      setFirstName(null);
+    }
+  }, [isOpen]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -135,6 +147,11 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
       >
         {/* Header */}
         <div className="p-4 border-b border-gray-700 flex-shrink-0">
+          {firstName && (
+            <div className="text-xs text-gray-400 mb-1">
+              {i18n.language === 'hi' ? `नमस्ते ${firstName} 👋` : `Hi ${firstName} 👋`}
+            </div>
+          )}
           <div className="flex items-center justify-between mb-3">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
               🔔 {t('notifications.title', 'Notifications')}

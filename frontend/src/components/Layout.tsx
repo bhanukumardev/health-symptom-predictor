@@ -53,6 +53,16 @@ export default function Layout() {
         console.log('👤 User data:', user)
         console.log('🔐 Is Admin:', user.is_admin)
         setIsAdmin(user.is_admin || false)
+        // Persist full name for lightweight UI personalization (e.g., notifications greeting)
+        try {
+          if (user?.full_name) {
+            localStorage.setItem('user_full_name', user.full_name)
+          } else {
+            localStorage.removeItem('user_full_name')
+          }
+        } catch (e) {
+          console.warn('Could not persist user_full_name:', e)
+        }
       } else {
         console.log('❌ Response not OK')
         setIsAdmin(false)

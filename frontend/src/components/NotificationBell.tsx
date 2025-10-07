@@ -37,7 +37,7 @@ const NotificationBell: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="fixed top-4 right-4 z-50 sm:top-6 sm:right-6">
       {/* Bell Button */}
       <button
         onClick={handleToggle}
@@ -98,12 +98,21 @@ const NotificationBell: React.FC = () => {
         )}
       </button>
 
-      {/* Dropdown */}
-      <NotificationDropdown
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        onNotificationUpdate={handleNotificationUpdate}
-      />
+      {/* Dropdown - mobile full width */}
+      <div className="sm:hidden fixed inset-0 w-full h-full z-50 bg-black bg-opacity-60">
+        <NotificationDropdown
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onNotificationUpdate={handleNotificationUpdate}
+        />
+      </div>
+      <div className="hidden sm:block">
+        <NotificationDropdown
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          onNotificationUpdate={handleNotificationUpdate}
+        />
+      </div>
     </div>
   );
 };

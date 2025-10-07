@@ -3,7 +3,7 @@ from sqlalchemy import or_, and_
 from typing import List, Optional
 from datetime import datetime, timedelta
 import os
-from groq import Groq
+# Groq client is imported lazily in get_groq_client to avoid import errors at module load time
 
 from app.models.notification import Notification
 from app.models.models import User, Prediction, Feedback
@@ -16,6 +16,10 @@ def get_groq_client():
     """Lazy initialization of Groq client"""
     global _groq_client
     if _groq_client is None:
+        try:
+            from groq import Groq  # type: ignore
+        except Exception as ie:
+            raise ValueError("The 'groq' package is not installed. Please add it to requirements and set GROQ_API_KEY.") from ie
         api_key = os.getenv("GROQ_API_KEY")
         if not api_key:
             raise ValueError("GROQ_API_KEY environment variable is not set")
@@ -150,6 +154,20 @@ class NotificationService:
         language: str = "en"
     ) -> Notification:
         """Generate AI-powered personalized health notification based on user history"""
+        # Derive a friendly first name from the user's profile
+        def _first_name(full_name: Optional[str]) -> str:
+            if not full_name:
+                return "there" if language == "en" else "मित्र"
+            parts = full_name.strip().split()
+            if not parts:
+                return "there" if language == "en" else "मित्र"
+            # Preserve original casing for non-latin scripts; capitalize latin scripts softly
+            try:
+                return parts[0].capitalize()
+            except Exception:
+                return parts[0]
+
+        first_name = _first_name(getattr(user, "full_name", None))
         
         # Get user's recent prediction history (last 30 days)
         recent_date = datetime.utcnow() - timedelta(days=30)
@@ -165,14 +183,14 @@ class NotificationService:
         
         # Build context for AI
         if not predictions:
-            # No history, send welcome notification
+            # No history, send welcome notification with name
             if language == "hi":
-                title = "स्वागत है! 🏥"
-                message = "आपके स्वास्थ्य यात्रा में आपका स्वागत है। लक्षणों का विश्लेषण शुरू करें और व्यक्तिगत स्वास्थ्य सुझाव प्राप्त करें।"
+                title = f"स्वागत है, {first_name}! 🏥"
+                message = f"नमस्ते {first_name}, आपकी स्वास्थ्य यात्रा में आपका स्वागत है। लक्षणों का विश्लेषण शुरू करें और व्यक्तिगत स्वास्थ्य सुझाव प्राप्त करें।"
             else:
-                title = "Welcome to Health Symptom Predictor! 🏥"
-                message = "Start analyzing your symptoms to get personalized health insights and recommendations powered by AI."
-            
+                title = f"Welcome, {first_name}! 🏥"
+                message = f"Hi {first_name}, welcome to Health Symptom Predictor. Start analyzing your symptoms to get personalized health insights and AI-powered recommendations."
+
             return NotificationService.create_notification(
                 db=db,
                 title=title,
@@ -195,8 +213,9 @@ class NotificationService:
         user_info = f"Age: {user.age if user.age else 'N/A'}, Gender: {user.gender if user.gender else 'N/A'}"
         
         # Create prompt for Groq
-        system_prompt = """You are a compassionate healthcare AI assistant. Generate a personalized health notification 
+        system_prompt = f"""You are a compassionate healthcare AI assistant. Generate a personalized health notification 
         based on the user's prediction history. The notification should:
+        - Address the user by their first name ('{first_name}') in the first sentence
         - Be encouraging and supportive
         - Provide actionable health advice
         - Be concise (2-3 sentences, max 200 words)
@@ -208,6 +227,7 @@ class NotificationService:
         if language == "hi":
             system_prompt += "\n- Respond in Hindi language"
             user_prompt = f"""
+पहला नाम: {first_name}
 उपयोगकर्ता की जानकारी:
 {user_info}
 
@@ -217,10 +237,14 @@ class NotificationService:
 फीडबैक:
 {feedback_summary}
 
-उपयोगकर्ता के स्वास्थ्य इतिहास के आधार पर एक व्यक्तिगत स्वास्थ्य सूचना तैयार करें। सकारात्मक, प्रोत्साहित करने वाला और कार्रवाई योग्य सलाह दें।
+उपयोगकर्ता के स्वास्थ्य इतिहास के आधार पर एक व्यक्तिगत स्वास्थ्य सूचना तैयार करें।
+निर्देश:
+- पहले वाक्य में उपयोगकर्ता को उनके पहले नाम से संबोधित करें (जैसे, "नमस्ते {first_name}, ...")
+- सकारात्मक, प्रोत्साहित करने वाला और कार्रवाई योग्य सलाह दें।
 """
         else:
             user_prompt = f"""
+First name: {first_name}
 User Information:
 {user_info}
 
@@ -230,7 +254,10 @@ Recent Predictions:
 Feedback:
 {feedback_summary}
 
-Create a personalized health notification based on the user's history. Be positive, encouraging, and provide actionable advice.
+Create a personalized health notification based on the user's history.
+Instructions:
+- Address the user by their first name in the first sentence (e.g., "Hi {first_name}, ...")
+- Be positive, encouraging, and provide actionable advice.
 """
         
         try:
@@ -247,9 +274,22 @@ Create a personalized health notification based on the user's history. Be positi
             )
             
             ai_message = response.choices[0].message.content.strip()
+            # Ensure the message greets the user by name even if the model forgot
+            normalized = ai_message.lower()
+            expected = first_name.lower()
+            if expected not in normalized[:max(0, min(len(ai_message), 60))]:
+                # Prepend a friendly greeting
+                if language == "hi":
+                    ai_message = f"नमस्ते {first_name}, " + ai_message
+                else:
+                    ai_message = f"Hi {first_name}, " + ai_message
             
             # Create notification
-            title = "Your Personalized Health Insight 💡" if language == "en" else "आपकी व्यक्तिगत स्वास्थ्य सलाह 💡"
+            title = (
+                "Your Personalized Health Insight 💡"
+                if language == "en"
+                else "आपकी व्यक्तिगत स्वास्थ्य सलाह 💡"
+            )
             
             return NotificationService.create_notification(
                 db=db,
@@ -264,10 +304,10 @@ Create a personalized health notification based on the user's history. Be positi
             # Fallback notification
             if language == "hi":
                 title = "स्वास्थ्य सलाह 💡"
-                message = "नियमित व्यायाम, संतुलित आहार और पर्याप्त नींद आपके स्वास्थ्य के लिए महत्वपूर्ण हैं। अपनी देखभाल करते रहें!"
+                message = f"नमस्ते {first_name}, नियमित व्यायाम, संतुलित आहार और पर्याप्त नींद आपके स्वास्थ्य के लिए महत्वपूर्ण हैं। अपनी देखभाल करते रहें!"
             else:
                 title = "Health Tip 💡"
-                message = "Regular exercise, balanced diet, and adequate sleep are key to maintaining good health. Keep taking care of yourself!"
+                message = f"Hi {first_name}, regular exercise, a balanced diet, and adequate sleep are key to maintaining good health. Keep taking care of yourself!"
             
             return NotificationService.create_notification(
                 db=db,
