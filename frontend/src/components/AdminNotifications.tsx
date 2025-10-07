@@ -35,7 +35,7 @@ const notificationTemplates = {
   ],
 };
 
-export const AdminNotifications: React.FC<AdminNotificationsProps> = ({ isOpen, onClose }) => {
+const AdminNotifications: React.FC<AdminNotificationsProps> = ({ isOpen, onClose }) => {
   const [selectedTab, setSelectedTab] = useState<'announcement' | 'direct' | 'ai'>('announcement');
   const [formData, setFormData] = useState({ title: '', message: '', selectedUserId: null });
   const [users, setUsers] = useState<UserForNotification[]>([]);
@@ -357,3 +357,4 @@ export const AdminNotifications: React.FC<AdminNotificationsProps> = ({ isOpen, 
       </div>
     </div>
   );
+export default AdminNotifications;
