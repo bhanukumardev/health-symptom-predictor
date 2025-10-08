@@ -3,5 +3,13 @@
   "outputDirectory": "dist",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "vite"
+  "framework": "vite",
+  "env": {
+    "VITE_API_URL": "https://health-symptom-predictor.onrender.com"
+  },
+  "build": {
+    "env": {
+      "VITE_API_URL": "https://health-symptom-predictor.onrender.com"
+    }
+  }
 }

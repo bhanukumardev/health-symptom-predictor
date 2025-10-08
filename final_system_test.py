@@ -7,13 +7,15 @@ import requests
 import json
 import time
 import sys
+import os
 from datetime import datetime
 
 # Configuration
 BACKEND_URL = "https://health-symptom-predictor.onrender.com"
 FRONTEND_URL = "https://health-symptom-predictor.netlify.app"
-ADMIN_EMAIL = "kumarbhanu818@gmail.com"
-ADMIN_PASSWORD = "Bhanu123@"
+# Admin credentials - use environment variables in production
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'admin@example.com')
+ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', 'defaultpassword')
 
 def print_header(text):
     print("\n" + "="*60)

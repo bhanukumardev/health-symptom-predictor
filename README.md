@@ -730,9 +730,9 @@ npm run devcd frontend
 
 **Bhanu Kumar Dev**
 
-- GitHub: [@bhanukumardev](https://github.com/bhanukumardev)✅ Frontend available at: **http://localhost:3000**
+- GitHub: [@bhanukumardev](https://github.com/bhanukumardev)
 
-- Email: kumarbhanu818@gmail.com
+✅ Frontend available at: **http://localhost:3000**
 
 Frontend will be available at: http://localhost:3000
 
@@ -1036,11 +1036,15 @@ Once backend is running:- Node.js 16+### Database
 
 - ✅ **Rate Limiting**: API protection
 
-- **Email**: kumarbhanu818@gmail.com│   │   ├── services/       # API service layer
+### 7. Access the Application
+
+The application will be running with a default admin account. Check the backend logs or create a new account through the registration flow.
+
+│   │   ├── services/       # API service layer
 
 ---
 
-- **Password**: Bhanu123@│   │   ├── types/          # TypeScript type definitions
+│   │   ├── types/          # TypeScript type definitions
 
 ## 🧪 Testing
 
@@ -1164,9 +1168,9 @@ This application is for **educational purposes only** and should **NOT** replace
 
 **Bhanu Kumar Dev**
 
-- GitHub: [@bhanukumardev](https://github.com/bhanukumardev)├── docker-compose.yml      # Docker orchestration
+- GitHub: [@bhanukumardev](https://github.com/bhanukumardev)
 
-- Email: kumarbhanu818@gmail.com
+├── docker-compose.yml      # Docker orchestration
 
 1. **User Authentication** - JWT-based, stored in PostgreSQL└── .env.example           # Environment variables template
 
@@ -1194,11 +1198,7 @@ This application is for **educational purposes only** and should **NOT** replace
 
 ## 📞 Support## 🔌 API Endpoints- Node.js 18+ and npm
 
-
-
-- 📧 Email: kumarbhanu818@gmail.com- Python 3.9+
-
-- 🐛 Issues: [GitHub Issues](https://github.com/bhanukumardev/health-symptom-predictor/issues)
+-  Issues: [GitHub Issues](https://github.com/bhanukumardev/health-symptom-predictor/issues)- Python 3.9+
 
 ### Auth- PostgreSQL 14+
 

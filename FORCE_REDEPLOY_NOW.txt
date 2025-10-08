@@ -62,7 +62,7 @@
 
   PowerShell:
   ───────────
-  $body = @{username='kumarbhanu818@gmail.com'; password='Bhanu123'}
+  $body = @{username=$env:ADMIN_EMAIL ?? 'admin@example.com'; password=$env:ADMIN_PASSWORD ?? 'defaultpassword'}
   Invoke-RestMethod -Uri 'https://health-symptom-predictor.onrender.com/api/auth/login' -Method Post -Body $body -ContentType 'application/x-www-form-urlencoded'
 
   Expected Success:
@@ -130,7 +130,7 @@
 
   Then test frontend:
   1. Open: https://health-symptom-predictor.netlify.app
-  2. Login: kumarbhanu818@gmail.com / Bhanu123
+  2. Login: Use admin credentials from environment variables or register
   3. Test: Predictions, History, Notifications, Profile
 
 ┌──────────────────────────────────────────────────────────────────────────────┐

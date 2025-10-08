@@ -1,0 +1,24 @@
+# RENDER BACKEND ENVIRONMENT VARIABLES
+# Copy these to your Render service environment variables
+
+# Database (Use your Supabase or other PostgreSQL URL)
+DATABASE_URL=postgresql://postgres.username:password@host:port/database?sslmode=require
+
+# JWT Configuration
+SECRET_KEY=your-super-secret-jwt-key-change-this-in-production
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# API Keys
+GROQ_API_KEY=your-groq-api-key-here
+
+# CORS Configuration (include your future Vercel domain)
+ALLOWED_ORIGINS=https://your-app.vercel.app,https://health-symptom-predictor.onrender.com,http://localhost:3000
+
+# Environment
+ENVIRONMENT=production
+DEBUG=False
+
+# Admin Credentials (for initial setup)
+ADMIN_EMAIL=admin@yourdomain.com
+ADMIN_PASSWORD=your-secure-admin-password

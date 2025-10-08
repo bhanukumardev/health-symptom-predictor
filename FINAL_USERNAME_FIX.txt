@@ -50,7 +50,7 @@
 
   Step 4: TEST
   ════════════
-  $body = @{username='kumarbhanu818@gmail.com'; password='Bhanu123'}
+  $body = @{username=$env:ADMIN_EMAIL ?? 'admin@example.com'; password=$env:ADMIN_PASSWORD ?? 'defaultpassword'}
   Invoke-RestMethod -Uri 'https://health-symptom-predictor.onrender.com/api/auth/login' -Method Post -Body $body -ContentType 'application/x-www-form-urlencoded'
 
   Expected: Returns access_token ✅
@@ -79,7 +79,7 @@ postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.s
 
   2. Test frontend:
      Open: https://health-symptom-predictor.netlify.app
-     Login: kumarbhanu818@gmail.com / Bhanu123
+     Login: Use admin credentials from environment variables or register
 
   3. Celebrate! 🎊 Your app will be FULLY OPERATIONAL!
 

@@ -40,7 +40,8 @@ Write-Host "`n━━━━━━━━━━━━━━━━━━━━━━
 Write-Host "PHASE 2: Authentication Tests" -ForegroundColor Cyan
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`n" -ForegroundColor Cyan
 
-$loginBody = @{ username = "kumarbhanu818@gmail.com"; password = "Bhanu123@" }
+# Login with admin credentials from environment variables
+$loginBody = @{ username = $env:ADMIN_EMAIL ?? "admin@example.com"; password = $env:ADMIN_PASSWORD ?? "defaultpassword" }
 $loginResponse = Test-Endpoint "User Login" "$backendURL/api/auth/login" "POST" $loginBody
 
 if ($loginResponse -and $loginResponse.access_token) {

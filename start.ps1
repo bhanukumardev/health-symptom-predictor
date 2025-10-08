@@ -120,9 +120,9 @@ Write-Host ""    & uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 Write-Host "Admin Login:" -ForegroundColor Yellow} -ArgumentList $projectRoot, $env:DATABASE_URL
 
-Write-Host "  Email: kumarbhanu818@gmail.com" -ForegroundColor White
+Write-Host "  Check backend logs for admin credentials" -ForegroundColor White
 
-Write-Host "  Password: Bhanu123@" -ForegroundColor WhiteStart-Sleep -Seconds 3
+Write-Host "  or create account through registration" -ForegroundColor WhiteStart-Sleep -Seconds 3
 
 Write-Host ""
 

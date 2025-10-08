@@ -78,7 +78,7 @@ Write-Host "━━━━━━━━━━━━━━━━━━━━━━�
 Write-Host "`nℹ️  To test login, update this script with your credentials" -ForegroundColor Yellow
 
 $loginBody = @{
-    username = "kumarbhanu818@gmail.com"
+    username = os.getenv('ADMIN_EMAIL', 'admin@example.com')
     password = "YOUR_PASSWORD_HERE"  # Update this!
 }
 

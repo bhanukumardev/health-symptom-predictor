@@ -24,12 +24,6 @@ export default function Developer() {
           <div className="mb-6 text-indigo-200 italic font-medium">BTech CSSE</div>
           <div className="flex flex-col gap-2 w-full">
             <div className="flex items-center gap-3 bg-[#20243c] px-3 py-2 rounded-lg text-cyan-200 hover:bg-[#2a2f47] transition-colors cursor-pointer">
-              <FaEnvelope />
-              <a href="mailto:kumarbhanu818@gmail.com" className="flex-1 font-medium">
-                Email
-              </a>
-            </div>
-            <div className="flex items-center gap-3 bg-[#20243c] px-3 py-2 rounded-lg text-cyan-200 hover:bg-[#2a2f47] transition-colors cursor-pointer">
               <FaGithub />
               <a href="https://github.com/bhanukumardev" target="_blank" rel="noopener noreferrer" className="flex-1 font-medium">
                 GitHub

@@ -5,8 +5,9 @@ $ErrorActionPreference = "Stop"
 
 $baseUrl = "https://health-symptom-predictor.onrender.com"
 $frontendUrl = "https://health-symptom-predictor.netlify.app"
-$testEmail = "kumarbhanu818@gmail.com"
-$testPassword = "Bhanu123@"
+# Test credentials - use environment variables in production
+$testEmail = $env:ADMIN_EMAIL ?? "admin@example.com"
+$testPassword = $env:ADMIN_PASSWORD ?? "defaultpassword"
 
 $testsPassed = 0
 $testsFailed = 0
