@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import AdminNotifications from '../components/AdminNotifications';
 
 interface Stats {
@@ -168,27 +168,27 @@ export default function Admin() {
             <div className="text-sm text-cyan-100">Send</div>
             <div className="font-medium">Notifications</div>
           </button>
-          <a 
-            href="/admin/users"
-            className="btn btn-ghost text-left p-4 hover:bg-slate-800"
+          <Link 
+            to="/admin/users"
+            className="btn btn-ghost text-left p-4 hover:bg-slate-800 block"
           >
             <div className="text-sm text-slate-400">Manage</div>
             <div className="font-medium">All Users</div>
-          </a>
-          <a 
-            href="/admin/predictions"
-            className="btn btn-ghost text-left p-4 hover:bg-slate-800"
+          </Link>
+          <Link 
+            to="/admin/predictions"
+            className="btn btn-ghost text-left p-4 hover:bg-slate-800 block"
           >
             <div className="text-sm text-slate-400">View</div>
             <div className="font-medium">All Predictions</div>
-          </a>
-          <a 
-            href="/admin/feedback"
-            className="btn btn-ghost text-left p-4 hover:bg-slate-800"
+          </Link>
+          <Link 
+            to="/admin/feedback"
+            className="btn btn-ghost text-left p-4 hover:bg-slate-800 block"
           >
             <div className="text-sm text-slate-400">Review</div>
             <div className="font-medium">All Feedback</div>
-          </a>
+          </Link>
         </div>
       </div>
 
