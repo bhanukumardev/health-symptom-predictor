@@ -1,6 +1,6 @@
 # FastAPI and server
-fastapi==0.115.0
-uvicorn[standard]==0.30.0
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
 python-multipart==0.0.6
 
 # Database
@@ -14,8 +14,8 @@ passlib[bcrypt]==1.7.4
 bcrypt==4.0.1
 
 # Data validation
-pydantic==2.9.2
-pydantic-settings>=2.1.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
 email-validator==2.1.0
 
 # ML Integration
