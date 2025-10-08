@@ -1,372 +1,368 @@
-# 🏥 Health Symptom Predictor# 🏥 Health Symptom Predictor
+# 🏥 Health Symptom Predictor# 🏥 Health Symptom Predictor# 🏥 Health Symptom Predictor
 
 
 
-<div align="center"><div align="center">
+<div align="center">
 
 
 
-![Health Predictor](https://img.shields.io/badge/Health-Predictor-blue)![Health Predictor](https://img.shields.io/badge/Health-Predictor-blue)
+![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react)<div align="center"><div align="center">
 
-![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react)![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-009688?logo=fastapi)
 
-![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-009688?logo=fastapi)![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-009688?logo=fastapi)
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python)
 
-![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python)![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-316192?logo=postgresql)
 
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-316192?logo=postgresql)![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12+-316192?logo=postgresql)
-
-![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-3178C6?logo=typescript)![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-3178C6?logo=typescript)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-3178C6?logo=typescript)![Health Predictor](https://img.shields.io/badge/Health-Predictor-blue)![Health Predictor](https://img.shields.io/badge/Health-Predictor-blue)
 
 ![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel)
 
-**An AI-powered health application that predicts potential diseases based on user-reported symptoms**
+![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react)![React](https://img.shields.io/badge/React-18.3.1-61DAFB?logo=react)
 
 **An AI-powered health application that predicts potential diseases based on user-reported symptoms**
 
-[Features](#-features) • [Tech Stack](#-tech-stack) • [Installation](#-installation) • [Usage](#-usage) • [Deployment](#-deployment)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-009688?logo=fastapi)![FastAPI](https://img.shields.io/badge/FastAPI-0.104.1-009688?logo=fastapi)
 
 [Features](#-features) • [Tech Stack](#-tech-stack) • [Quick Start](#-quick-start) • [Deployment](#-deployment) • [API Docs](#-api-documentation)
 
-</div>
+![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python)![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python)
 
 </div>
 
----
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Supabase-316192?logo=postgresql)![PostgreSQL](https://img.shields.io/badge/PostgreSQL-12+-316192?logo=postgresql)
 
 ---
 
-## ✨ Features
+![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-3178C6?logo=typescript)![TypeScript](https://img.shields.io/badge/TypeScript-5.6.2-3178C6?logo=typescript)
 
 ## ✨ Features
+
+![Vercel](https://img.shields.io/badge/Deploy-Vercel-000000?logo=vercel)
 
 ### 🤖 AI-Powered Health Assistant
 
-### 🤖 AI-Powered Health Assistant- **Intelligent Symptom Analysis**: Machine learning-based disease prediction
+- **Intelligent Symptom Analysis**: Machine learning-based disease prediction**An AI-powered health application that predicts potential diseases based on user-reported symptoms**
 
-- **Intelligent Symptom Analysis**: Machine learning-based disease prediction- **AI Chatbot**: Groq LLM-powered health assistant supporting English, Hindi, and Hinglish
+- **AI Chatbot**: Groq LLM-powered health assistant supporting English, Hindi, and Hinglish
 
-- **AI Chatbot**: Groq LLM-powered health assistant supporting English, Hindi, and Hinglish- **Personalized Recommendations**: Age, gender, and weight-based medicine suggestions
-
-- **Personalized Recommendations**: Age, gender, and weight-based medicine suggestions- **Multilingual Support**: Full bilingual interface (English & Hindi)
+- **Personalized Recommendations**: Age, gender, and weight-based medicine suggestions**An AI-powered health application that predicts potential diseases based on user-reported symptoms**
 
 - **Multilingual Support**: Full bilingual interface (English & Hindi)
 
+[Features](#-features) • [Tech Stack](#-tech-stack) • [Installation](#-installation) • [Usage](#-usage) • [Deployment](#-deployment)
+
 ### 👤 User Management
 
-### 👤 User Management- Secure authentication with JWT tokens
+- Secure authentication with JWT tokens[Features](#-features) • [Tech Stack](#-tech-stack) • [Quick Start](#-quick-start) • [Deployment](#-deployment) • [API Docs](#-api-documentation)
 
-- Secure authentication with JWT tokens- User profile management with health metrics
+- User profile management with health metrics
 
-- User profile management with health metrics- Prediction history tracking
-
-- Prediction history tracking- Password hashing with bcrypt
+- Prediction history tracking</div>
 
 - Password hashing with bcrypt
 
+</div>
+
+### 📱 Responsive Design
+
+- **Mobile-First**: Optimized for all screen sizes---
+
+- **Adaptive Layouts**: Portrait and landscape support
+
+- **Touch-Friendly**: Mobile-optimized interactions---
+
+- **PWA-Ready**: Progressive Web App capabilities
+
+## ✨ Features
+
+### 🔔 Smart Notifications
+
+- **Real-time Updates**: Health tips and reminders## ✨ Features
+
+- **Personalized AI Tips**: Groq-powered health insights
+
+- **Bilingual**: Notifications in English & Hindi### 🤖 AI-Powered Health Assistant
+
+- **Mobile Optimized**: Full-screen modal on mobile devices
+
+### 🤖 AI-Powered Health Assistant- **Intelligent Symptom Analysis**: Machine learning-based disease prediction
+
 ### 🏥 Health Features
 
-### 📱 Responsive Design- Symptom-based disease prediction
+- Symptom-based disease prediction with confidence scores- **Intelligent Symptom Analysis**: Machine learning-based disease prediction- **AI Chatbot**: Groq LLM-powered health assistant supporting English, Hindi, and Hinglish
 
-- **Mobile-First**: Optimized for all screen sizes- Detailed disease information
+- Detailed disease information and descriptions
 
-- **Adaptive Layouts**: Portrait and landscape support- Medicine recommendations with dosage
+- Medicine recommendations with proper dosage- **AI Chatbot**: Groq LLM-powered health assistant supporting English, Hindi, and Hinglish- **Personalized Recommendations**: Age, gender, and weight-based medicine suggestions
 
-- **Touch-Friendly**: Mobile-optimized interactions- Home remedies and precautions
+- Home remedies and precautions
 
-- **PWA-Ready**: Progressive Web App capabilities- Emergency warning signs
+- Emergency warning signs- **Personalized Recommendations**: Age, gender, and weight-based medicine suggestions- **Multilingual Support**: Full bilingual interface (English & Hindi)
 
+- Comprehensive prediction history
 
+- **Multilingual Support**: Full bilingual interface (English & Hindi)
 
-### 🔔 Smart Notifications### 🔐 Admin Dashboard
+### 🔐 Admin Dashboard
 
-- **Real-time Updates**: Health tips and reminders- User management
+- User management and monitoring### 👤 User Management
 
-- **Personalized AI Tips**: Groq-powered health insights- System statistics
+- System statistics and analytics
 
-- **Bilingual**: Notifications in English & Hindi- Prediction monitoring
+- Prediction tracking and oversight### 👤 User Management- Secure authentication with JWT tokens
 
-- **Mobile Optimized**: Full-screen modal on mobile devices- Admin-only access control
+- Admin-only access control with role-based permissions
 
-
-
-### 🏥 Health Features---
-
-- Symptom-based disease prediction with confidence scores
-
-- Detailed disease information and descriptions## 🏗️ Tech Stack
-
-- Medicine recommendations with proper dosage
-
-- Home remedies and precautions### Frontend
-
-- Emergency warning signs- **Framework**: React 18.3.1 with TypeScript
-
-- Comprehensive prediction history- **Build Tool**: Vite 5.4.10
-
-- **Styling**: Tailwind CSS 3.4.13
-
-### 🔐 Admin Dashboard- **State Management**: Zustand 4.5.4
-
-- User management and monitoring- **Routing**: React Router DOM 6.26.2
-
-- System statistics and analytics- **HTTP Client**: Axios 1.7.7
-
-- Prediction tracking and oversight- **UI Components**: Lucide React, React Icons
-
-- Admin-only access control with role-based permissions- **Internationalization**: i18next, react-i18next
-
-
-
----### Backend
-
-- **Framework**: FastAPI 0.104.1
-
-## 🏗️ Tech Stack- **Language**: Python 3.9+
-
-- **Database**: PostgreSQL 12+
-
-### Frontend- **ORM**: SQLAlchemy 2.0+
-
-- **Framework**: React 18.3.1 with TypeScript- **Authentication**: JWT (python-jose)
-
-- **Build Tool**: Vite 5.4.10- **Password Hashing**: bcrypt
-
-- **Styling**: Tailwind CSS 3.4.13- **ASGI Server**: Uvicorn 0.24.0
-
-- **State Management**: Zustand 4.5.4- **AI Integration**: Groq LLM API
-
-- **Routing**: React Router DOM 6.26.2
-
-- **HTTP Client**: Axios 1.7.7### Database
-
-- **UI Components**: Lucide React, React Icons- **PostgreSQL 12+**
-
-- **Internationalization**: i18next, react-i18next- Persistent data storage
-
-- **Date Handling**: date-fns 4.1.0- User authentication
-
-- Prediction history
-
-### Backend- Admin management
-
-- **Framework**: FastAPI 0.104.1
-
-- **Language**: Python 3.9+---
-
-- **Database**: Supabase PostgreSQL
-
-- **ORM**: SQLAlchemy 2.0+## 📋 Prerequisites
-
-- **Authentication**: JWT (python-jose)
-
-- **Password Hashing**: bcryptBefore you begin, ensure you have the following installed:
-
-- **ASGI Server**: Uvicorn 0.24.0
-
-- **AI Integration**: Groq LLM API- **Python 3.9 or higher**
-
-- **Database Adapter**: psycopg2-binary- **Node.js 16+ and npm**
-
-- **PostgreSQL 12+**
-
-### Database & Cloud- **Git**
-
-- **Database**: Supabase PostgreSQL (Cloud-hosted)- **Groq API Key** (Get one free at [console.groq.com](https://console.groq.com/))
-
-- **Hosting**: Vercel (Frontend & Backend)
-
-- **AI**: Groq API (LLaMA 3 models)---
-
-- **Version Control**: Git & GitHub
-
-## 🚀 Installation
+- Secure authentication with JWT tokens- User profile management with health metrics
 
 ---
 
-### 1. Clone the Repository
+- User profile management with health metrics- Prediction history tracking
+
+## 🏗️ Tech Stack
+
+- Prediction history tracking- Password hashing with bcrypt
+
+### Frontend
+
+- **Framework**: React 18.3.1 with TypeScript- Password hashing with bcrypt
+
+- **Build Tool**: Vite 5.4.10
+
+- **Styling**: Tailwind CSS 3.4.13### 🏥 Health Features
+
+- **State Management**: Zustand 4.5.4
+
+- **Routing**: React Router DOM 6.26.2### 📱 Responsive Design- Symptom-based disease prediction
+
+- **HTTP Client**: Axios 1.7.7
+
+- **UI Components**: Lucide React, React Icons- **Mobile-First**: Optimized for all screen sizes- Detailed disease information
+
+- **Internationalization**: i18next, react-i18next
+
+- **Adaptive Layouts**: Portrait and landscape support- Medicine recommendations with dosage
+
+### Backend
+
+- **Framework**: FastAPI 0.104.1- **Touch-Friendly**: Mobile-optimized interactions- Home remedies and precautions
+
+- **Language**: Python 3.9+
+
+- **Database**: PostgreSQL 12+ (Supabase)- **PWA-Ready**: Progressive Web App capabilities- Emergency warning signs
+
+- **ORM**: SQLAlchemy 2.0+
+
+- **Authentication**: JWT (python-jose)
+
+- **Password Hashing**: bcrypt
+
+- **ASGI Server**: Uvicorn 0.24.0### 🔔 Smart Notifications### 🔐 Admin Dashboard
+
+- **AI Integration**: Groq LLM API
+
+- **Real-time Updates**: Health tips and reminders- User management
+
+### Database & Cloud
+
+- **Database**: Supabase PostgreSQL (Cloud-hosted)- **Personalized AI Tips**: Groq-powered health insights- System statistics
+
+- **Hosting**: Vercel (Frontend & Backend) / Netlify + Render
+
+- **AI**: Groq API (LLaMA 3 models)- **Bilingual**: Notifications in English & Hindi- Prediction monitoring
+
+- **Version Control**: Git & GitHub
+
+- **Mobile Optimized**: Full-screen modal on mobile devices- Admin-only access control
+
+---
+
+
 
 ## 📋 Prerequisites
 
-```bash
+### 🏥 Health Features---
 
-Before you begin, ensure you have:git clone https://github.com/YOUR_USERNAME/health-symptom-predictor.git
+Before you begin, ensure you have:
 
-cd health-symptom-predictor
+- Symptom-based disease prediction with confidence scores
 
-- **Python 3.9 or higher**```
+- **Python 3.9 or higher**
 
-- **Node.js 16+ and npm**
+- **Node.js 16+ and npm**- Detailed disease information and descriptions## 🏗️ Tech Stack
 
-- **Git**### 2. Backend Setup
+- **Git**
 
-- **Groq API Key** ([Get one free](https://console.groq.com/))
+- **Groq API Key** ([Get one free](https://console.groq.com/))- Medicine recommendations with proper dosage
 
-- **Vercel Account** (for deployment, [Sign up free](https://vercel.com))```bash
+- **Vercel Account** (for deployment, [Sign up free](https://vercel.com))
 
-# Navigate to backend directory
+- Home remedies and precautions### Frontend
 
----cd backend
+---
 
+- Emergency warning signs- **Framework**: React 18.3.1 with TypeScript
 
+## 🚀 Quick Start
 
-## 🚀 Quick Start# Create virtual environment
-
-python -m venv venv
+- Comprehensive prediction history- **Build Tool**: Vite 5.4.10
 
 ### 1. Clone the Repository
 
-# Activate virtual environment
-
-```bash# On Windows:
-
-git clone https://github.com/bhanukumardev/health-symptom-predictor.git.\venv\Scripts\activate
-
-cd health-symptom-predictor# On macOS/Linux:
-
-```source venv/bin/activate
-
-
-
-### 2. Backend Setup# Install dependencies
-
-pip install -r requirements.txt
+- **Styling**: Tailwind CSS 3.4.13
 
 ```bash
 
-# Navigate to backend directory# Create .env file from example
+git clone https://github.com/bhanukumardev/health-symptom-predictor.git### 🔐 Admin Dashboard- **State Management**: Zustand 4.5.4
 
-cd backendcopy .env.example .env  # Windows
+cd health-symptom-predictor
 
-cp .env.example .env    # macOS/Linux
+```- User management and monitoring- **Routing**: React Router DOM 6.26.2
+
+
+
+### 2. Backend Setup- System statistics and analytics- **HTTP Client**: Axios 1.7.7
+
+
+
+```bash- Prediction tracking and oversight- **UI Components**: Lucide React, React Icons
+
+# Navigate to backend directory
+
+cd backend- Admin-only access control with role-based permissions- **Internationalization**: i18next, react-i18next
+
+
 
 # Create virtual environment
 
-python -m venv venv# Edit .env and add your configuration
+python -m venv venv
 
-# IMPORTANT: Add your GROQ_API_KEY and DATABASE_URL
+---### Backend
 
-# Activate virtual environment```
+# Activate virtual environment
 
-# On Windows:
+# On Windows:- **Framework**: FastAPI 0.104.1
 
-venv\Scripts\activate### 3. Database Setup
+venv\Scripts\activate
 
-# On macOS/Linux:
+# On macOS/Linux:## 🏗️ Tech Stack- **Language**: Python 3.9+
 
-source venv/bin/activate```bash
+source venv/bin/activate
 
-# Create PostgreSQL database
+- **Database**: PostgreSQL 12+
 
-# Install dependenciescreatedb health_predictor
+# Install dependencies
 
-pip install -r requirements.txt
-
-```# Or using psql:
-
-psql -U postgres
-
-Create `backend/.env`:CREATE DATABASE health_predictor;
-
-```env\q
-
-DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
-
-SECRET_KEY=your-secret-key-generate-strong-random-key# Update DATABASE_URL in backend/.env
-
-ALGORITHM=HS256DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/health_predictor
-
-ACCESS_TOKEN_EXPIRE_MINUTES=30```
-
-GROQ_API_KEY=your-groq-api-key-here
-
-ENVIRONMENT=development### 4. Frontend Setup
-
-DEBUG=True
-
-``````bash
-
-# Navigate to frontend directory
-
-### 3. Frontend Setupcd ../frontend
-
-
-
-```bash# Install dependencies
-
-# Navigate to frontend directorynpm install
-
-cd ../frontend
-
-# Create .env file from example
-
-# Install dependenciescopy .env.example .env  # Windows
-
-npm installcp .env.example .env    # macOS/Linux
+pip install -r requirements.txt### Frontend- **ORM**: SQLAlchemy 2.0+
 
 ```
 
-# Edit .env if needed (default points to localhost:8000)
+- **Framework**: React 18.3.1 with TypeScript- **Authentication**: JWT (python-jose)
 
-Create `frontend/.env`:```
+Create `backend/.env`:
+
+- **Build Tool**: Vite 5.4.10- **Password Hashing**: bcrypt
 
 ```env
 
-VITE_API_URL=http://localhost:8000---
+DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require- **Styling**: Tailwind CSS 3.4.13- **ASGI Server**: Uvicorn 0.24.0
+
+SECRET_KEY=your-secret-key-generate-strong-random-key
+
+ALGORITHM=HS256- **State Management**: Zustand 4.5.4- **AI Integration**: Groq LLM API
+
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+GROQ_API_KEY=your-groq-api-key-here- **Routing**: React Router DOM 6.26.2
+
+ENVIRONMENT=development
+
+DEBUG=True- **HTTP Client**: Axios 1.7.7### Database
 
 ```
 
-## 🎯 Usage
+- **UI Components**: Lucide React, React Icons- **PostgreSQL 12+**
+
+### 3. Frontend Setup
+
+- **Internationalization**: i18next, react-i18next- Persistent data storage
+
+```bash
+
+# Navigate to frontend directory- **Date Handling**: date-fns 4.1.0- User authentication
+
+cd ../frontend
+
+- Prediction history
+
+# Install dependencies
+
+npm install### Backend- Admin management
+
+```
+
+- **Framework**: FastAPI 0.104.1
+
+Create `frontend/.env`:
+
+- **Language**: Python 3.9+---
+
+```env
+
+VITE_API_URL=http://localhost:8888- **Database**: Supabase PostgreSQL
+
+```
+
+- **ORM**: SQLAlchemy 2.0+## 📋 Prerequisites
 
 ### 4. Run Locally
 
-### Running Locally
-
-#### Start Backend
+- **Authentication**: JWT (python-jose)
 
 #### Start Backend Server
 
+- **Password Hashing**: bcryptBefore you begin, ensure you have the following installed:
+
 ```bash
 
-cd backend```bash
+cd backend- **ASGI Server**: Uvicorn 0.24.0
 
-venv\Scripts\activate  # Windowscd backend
+.\venv\Scripts\activate  # Windows
 
-source venv/bin/activate  # macOS/Linux.\venv\Scripts\activate  # Windows
-
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000source venv/bin/activate # macOS/Linux
-
-```
+source venv/bin/activate # macOS/Linux- **AI Integration**: Groq LLM API- **Python 3.9 or higher**
 
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8888
 
-✅ Backend available at:```
+```- **Database Adapter**: psycopg2-binary- **Node.js 16+ and npm**
 
-- **API**: http://localhost:8000
 
-- **API Docs**: http://localhost:8000/docsBackend will be available at:
 
-- **Health Check**: http://localhost:8000/health- API: http://localhost:8888
+Backend will be available at:- **PostgreSQL 12+**
 
-- Docs: http://localhost:8888/docs
+- API: http://localhost:8888
 
-#### Start Frontend
+- Docs: http://localhost:8888/docs### Database & Cloud- **Git**
 
-#### Start Frontend Server
 
-```bash
 
-cd frontend```bash
+#### Start Frontend Server- **Database**: Supabase PostgreSQL (Cloud-hosted)- **Groq API Key** (Get one free at [console.groq.com](https://console.groq.com/))
 
-npm run devcd frontend
 
-```npm run dev
+
+```bash- **Hosting**: Vercel (Frontend & Backend)
+
+cd frontend
+
+npm run dev- **AI**: Groq API (LLaMA 3 models)---
 
 ```
 
-✅ Frontend available at: **http://localhost:3000**
+- **Version Control**: Git & GitHub
 
 Frontend will be available at: http://localhost:3000
+
+## 🚀 Installation
 
 ---
 
@@ -374,23 +370,421 @@ Frontend will be available at: http://localhost:3000
 
 ## 🌐 Deployment to Vercel
 
-## 🔧 Configuration
+### 1. Clone the Repository
 
 ### 📖 Complete Deployment Guide
 
-### Backend Environment Variables
+## 📋 Prerequisites
 
 **For detailed step-by-step instructions, see:**
 
+👉 **[VERCEL_DEPLOYMENT_GUIDE.md](./VERCEL_DEPLOYMENT_GUIDE.md)**```bash
+
+
+
+### Quick Deploy CommandsBefore you begin, ensure you have:git clone https://github.com/YOUR_USERNAME/health-symptom-predictor.git
+
+
+
+**Frontend:**cd health-symptom-predictor
+
+```bash
+
+cd frontend- **Python 3.9 or higher**```
+
+vercel --prod
+
+```- **Node.js 16+ and npm**
+
+
+
+**Backend:**- **Git**### 2. Backend Setup
+
+```bash
+
+cd backend- **Groq API Key** ([Get one free](https://console.groq.com/))
+
+vercel --prod
+
+```- **Vercel Account** (for deployment, [Sign up free](https://vercel.com))```bash
+
+
+
+### Required Environment Variables for Production# Navigate to backend directory
+
+
+
+**Backend (Vercel Dashboard):**---cd backend
+
+```env
+
+DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+
+SECRET_KEY=<generate-strong-random-key>
+
+GROQ_API_KEY=<your-groq-api-key>## 🚀 Quick Start# Create virtual environment
+
+ALGORITHM=HS256
+
+ACCESS_TOKEN_EXPIRE_MINUTES=30python -m venv venv
+
+ENVIRONMENT=production
+
+DEBUG=False### 1. Clone the Repository
+
+```
+
+# Activate virtual environment
+
+**Frontend (Vercel Dashboard):**
+
+```env```bash# On Windows:
+
+VITE_API_URL=https://your-backend.vercel.app
+
+```git clone https://github.com/bhanukumardev/health-symptom-predictor.git.\venv\Scripts\activate
+
+
+
+### Current Live Production URLscd health-symptom-predictor# On macOS/Linux:
+
+
+
+- **Frontend**: https://health-symptom-predictor.netlify.app```source venv/bin/activate
+
+- **Backend**: https://health-symptom-predictor.onrender.com
+
+- **API Docs**: https://health-symptom-predictor.onrender.com/docs
+
+
+
+---### 2. Backend Setup# Install dependencies
+
+
+
+## 📁 Project Structurepip install -r requirements.txt
+
+
+
+``````bash
+
+health-symptom-predictor/
+
+├── frontend/                      # React TypeScript frontend# Navigate to backend directory# Create .env file from example
+
+│   ├── src/
+
+│   │   ├── components/           # UI componentscd backendcopy .env.example .env  # Windows
+
+│   │   ├── pages/                # Page components
+
+│   │   ├── services/             # API servicescp .env.example .env    # macOS/Linux
+
+│   │   └── store/                # State management
+
+│   ├── vercel.json               # Vercel config# Create virtual environment
+
+│   └── package.json
+
+│python -m venv venv# Edit .env and add your configuration
+
+├── backend/                       # FastAPI backend
+
+│   ├── app/# IMPORTANT: Add your GROQ_API_KEY and DATABASE_URL
+
+│   │   ├── api/                  # API routes
+
+│   │   ├── core/                 # Configuration# Activate virtual environment```
+
+│   │   ├── models/               # Database models
+
+│   │   ├── schemas/              # Pydantic schemas# On Windows:
+
+│   │   ├── services/             # Business logic
+
+│   │   └── main.pyvenv\Scripts\activate### 3. Database Setup
+
+│   ├── vercel.json               # Vercel config
+
+│   └── requirements.txt# On macOS/Linux:
+
+│
+
+├── vercel.json                    # Root Vercel configsource venv/bin/activate```bash
+
+├── VERCEL_DEPLOYMENT_GUIDE.md    # Deployment guide
+
+└── README.md                      # This file# Create PostgreSQL database
+
+```
+
+# Install dependenciescreatedb health_predictor
+
+---
+
+pip install -r requirements.txt
+
+## 🔌 API Documentation
+
+```# Or using psql:
+
+### Live API Documentation
+
+psql -U postgres
+
+Once backend is running:
+
+- **Swagger UI**: http://localhost:8888/docsCreate `backend/.env`:CREATE DATABASE health_predictor;
+
+- **ReDoc**: http://localhost:8888/redoc
+
+```env\q
+
+### Key API Endpoints
+
+DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+
+#### Authentication
+
+- `POST /api/auth/register` - Register new userSECRET_KEY=your-secret-key-generate-strong-random-key# Update DATABASE_URL in backend/.env
+
+- `POST /api/auth/login` - User login (JWT)
+
+- `GET /api/auth/me` - Current user infoALGORITHM=HS256DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/health_predictor
+
+
+
+#### PredictionsACCESS_TOKEN_EXPIRE_MINUTES=30```
+
+- `POST /api/predictions/predict` - Predict disease
+
+- `GET /api/predictions/history` - Prediction historyGROQ_API_KEY=your-groq-api-key-here
+
+- `DELETE /api/predictions/history/{id}` - Delete prediction
+
+ENVIRONMENT=development### 4. Frontend Setup
+
+#### Notifications
+
+- `GET /api/notifications` - Get notificationsDEBUG=True
+
+- `POST /api/notifications/generate` - Generate AI tip
+
+- `PUT /api/notifications/{id}/read` - Mark as read``````bash
+
+- `PUT /api/notifications/mark-all-read` - Mark all read
+
+- `DELETE /api/notifications/{id}` - Delete notification# Navigate to frontend directory
+
+
+
+#### User Profile### 3. Frontend Setupcd ../frontend
+
+- `GET /api/user/profile` - Get profile
+
+- `PUT /api/user/profile` - Update profile
+
+
+
+#### Admin```bash# Install dependencies
+
+- `GET /api/admin/users` - All users
+
+- `GET /api/admin/stats` - Statistics# Navigate to frontend directorynpm install
+
+
+
+#### Chatcd ../frontend
+
+- `POST /api/chat` - AI health assistant
+
+# Create .env file from example
+
+---
+
+# Install dependenciescopy .env.example .env  # Windows
+
+## 🔒 Security Features
+
+npm installcp .env.example .env    # macOS/Linux
+
+- ✅ **Password Hashing**: bcrypt
+
+- ✅ **JWT Authentication**: Secure tokens```
+
+- ✅ **CORS Protection**: Configured origins
+
+- ✅ **SQL Injection Prevention**: SQLAlchemy ORM# Edit .env if needed (default points to localhost:8000)
+
+- ✅ **Input Validation**: Pydantic
+
+- ✅ **HTTPS**: Enforced (Vercel)Create `frontend/.env`:```
+
+- ✅ **Environment Variables**: Protected
+
+- ✅ **Rate Limiting**: API protection```env
+
+
+
+---VITE_API_URL=http://localhost:8000---
+
+
+
+## 🧪 Testing```
+
+
+
+```bash## 🎯 Usage
+
+# Backend tests
+
+cd backend### 4. Run Locally
+
+pytest
+
+### Running Locally
+
+# Frontend tests
+
+cd frontend#### Start Backend
+
+npm test
+
+```#### Start Backend Server
+
+
+
+---```bash
+
+
+
+## 🐛 Troubleshootingcd backend```bash
+
+
+
+### Common Issuesvenv\Scripts\activate  # Windowscd backend
+
+
+
+**Backend won't start:**source venv/bin/activate  # macOS/Linux.\venv\Scripts\activate  # Windows
+
+- Check Python version (3.9+)
+
+- Verify dependencies: `pip install -r requirements.txt`uvicorn app.main:app --reload --host 0.0.0.0 --port 8000source venv/bin/activate # macOS/Linux
+
+- Check DATABASE_URL
+
+```
+
+**Frontend won't connect:**
+
+- Verify VITE_API_URL in `.env`uvicorn app.main:app --reload --host 0.0.0.0 --port 8888
+
+- Check backend is running
+
+- Check CORS settings✅ Backend available at:```
+
+
+
+**Database connection error:**- **API**: http://localhost:8000
+
+- Verify DATABASE_URL format
+
+- Check Supabase is accessible- **API Docs**: http://localhost:8000/docsBackend will be available at:
+
+
+
+---- **Health Check**: http://localhost:8000/health- API: http://localhost:8888
+
+
+
+## ⚠️ Disclaimer- Docs: http://localhost:8888/docs
+
+
+
+**IMPORTANT MEDICAL DISCLAIMER**#### Start Frontend
+
+
+
+This application is for **educational purposes only** and should **NOT** replace professional medical advice.#### Start Frontend Server
+
+
+
+- Always consult healthcare providers```bash
+
+- Never ignore professional medical advice
+
+- In emergencies, call local emergency servicescd frontend```bash
+
+- AI predictions are not 100% accurate
+
+npm run devcd frontend
+
+---
+
+```npm run dev
+
+## 👥 Author
+
+```
+
+**Bhanu Kumar Dev**
+
+- GitHub: [@bhanukumardev](https://github.com/bhanukumardev)✅ Frontend available at: **http://localhost:3000**
+
+- Email: kumarbhanu818@gmail.com
+
+Frontend will be available at: http://localhost:3000
+
+---
+
+---
+
+## 🙏 Acknowledgments
+
+---
+
+- Groq AI for LLM inference
+
+- Supabase for database## 🌐 Deployment to Vercel
+
+- Vercel for deployment
+
+- FastAPI & React communities## 🔧 Configuration
+
+
+
+---### 📖 Complete Deployment Guide
+
+
+
+## 📞 Support### Backend Environment Variables
+
+
+
+- 📧 Email: kumarbhanu818@gmail.com**For detailed step-by-step instructions, see:**
+
+- 🐛 Issues: [GitHub Issues](https://github.com/bhanukumardev/health-symptom-predictor/issues)
+
 👉 **[VERCEL_DEPLOYMENT_GUIDE.md](./VERCEL_DEPLOYMENT_GUIDE.md)**Create `backend/.env` with the following:
 
+---
 
+
+
+<div align="center">
 
 ### Quick Deploy Commands```env
 
+**⭐ Star this repo if you find it helpful!**
+
 # Database
 
+Made with ❤️ by Bhanu Kumar Dev
+
 **Frontend:**DATABASE_URL=postgresql://postgres:password@localhost:5432/health_predictor
+
+</div>
 
 ```bash
 
