@@ -21,14 +21,13 @@ RENDER_CONFIG = {
 }
 
 # Target: Supabase PostgreSQL
-# Note: You need to get your actual Supabase database password from the Supabase dashboard
-# Go to: Project Settings → Database → Connection string
+# Password configured for migration
 SUPABASE_CONFIG = {
     'host': 'db.txhohvmugqptewlvuhfn.supabase.co',
-    'port': 6543,
+    'port': 5432,  # Using direct connection for migration (not pooler)
     'database': 'postgres',
     'user': 'postgres',
-    'password': 'YOUR_SUPABASE_PASSWORD_HERE',  # Replace with actual Supabase password
+    'password': 'Bhanu123@',
     'sslmode': 'require'
 }
 

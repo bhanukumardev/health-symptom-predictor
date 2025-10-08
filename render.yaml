@@ -9,7 +9,7 @@ start_command = uvicorn app.main:app --host 0.0.0.0 --port $PORT
 
 # Environment Variables Required in Render Dashboard:
 # GROQ_API_KEY=your_actual_groq_api_key_here
-# DATABASE_URL=postgresql://health_predictor_user:WtIo4HLKi9AEveEmlMFYONE3dxWJhfOd@dpg-d3hu2c1gv73c73e0l170-a.oregon-postgres.render.com/health_predictor
+# DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
 # ALLOWED_ORIGINS=https://health-symptom-predictor.netlify.app,https://health-symptom-predictor.onrender.com,http://localhost:3000,http://localhost:3001
 # ENVIRONMENT=production
 # DEBUG=False
@@ -29,4 +29,4 @@ region = oregon
 # Database Configuration
 database_name = health_predictor
 database_user = health_predictor_user
-database_url = postgresql://health_predictor_user:WtIo4HLKi9AEveEmlMFYONE3dxWJhfOd@dpg-d3hu2c1gv73c73e0l170-a.oregon-postgres.render.com/health_predictor
+database_url = postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require

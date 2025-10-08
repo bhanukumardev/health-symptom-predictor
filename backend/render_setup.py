@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Render Backend Setup Script
-Initializes the Render PostgreSQL database with all tables and admin user
+Initializes the Supabase PostgreSQL database via the IPv4-compatible connection pooler
 """
 import os
 import sys
@@ -14,8 +14,8 @@ import json
 # Add the backend directory to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# Set production environment variables
-os.environ["DATABASE_URL"] = "postgresql://health_predictor_user:WtIo4HLKi9AEveEmlMFYONE3dxWJhfOd@dpg-d3hu2c1gv73c73e0l170-a.oregon-postgres.render.com/health_predictor"
+# Set production environment variables for Render deployment using Supabase
+os.environ["DATABASE_URL"] = "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require"
 os.environ["ENVIRONMENT"] = "production"
 os.environ["DEBUG"] = "False"
 os.environ["ALLOWED_ORIGINS"] = "https://health-symptom-predictor.netlify.app,https://health-symptom-predictor.onrender.com,http://localhost:3000,http://localhost:3001"
@@ -164,7 +164,7 @@ def main():
     
     print(f"🎯 Service ID: srv-d3hu4l3uibrs73b7kfb0")
     print(f"🌐 Backend URL: https://health-symptom-predictor.onrender.com")
-    print(f"🗄️ Database: PostgreSQL v17 on Render")
+    print(f"🗄️ Database: Supabase PostgreSQL via Transaction Pooler")
     print("=" * 50)
     
     # Step 1: Test database connection

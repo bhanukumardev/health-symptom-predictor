@@ -24,7 +24,7 @@ class Settings:
     def DATABASE_URL_WITH_SSL(self) -> str:
         """Returns database URL with proper SSL configuration for production"""
         db_url = self.DATABASE_URL
-        if "render.com" in db_url or "amazonaws.com" in db_url:
+        if any(host in db_url for host in ("render.com", "amazonaws.com", "supabase.co", "pooler.supabase.com")) and "sslmode" not in db_url:
             # Add SSL parameters for cloud databases
             if "?" not in db_url:
                 db_url += "?sslmode=require"

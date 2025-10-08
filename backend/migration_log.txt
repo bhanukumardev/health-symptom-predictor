@@ -1,0 +1,119 @@
+[2025-10-08 12:52:27] [INFO] Connecting to Render PostgreSQL...
+[2025-10-08 12:52:29] [SUCCESS] Connected to Render PostgreSQL
+[2025-10-08 12:52:29] [INFO] Connecting to Supabase PostgreSQL...
+[2025-10-08 12:52:29] [SUCCESS] Connected to Supabase PostgreSQL
+[2025-10-08 12:52:29] [INFO] Processing table: users
+[2025-10-08 12:52:31] [INFO] Found 7 rows in 'users'
+[2025-10-08 12:52:31] [INFO] Creating table 'users' in Supabase...
+[2025-10-08 12:52:31] [INFO] Table 'users' created successfully
+[2025-10-08 12:52:31] [INFO] Inserting 7 rows into 'users'...
+[2025-10-08 12:52:31] [WARNING] Error inserting row: column "hashed_password" of relation "users" does not exist
+LINE 1: INSERT INTO users (id,email,hashed_password,full_name,age,ge...
+                                    ^
+
+[2025-10-08 12:52:31] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:32] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:32] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:32] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:32] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:32] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:32] [SUCCESS] Inserted 0/7 rows into 'users'
+[2025-10-08 12:52:32] [INFO] Processing table: symptoms
+[2025-10-08 12:52:33] [INFO] No data in table 'symptoms'
+[2025-10-08 12:52:33] [INFO] Processing table: diseases
+[2025-10-08 12:52:34] [INFO] Found 5 rows in 'diseases'
+[2025-10-08 12:52:34] [INFO] Creating table 'diseases' in Supabase...
+[2025-10-08 12:52:34] [INFO] Table 'diseases' created successfully
+[2025-10-08 12:52:34] [INFO] Inserting 5 rows into 'diseases'...
+[2025-10-08 12:52:34] [WARNING] Error inserting row: column "common_symptoms" of relation "diseases" does not exist
+LINE 1: ...iseases (id,name,description,precautions,severity,common_sym...
+                                                             ^
+
+[2025-10-08 12:52:34] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:35] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:35] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:35] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:35] [SUCCESS] Inserted 0/5 rows into 'diseases'
+[2025-10-08 12:52:35] [INFO] Processing table: predictions
+[2025-10-08 12:52:37] [INFO] Found 20 rows in 'predictions'
+[2025-10-08 12:52:37] [INFO] Creating table 'predictions' in Supabase...
+[2025-10-08 12:52:37] [INFO] Table 'predictions' created successfully
+[2025-10-08 12:52:37] [INFO] Inserting 20 rows into 'predictions'...
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [WARNING] Error inserting row: can't adapt type 'dict'
+[2025-10-08 12:52:37] [SUCCESS] Inserted 0/20 rows into 'predictions'
+[2025-10-08 12:52:37] [INFO] Processing table: feedback
+[2025-10-08 12:52:38] [INFO] Found 5 rows in 'feedback'
+[2025-10-08 12:52:38] [INFO] Creating table 'feedback' in Supabase...
+[2025-10-08 12:52:38] [INFO] Table 'feedback' created successfully
+[2025-10-08 12:52:38] [INFO] Inserting 5 rows into 'feedback'...
+[2025-10-08 12:52:39] [WARNING] Error inserting row: column "actual_diagnosis" of relation "feedback" does not exist
+LINE 1: ...NSERT INTO feedback (id,prediction_id,is_accurate,actual_dia...
+                                                             ^
+
+[2025-10-08 12:52:39] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:39] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:39] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:39] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:39] [SUCCESS] Inserted 0/5 rows into 'feedback'
+[2025-10-08 12:52:39] [INFO] Processing table: notifications
+[2025-10-08 12:52:40] [INFO] Found 11 rows in 'notifications'
+[2025-10-08 12:52:40] [INFO] Creating table 'notifications' in Supabase...
+[2025-10-08 12:52:41] [INFO] Table 'notifications' created successfully
+[2025-10-08 12:52:41] [INFO] Inserting 11 rows into 'notifications'...
+[2025-10-08 12:52:41] [WARNING] Error inserting row: insert or update on table "notifications" violates foreign key constraint "notifications_user_id_fkey"
+DETAIL:  Key (user_id)=(7) is not present in table "users".
+
+[2025-10-08 12:52:41] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:41] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:41] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:41] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:41] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:41] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:41] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:42] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:42] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:42] [WARNING] Error inserting row: current transaction is aborted, commands ignored until end of transaction block
+
+[2025-10-08 12:52:42] [SUCCESS] Inserted 0/11 rows into 'notifications'

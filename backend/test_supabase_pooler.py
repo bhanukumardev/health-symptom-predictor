@@ -6,17 +6,14 @@ import sys
 
 # Test all possible Supabase connection strings
 connection_strings = {
-    "1. Transaction Pooler (Port 6543 - as suggested)": 
-        "postgresql://postgres:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require",
-    
-    "2. Session Pooler (Port 5432 with project username)": 
-        "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require",
-    
-    "3. Direct Connection (Port 5432)": 
+    "1. Transaction Pooler (Port 6543 with project username)":
+        "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require",
+
+    "2. Session Pooler (Port 5432 with project username)":
+        "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require",
+
+    "3. Direct Connection (Port 5432)":
         "postgresql://postgres:Bhanu123%40@db.txhohvmugqptewlvuhfn.supabase.co:5432/postgres?sslmode=require",
-    
-    "4. Transaction Pooler with project username": 
-        "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require",
 }
 
 print("=" * 80)

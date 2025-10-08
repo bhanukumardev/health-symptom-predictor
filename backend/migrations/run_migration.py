@@ -11,7 +11,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Get database URL from environment
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://health_predictor_user:WtIo4HLKi9AEveEmlMFYONE3dxWJhfOd@dpg-d3hu2c1gv73c73e0l170-a/health_predictor")
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require",
+)
 
 def run_migration():
     """Run the migration to create notifications table"""

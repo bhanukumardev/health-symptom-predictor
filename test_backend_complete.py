@@ -41,7 +41,7 @@ print("\n3. Testing Login Endpoint (Database Connection)...")
 try:
     login_data = {
         "username": "kumarbhanu818@gmail.com",
-        "password": "Bhanu123"
+        "password": "Bhanu123@"
     }
     response = requests.post(
         f"{BASE_URL}/api/auth/login",
@@ -75,9 +75,9 @@ try:
     else:
         print(f"   ❌ Login failed!")
         print(f"   Response: {response.text}")
-        print("\n   💡 This indicates DATABASE_URL on Render needs to be updated!")
-        print("   Please update DATABASE_URL on Render dashboard to:")
-        print("   postgresql://postgres:Bhanu123%40@db.txhohvmugqptewlvuhfn.supabase.co:5432/postgres?sslmode=require")
+    print("\n   💡 This indicates DATABASE_URL on Render needs to be updated!")
+    print("   Please update DATABASE_URL on Render dashboard to the transaction pooler string:")
+    print("   postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require")
         
 except Exception as e:
     print(f"   ❌ Error: {e}")
