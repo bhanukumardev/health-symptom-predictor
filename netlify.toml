@@ -22,6 +22,7 @@
 [build.environment]
   NODE_VERSION = "18"
   NPM_FLAGS = "--prefix=/opt/buildhome/.nvm/versions/node/v18.20.4/bin/npm"
+  VITE_API_URL = "https://health-symptom-predictor.onrender.com"
 
 # Build settings
 [build.processing]
