@@ -42,6 +42,17 @@ class Settings:
             else:
                 return [origins.strip()]
         return origins
+
+    @property
+    def ALLOWED_ORIGIN_REGEX(self) -> str | None:
+        """Optional regex for dynamic origins (e.g., Vercel deploy previews).
+
+        Example:
+        - ^https://health-symptom-predictor-frontend-[a-z0-9]+\.vercel\.app$
+        - ^https://.*\.vercel\.app$
+        """
+        pattern = os.getenv("ALLOWED_ORIGIN_REGEX", "").strip()
+        return pattern or None
     
     # ML Model
     MODEL_PATH: str = "../ml-model/models/disease_predictor.pkl"
@@ -52,9 +63,6 @@ class Settings:
     # Environment
     ENVIRONMENT: str = "development"
     DEBUG: bool = True
-
-
-settings = Settings()
 
 
 settings = Settings()
