@@ -52,10 +52,22 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
 
     if (isOpen) {
       document.addEventListener('mousedown', handleClickOutside);
+        // Prevent body scroll on mobile when modal is open
+        if (window.innerWidth <= 768) {
+          document.body.classList.add('modal-open');
+          document.body.style.overflow = 'hidden';
+          document.body.style.position = 'fixed';
+          document.body.style.width = '100%';
+        }
     }
 
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+        // Re-enable body scroll when modal closes
+        document.body.classList.remove('modal-open');
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
     };
   }, [isOpen, onClose]);
 
@@ -134,9 +146,9 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
 
   return (
     <>
-      {/* Mobile Overlay */}
+      {/* Mobile Overlay - Higher z-index to ensure it's above everything */}
       <div 
-        className="fixed inset-0 bg-black/50 z-40 md:hidden" 
+          className="notification-overlay fixed inset-0 bg-black/60 z-[100] md:hidden" 
         onClick={onClose}
         aria-hidden="true"
       />
@@ -145,29 +157,36 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
       <div
         ref={dropdownRef}
         className="
-          fixed md:absolute
-          bottom-0 md:bottom-auto
-          md:top-full md:right-0
-          left-0 md:left-auto
-          w-full md:w-96
-          md:mt-2
-          bg-gray-800/95 md:bg-gray-800
-          backdrop-blur-sm
-          border border-gray-700 
-          rounded-t-2xl md:rounded-xl 
-          shadow-2xl 
-          z-50
-          max-h-[85vh] md:max-h-[600px]
-          flex flex-col
-          animate-slide-up md:animate-fade-in
-          overflow-hidden
+            notification-modal
+            notification-modal-mobile md:notification-modal-desktop
+            fixed md:absolute
+            bottom-0 md:bottom-auto
+            md:top-full md:right-0
+            left-0 md:left-auto
+            w-full md:w-96
+            h-[90vh] md:h-auto
+            md:mt-2
+            bg-gray-800/98 md:bg-gray-800/95
+            backdrop-blur-md md:backdrop-blur-sm
+            border border-gray-700 
+            rounded-t-3xl md:rounded-xl 
+            shadow-2xl 
+            z-[101]
+            max-h-[90vh] md:max-h-[600px]
+            flex flex-col
+            animate-slide-up md:animate-fade-in
+            overflow-hidden
+            transform translate3d(0,0,0)
         "
         role="dialog"
         aria-modal="true"
         aria-labelledby="notifications-title"
       >
         {/* Header */}
-        <div className="p-4 border-b border-gray-700 flex-shrink-0">
+          <div className="p-4 pb-3 border-b border-gray-700 flex-shrink-0 sticky top-0 bg-gray-800/98 backdrop-blur-md z-10">
+            {/* Mobile handle bar for swipe gesture indication */}
+            <div className="md:hidden w-12 h-1 bg-gray-600 rounded-full mx-auto mb-3"></div>
+          
           {firstName && (
             <div className="text-xs text-gray-400 mb-1">
               {i18n.language === 'hi' ? `नमस्ते ${firstName} 👋` : `Hi ${firstName} 👋`}
@@ -185,18 +204,23 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
                 </span>
               )}
             </h3>
-            <button
-              onClick={onClose}
-              className="
-                text-gray-400 hover:text-white transition-colors 
-                p-2 rounded-lg hover:bg-gray-700/50
-                min-w-[44px] min-h-[44px] flex items-center justify-center
-                md:hidden
-              "
-              aria-label={t('notifications.close', 'Close notifications')}
-            >
-              ✕
-            </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={onClose}
+                  className="
+                    text-gray-400 hover:text-white transition-all duration-200
+                    p-2.5 rounded-xl hover:bg-gray-700/70 active:bg-gray-600/50
+                    min-w-[44px] min-h-[44px] flex items-center justify-center
+                    md:hidden
+                    border border-gray-600/50 hover:border-gray-500
+                  "
+                  aria-label={t('notifications.close', 'Close notifications')}
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
           </div>
 
           {/* Action Buttons - Better mobile layout */}
