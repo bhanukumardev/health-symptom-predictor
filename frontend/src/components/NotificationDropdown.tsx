@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 import NotificationItem from './NotificationItem';
 import {
@@ -141,6 +142,71 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
   };
 
   if (!isOpen) return null;
+
+  // Mobile portal root for notification modal
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  let modalContent = (
+    <>
+      {/* Mobile Overlay - Higher z-index to ensure it's above everything */}
+      <div 
+        className="notification-overlay fixed inset-0 bg-black/60 z-[9998] md:hidden" 
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Dropdown/Modal - Optimized for both desktop and mobile */}
+      <div
+        ref={dropdownRef}
+        className={
+          `notification-modal notification-modal-mobile md:notification-modal-desktop
+          fixed md:absolute
+          bottom-0 md:bottom-auto
+          md:top-full md:right-0
+          left-0 md:left-auto
+          w-full md:w-96
+          h-[90vh] md:h-auto
+          md:mt-2
+          bg-gray-800/98 md:bg-gray-800/95
+          backdrop-blur-md md:backdrop-blur-sm
+          border border-gray-700 
+          rounded-t-3xl md:rounded-xl 
+          shadow-2xl 
+          z-[9999]
+          max-h-[90vh] md:max-h-[600px]
+          flex flex-col
+          animate-slide-up md:animate-fade-in
+          overflow-hidden
+          transform translate3d(0,0,0)`
+        }
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="notifications-title"
+        style={isMobile ? {
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 9999,
+          width: '100vw',
+          maxWidth: '100vw',
+          maxHeight: '90vh',
+          borderRadius: '24px 24px 0 0',
+          margin: 0,
+          transform: 'translateY(0)'
+        } : undefined}
+      >
+        {/* ...existing modal content... */}
+        {/* Header, actions, notifications list, etc. */}
+        {/* ...existing code... */}
+      </div>
+    </>
+  );
+
+  // Use portal for mobile to guarantee overlay above all elements
+  if (isMobile) {
+    const portalRoot = document.getElementById('modal-root') || document.body;
+    return createPortal(modalContent, portalRoot);
+  }
 
   const unreadCount = notifications.filter(n => !n.is_read).length;
 
