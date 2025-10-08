@@ -144,12 +144,15 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
   if (!isOpen) return null;
 
   // Mobile portal root for notification modal
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth <= 768);
+  // Mobile detection: portrait or landscape, width <= 900px
+  const getIsMobile = () => typeof window !== 'undefined' && (window.innerWidth <= 900 || window.innerHeight <= 500);
+  const getIsMobile = () => typeof window !== 'undefined' && (window.innerWidth <= 900 || window.innerHeight <= 500);
+  const [isMobile, setIsMobile] = useState(getIsMobile());
 
   // Listen for window resize/orientation change to update mobile detection
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(getIsMobile());
     };
     window.addEventListener('resize', handleResize);
     window.addEventListener('orientationchange', handleResize);
@@ -163,75 +166,128 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
       {/* Mobile Overlay - Higher z-index to ensure it's above everything */}
       <div 
         className="notification-overlay fixed inset-0 bg-black/60 z-[9998] md:hidden" 
-        onClick={onClose}
-        aria-hidden="true"
-      />
+        if (!isOpen) return null;
 
-      {/* Dropdown/Modal - Optimized for both desktop and mobile */}
-      <div
-        ref={dropdownRef}
-        className={
-          `notification-modal notification-modal-mobile md:notification-modal-desktop
-          fixed md:absolute
-          bottom-0 md:bottom-auto
-          md:top-full md:right-0
-          left-0 md:left-auto
-          w-full md:w-96
-          h-[90vh] md:h-auto
-          md:mt-2
-          bg-gray-800/98 md:bg-gray-800/95
-          backdrop-blur-md md:backdrop-blur-sm
-          border border-gray-700 
-          rounded-t-3xl md:rounded-xl 
-          shadow-2xl 
-          z-[9999]
-          max-h-[90vh] md:max-h-[600px]
-          flex flex-col
-          animate-slide-up md:animate-fade-in
-          overflow-hidden
-          transform translate3d(0,0,0)`
+        // Modal content (always rendered, never empty)
+        const modalContent = (
+          <>
+            {/* Overlay for mobile only */}
+            {isMobile && (
+              <div 
+                className="notification-overlay fixed inset-0 bg-black/60 z-[9998]"
+                onClick={onClose}
+                aria-hidden="true"
+              />
+            )}
+
+            {/* Dropdown/Modal - Optimized for both desktop and mobile */}
+            <div
+              ref={dropdownRef}
+              className={`notification-modal ${isMobile ? 'notification-modal-mobile fixed bottom-0 left-0 right-0 w-full h-[90vh] z-[9999]' : 'notification-modal-desktop absolute top-full right-0 mt-2 w-96 z-[101]'} bg-gray-800/98 backdrop-blur-md border border-gray-700 rounded-t-3xl shadow-2xl max-h-[90vh] flex flex-col animate-slide-up overflow-hidden transform translate3d(0,0,0)`}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="notifications-title"
+              style={isMobile ? {
+                position: 'fixed',
+                bottom: 0,
+                left: 0,
+                right: 0,
+                zIndex: 9999,
+                width: '100vw',
+                maxWidth: '100vw',
+                maxHeight: '90vh',
+                borderRadius: '24px 24px 0 0',
+                margin: 0,
+                transform: 'translateY(0)'
+              } : {
+                position: 'absolute',
+                top: '100%',
+                right: 0,
+                marginTop: '0.5rem',
+                width: '24rem',
+                zIndex: 101
+              }}
+            >
+              {/* ...existing modal content... */}
+              {/* Header, actions, notifications list, etc. */}
+              {/* ...existing code... */}
+              {/* Render all notification content here as before */}
+              <div className="p-4 pb-3 border-b border-gray-700 flex-shrink-0 sticky top-0 bg-gray-800/98 backdrop-blur-md z-10">
+                <div className="md:hidden w-12 h-1 bg-gray-600 rounded-full mx-auto mb-3"></div>
+                {firstName && (
+                  <div className="text-xs text-gray-400 mb-1">
+                    {i18n.language === 'hi' ? `नमस्ते ${firstName} 👋` : `Hi ${firstName} 👋`}
+                  </div>
+                )}
+                <div className="flex items-center justify-between mb-3">
+                  <h3 
+                    id="notifications-title"
+                    className="text-lg font-bold text-white flex items-center gap-2"
+                  >
+                    🔔 {t('notifications.title', 'Notifications')}
+                    {notifications.filter(n => !n.is_read).length > 0 && (
+                      <span className="text-xs bg-blue-500 text-white px-2 py-0.5 rounded-full">
+                        {notifications.filter(n => !n.is_read).length}
+                      </span>
+                    )}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={onClose}
+                      className="text-gray-400 hover:text-white transition-all duration-200 p-2.5 rounded-xl hover:bg-gray-700/70 active:bg-gray-600/50 min-w-[44px] min-h-[44px] flex items-center justify-center md:hidden border border-gray-600/50 hover:border-gray-500"
+                      aria-label={t('notifications.close', 'Close notifications')}
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                {/* ...existing header actions/buttons... */}
+              </div>
+              {/* ...existing notification list and actions... */}
+              {/* ...existing code... */}
+              {/* Render notifications, loading, empty state, etc. as before */}
+              <div className="flex-1 overflow-y-auto">
+                {loading ? (
+                  <div className="flex items-center justify-center py-12">
+                    <div className="animate-spin text-4xl">⚙️</div>
+                  </div>
+                ) : notifications.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center py-12 px-4">
+                    <div className="text-6xl mb-3">🔔</div>
+                    <p className="text-gray-400 text-center">
+                      {showUnreadOnly
+                        ? t('notifications.noUnread', 'No unread notifications')
+                        : t('notifications.noNotifications', 'No notifications yet')}
+                    </p>
+                    <p className="text-gray-500 text-sm text-center mt-2">
+                      {t('notifications.generateHint', 'Click "AI Health Tip" to get personalized health advice')}
+                    </p>
+                  </div>
+                ) : (
+                  <div className="divide-y divide-gray-700">
+                    {notifications.map(notification => (
+                      <NotificationItem
+                        key={notification.id}
+                        notification={notification}
+                        onMarkAsRead={handleMarkAsRead}
+                        onDelete={handleDelete}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
+        );
+
+        // Use portal for mobile, inline for desktop
+        if (isMobile) {
+          const portalRoot = document.getElementById('modal-root') || document.body;
+          return createPortal(modalContent, portalRoot);
         }
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="notifications-title"
-        style={isMobile ? {
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          zIndex: 9999,
-          width: '100vw',
-          maxWidth: '100vw',
-          maxHeight: '90vh',
-          borderRadius: '24px 24px 0 0',
-          margin: 0,
-          transform: 'translateY(0)'
-        } : undefined}
-      >
-        {/* ...existing modal content... */}
-        {/* Header, actions, notifications list, etc. */}
-        {/* ...existing code... */}
-      </div>
-    </>
-  );
-
-  // Use portal for mobile to guarantee overlay above all elements
-  if (isMobile) {
-    const portalRoot = document.getElementById('modal-root') || document.body;
-    return createPortal(modalContent, portalRoot);
-  }
-
-  const unreadCount = notifications.filter(n => !n.is_read).length;
-
-  return (
-    <>
-      {/* Mobile Overlay - Higher z-index to ensure it's above everything */}
-      <div 
-          className="notification-overlay fixed inset-0 bg-black/60 z-[100] md:hidden" 
-        onClick={onClose}
-        aria-hidden="true"
-      />
-
+        return modalContent;
       {/* Dropdown/Modal - Optimized for both desktop and mobile */}
       <div
         ref={dropdownRef}
