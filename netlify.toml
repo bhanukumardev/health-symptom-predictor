@@ -1,29 +1,13 @@
-# Netlify Configuration for Health Symptom Predictor Frontend
-# This deploys the React frontend
-
 [build]
-  # Base directory for the build
   base = "frontend"
-  
-  # Command to build the React app
-  command = "npm ci && npm run build"
-  
-  # Directory to publish (Vite builds to 'dist' relative to base)
+  command = "npm install && npm run build"
   publish = "dist"
 
-# SPA (Single Page Application) redirect rules
-# This ensures React Router works correctly
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-# Environment variables
 [build.environment]
-  NODE_VERSION = "18"
-  NPM_FLAGS = "--prefix=/opt/buildhome/.nvm/versions/node/v18.20.4/bin/npm"
+  NODE_VERSION = "18.20.8"
   VITE_API_URL = "https://health-symptom-predictor.onrender.com"
-
-# Build settings
-[build.processing]
-  skip_processing = false
