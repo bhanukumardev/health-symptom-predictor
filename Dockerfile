@@ -27,7 +27,7 @@ COPY start.sh ./
 RUN chmod +x start.sh
 
 # Expose port (Render will override with $PORT)
-EXPOSE 8000
+EXPOSE 8888
 
 # Run the FastAPI application via startup script
 CMD ["./start.sh"]

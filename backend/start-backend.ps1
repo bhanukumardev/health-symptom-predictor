@@ -15,15 +15,15 @@ $env:DATABASE_URL = "postgresql://postgres:Bhanu123%40@localhost:5432/health_pre
 Write-Host "✅ Configuration:" -ForegroundColor Green
 Write-Host "   Database: PostgreSQL (health_predictor)" -ForegroundColor White
 Write-Host "   Connection: Permanent (data persists)" -ForegroundColor White
-Write-Host "   Port: 8000" -ForegroundColor White
+Write-Host "   Port: 8888" -ForegroundColor White
 Write-Host ""
 Write-Host "💾 Data Storage:" -ForegroundColor Cyan
 Write-Host "   ✓ Tables persist across restarts" -ForegroundColor White
 Write-Host "   ✓ User data automatically saved" -ForegroundColor White
 Write-Host "   ✓ No need to recreate tables" -ForegroundColor White
 Write-Host ""
-Write-Host "📍 Backend:  http://localhost:8000" -ForegroundColor Green
-Write-Host "📍 API Docs: http://localhost:8000/docs" -ForegroundColor Green
+Write-Host "📍 Backend:  http://localhost:8888" -ForegroundColor Green
+Write-Host "📍 API Docs: http://localhost:8888/docs" -ForegroundColor Green
 Write-Host ""
 Write-Host "Press Ctrl+C to stop" -ForegroundColor Yellow
 Write-Host ""
@@ -37,4 +37,4 @@ Write-Host "Starting server..." -ForegroundColor Cyan
 Write-Host ""
 
 # Start FastAPI server
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8888

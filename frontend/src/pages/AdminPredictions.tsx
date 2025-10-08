@@ -29,7 +29,7 @@ export default function AdminPredictions() {
 
   const fetchPredictions = async (token: string) => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8888';
       const response = await fetch(`${apiUrl}/api/admin/predictions`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });

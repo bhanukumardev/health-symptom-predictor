@@ -4,7 +4,7 @@
 import requests
 import json
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://localhost:8888"
 
 def test_english_prediction():
     """Test prediction in English mode"""

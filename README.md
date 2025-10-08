@@ -168,12 +168,12 @@ cd backend
 .\venv\Scripts\activate  # Windows
 source venv/bin/activate # macOS/Linux
 
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8888
 ```
 
 Backend will be available at:
-- API: http://localhost:8000
-- Docs: http://localhost:8000/docs
+- API: http://localhost:8888
+- Docs: http://localhost:8888/docs
 
 #### Start Frontend Server
 
@@ -214,7 +214,7 @@ DEBUG=True
 Create `frontend/.env` with:
 
 ```env
-VITE_API_URL=http://localhost:8000
+VITE_API_URL=http://localhost:8888
 ```
 
 ---
@@ -252,8 +252,8 @@ health-symptom-predictor/
 ## 🌐 API Documentation
 
 Once the backend is running, visit:
-- **Swagger UI**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
+- **Swagger UI**: http://localhost:8888/docs
+- **ReDoc**: http://localhost:8888/redoc
 
 ### Key Endpoints
 

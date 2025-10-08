@@ -72,40 +72,52 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
   };
 
   const handleMarkAsRead = async (id: number) => {
+    console.log('Attempting to mark notification as read:', id);
     try {
       await markNotificationAsRead(id);
+      console.log('Successfully marked notification as read:', id);
       setNotifications(notifications.map(n => n.id === id ? { ...n, is_read: true } : n));
       onNotificationUpdate();
     } catch (error) {
       console.error('Error marking notification as read:', error);
+      alert('Failed to mark notification as read. Please try again.');
     }
   };
 
   const handleMarkAllAsRead = async () => {
+    console.log('Attempting to mark all notifications as read');
     try {
       await markAllNotificationsAsRead();
+      console.log('Successfully marked all notifications as read');
       setNotifications(notifications.map(n => ({ ...n, is_read: true })));
       onNotificationUpdate();
     } catch (error) {
       console.error('Error marking all notifications as read:', error);
+      alert('Failed to mark all notifications as read. Please try again.');
     }
   };
 
   const handleDelete = async (id: number) => {
+    console.log('Attempting to delete notification:', id);
     try {
       await deleteNotification(id);
+      console.log('Successfully deleted notification:', id);
       setNotifications(notifications.filter(n => n.id !== id));
       onNotificationUpdate();
     } catch (error) {
       console.error('Error deleting notification:', error);
+      alert('Failed to delete notification. Please try again.');
     }
   };
 
   const handleGenerateAI = async () => {
+    console.log('Attempting to generate AI notification');
     setGenerating(true);
     try {
       const language = i18n.language === 'hi' ? 'hi' : 'en';
-      await generatePersonalizedNotification(language);
+      console.log('Generating AI notification with language:', language);
+      const newNotification = await generatePersonalizedNotification(language);
+      console.log('Successfully generated AI notification:', newNotification);
       await fetchNotifications();
       onNotificationUpdate();
     } catch (error) {
@@ -123,9 +135,13 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
   return (
     <>
       {/* Mobile Overlay */}
-      <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={onClose} />
+      <div 
+        className="fixed inset-0 bg-black/50 z-40 md:hidden" 
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
-      {/* Dropdown/Modal */}
+      {/* Dropdown/Modal - Optimized for both desktop and mobile */}
       <div
         ref={dropdownRef}
         className="
@@ -135,15 +151,20 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
           left-0 md:left-auto
           w-full md:w-96
           md:mt-2
-          bg-gray-800 
+          bg-gray-800/95 md:bg-gray-800
+          backdrop-blur-sm
           border border-gray-700 
-          rounded-t-2xl md:rounded-lg 
+          rounded-t-2xl md:rounded-xl 
           shadow-2xl 
           z-50
-          max-h-[80vh] md:max-h-[600px]
+          max-h-[85vh] md:max-h-[600px]
           flex flex-col
           animate-slide-up md:animate-fade-in
+          overflow-hidden
         "
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="notifications-title"
       >
         {/* Header */}
         <div className="p-4 border-b border-gray-700 flex-shrink-0">
@@ -153,7 +174,10 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
             </div>
           )}
           <div className="flex items-center justify-between mb-3">
-            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+            <h3 
+              id="notifications-title"
+              className="text-lg font-bold text-white flex items-center gap-2"
+            >
               🔔 {t('notifications.title', 'Notifications')}
               {unreadCount > 0 && (
                 <span className="text-xs bg-blue-500 text-white px-2 py-0.5 rounded-full">
@@ -163,26 +187,34 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
             </h3>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-white transition-colors p-1 md:hidden"
+              className="
+                text-gray-400 hover:text-white transition-colors 
+                p-2 rounded-lg hover:bg-gray-700/50
+                min-w-[44px] min-h-[44px] flex items-center justify-center
+                md:hidden
+              "
+              aria-label={t('notifications.close', 'Close notifications')}
             >
               ✕
             </button>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center gap-2 flex-wrap">
+          {/* Action Buttons - Better mobile layout */}
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             <button
               onClick={handleGenerateAI}
               disabled={generating}
               className="
-                flex-1 min-w-[140px]
-                px-3 py-2 
+                flex-1 min-w-0
+                px-3 py-2.5 sm:py-2
                 bg-gradient-to-r from-blue-600 to-purple-600 
                 hover:from-blue-700 hover:to-purple-700
+                disabled:from-gray-600 disabled:to-gray-700
                 text-white text-sm font-medium rounded-lg
-                transition-all
+                transition-all duration-200
                 disabled:opacity-50 disabled:cursor-not-allowed
                 flex items-center justify-center gap-2
+                min-h-[44px] sm:min-h-[36px]
               "
             >
               {generating ? (
@@ -201,10 +233,12 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
               <button
                 onClick={handleMarkAllAsRead}
                 className="
-                  px-3 py-2
+                  px-3 py-2.5 sm:py-2
                   bg-gray-700 hover:bg-gray-600
                   text-white text-sm font-medium rounded-lg
-                  transition-all
+                  transition-all duration-200
+                  min-h-[44px] sm:min-h-[36px]
+                  whitespace-nowrap
                 "
               >
                 ✓ {t('notifications.markAllRead', 'Mark All Read')}
@@ -212,13 +246,14 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
             )}
           </div>
 
-          {/* Filter Toggle */}
+          {/* Filter Toggle - Mobile optimized */}
           <div className="mt-3 flex items-center gap-2">
             <button
               onClick={() => setShowUnreadOnly(false)}
               className={`
-                px-3 py-1.5 text-xs font-medium rounded-lg transition-all
-                ${!showUnreadOnly ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}
+                flex-1 sm:flex-none px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200
+                min-h-[36px] flex items-center justify-center
+                ${!showUnreadOnly ? 'bg-blue-600 text-white shadow-lg' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}
               `}
             >
               {t('notifications.all', 'All')}
@@ -226,8 +261,9 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
             <button
               onClick={() => setShowUnreadOnly(true)}
               className={`
-                px-3 py-1.5 text-xs font-medium rounded-lg transition-all
-                ${showUnreadOnly ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}
+                flex-1 sm:flex-none px-3 py-2 text-xs font-medium rounded-lg transition-all duration-200
+                min-h-[36px] flex items-center justify-center
+                ${showUnreadOnly ? 'bg-blue-600 text-white shadow-lg' : 'bg-gray-700 text-gray-300 hover:bg-gray-600'}
               `}
             >
               {t('notifications.unreadOnly', 'Unread Only')}
@@ -254,14 +290,16 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
               </p>
             </div>
           ) : (
-            notifications.map(notification => (
-              <NotificationItem
-                key={notification.id}
-                notification={notification}
-                onMarkAsRead={handleMarkAsRead}
-                onDelete={handleDelete}
-              />
-            ))
+            <div className="divide-y divide-gray-700">
+              {notifications.map(notification => (
+                <NotificationItem
+                  key={notification.id}
+                  notification={notification}
+                  onMarkAsRead={handleMarkAsRead}
+                  onDelete={handleDelete}
+                />
+              ))}
+            </div>
           )}
         </div>
       </div>

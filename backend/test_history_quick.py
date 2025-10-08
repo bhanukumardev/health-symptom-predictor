@@ -4,7 +4,7 @@ Quick History Test - Check if history endpoint is working
 
 import requests
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://localhost:8888"
 
 print("="*80)
 print("🧪 QUICK HISTORY TEST")

@@ -5,7 +5,7 @@ Tests both GET and PUT endpoints
 import requests
 import json
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://localhost:8888"
 
 def test_profile_feature():
     print("=" * 60)

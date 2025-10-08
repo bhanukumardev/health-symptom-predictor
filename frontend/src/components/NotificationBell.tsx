@@ -37,26 +37,29 @@ const NotificationBell: React.FC = () => {
   };
 
   return (
-    <div className="fixed top-14 right-4 sm:top-6 sm:right-6 z-50 notification-bell">
-      {/* Bell Button */}
+    <div className="relative notification-bell">
+      {/* Bell Button - Optimized for both desktop and mobile */}
       <button
         onClick={handleToggle}
         className="
           relative
-          p-3 md:p-3.5
-          text-cyan-400 bg-slate-900 
+          p-2 sm:p-2.5 md:p-3
+          text-cyan-400 bg-slate-900/90 backdrop-blur-sm
           hover:text-white 
           hover:bg-cyan-700/80 
           rounded-full 
-          transition-all
-          min-w-[48px] min-h-[48px] w-12 h-12
+          transition-all duration-200
+          min-w-[44px] min-h-[44px] 
+          w-11 h-11 sm:w-12 sm:h-12
           flex items-center justify-center
+          shadow-lg hover:shadow-xl
+          border border-slate-700/50
         "
         aria-label={t('notifications.title', 'Notifications')}
       >
-        {/* Bell Icon */}
+        {/* Bell Icon - Responsive sizing */}
         <svg
-          className="w-12 h-12"
+          className="w-5 h-5 sm:w-6 sm:h-6"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -70,19 +73,20 @@ const NotificationBell: React.FC = () => {
           />
         </svg>
 
-        {/* Unread Badge */}
+        {/* Unread Badge - Better mobile touch target */}
         {stats.unread > 0 && (
           <span
             className="
               absolute -top-1 -right-1
               bg-red-500 text-white
               text-xs font-bold
-              min-w-[20px] h-5
+              min-w-[18px] h-[18px] sm:min-w-[20px] sm:h-5
               flex items-center justify-center
               rounded-full
-              px-1.5
+              px-1 sm:px-1.5
               animate-pulse
               shadow-lg
+              border-2 border-slate-900
             "
           >
             {stats.unread > 99 ? '99+' : stats.unread}
@@ -98,21 +102,12 @@ const NotificationBell: React.FC = () => {
         )}
       </button>
 
-      {/* Dropdown - mobile full width */}
-      <div className="sm:hidden fixed inset-0 w-full h-full z-50 bg-black bg-opacity-60">
-        <NotificationDropdown
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          onNotificationUpdate={handleNotificationUpdate}
-        />
-      </div>
-      <div className="hidden sm:block">
-        <NotificationDropdown
-          isOpen={isOpen}
-          onClose={() => setIsOpen(false)}
-          onNotificationUpdate={handleNotificationUpdate}
-        />
-      </div>
+      {/* Notification Dropdown */}
+      <NotificationDropdown
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onNotificationUpdate={handleNotificationUpdate}
+      />
     </div>
   );
 };

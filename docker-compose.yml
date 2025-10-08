@@ -29,7 +29,7 @@ services:
       dockerfile: Dockerfile
     container_name: health_backend
     ports:
-      - "8000:8000"
+      - "8888:8888"
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-health_user}:${POSTGRES_PASSWORD:-health_password}@db:5432/${POSTGRES_DB:-health_db}
       SECRET_KEY: ${SECRET_KEY:-dev-secret-key}
@@ -43,7 +43,7 @@ services:
       - ./ml-model/models:/app/models
     networks:
       - health_network
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8888 --reload
 
   # Frontend
   frontend:
@@ -54,7 +54,7 @@ services:
     ports:
       - "5173:5173"
     environment:
-      VITE_API_URL: http://localhost:8000
+      VITE_API_URL: http://localhost:8888
     volumes:
       - ./frontend:/app
       - /app/node_modules

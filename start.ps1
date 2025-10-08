@@ -64,9 +64,9 @@ Write-Host "🚀 Starting Health App..." -ForegroundColor Cyan
 
 Write-Host ""$dbChoice = Read-Host "Enter choice (1 or 2)"
 
-Write-Host "📍 Backend will start at:  http://localhost:8000" -ForegroundColor Green
+Write-Host "📍 Backend will start at:  http://localhost:8888" -ForegroundColor Green
 
-Write-Host "📍 API Docs will be at:    http://localhost:8000/docs" -ForegroundColor Greenif ($dbChoice -eq "1") {
+Write-Host "📍 API Docs will be at:    http://localhost:8888/docs" -ForegroundColor Greenif ($dbChoice -eq "1") {
 
 Write-Host "📍 Frontend will start at: http://localhost:3000" -ForegroundColor Green    Write-Host "✅ Using SQLite database" -ForegroundColor Green
 
@@ -86,9 +86,9 @@ Write-Host "🔄 Starting backend..." -ForegroundColor CyanWrite-Host "🚀 Star
 
 Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$projectRoot\backend'; .\start-backend.ps1"Write-Host ""
 
-Write-Host "📍 Backend will start at:  http://localhost:8000" -ForegroundColor Green
+Write-Host "📍 Backend will start at:  http://localhost:8888" -ForegroundColor Green
 
-Start-Sleep -Seconds 3Write-Host "📍 API Docs will be at:    http://localhost:8000/docs" -ForegroundColor Green
+Start-Sleep -Seconds 3Write-Host "📍 API Docs will be at:    http://localhost:8888/docs" -ForegroundColor Green
 
 Write-Host "📍 Frontend will start at: http://localhost:5173" -ForegroundColor Green
 

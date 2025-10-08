@@ -3,7 +3,7 @@ Direct API Test - Check what's wrong with history endpoint
 """
 import requests
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://localhost:8888"
 
 print("="*80)
 print("🔍 DEBUGGING HISTORY ENDPOINT")

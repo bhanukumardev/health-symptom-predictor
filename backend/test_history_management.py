@@ -10,7 +10,7 @@ import requests
 import json
 from datetime import datetime
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://localhost:8888"
 
 # Test credentials
 TEST_EMAIL = "admin@test.com"

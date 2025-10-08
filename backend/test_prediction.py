@@ -5,14 +5,14 @@ import requests
 import json
 
 # Test data
-url = "http://localhost:8000/api/predictions/predict?language=en"
+url = "http://localhost:8888/api/predictions/predict?language=en"
 headers = {
     "Content-Type": "application/json",
     "Authorization": "Bearer YOUR_TOKEN_HERE"  # Need to get a valid token
 }
 
 # First, let's try to login
-login_url = "http://localhost:8000/api/auth/login"
+login_url = "http://localhost:8888/api/auth/login"
 login_data = {
     "username": "test@example.com",  # Update with valid credentials
     "password": "test123"

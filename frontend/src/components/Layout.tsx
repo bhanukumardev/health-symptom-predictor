@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from './LanguageSwitcher'
 import NotificationBell from './NotificationBell'
-import FloatingContactButton from './FloatingContactButton'
 
 export default function Layout() {
   const navigate = useNavigate()
@@ -41,7 +40,7 @@ export default function Layout() {
   
   const checkAdminStatus = async (authToken: string) => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8888'
       console.log('🔍 Checking admin status with token:', authToken?.substring(0, 20) + '...')
       console.log('🌐 API URL:', apiUrl)
       const response = await fetch(`${apiUrl}/api/auth/me`, {
@@ -308,9 +307,6 @@ export default function Layout() {
           </div>
         </div>
       </footer>
-
-  {/* Floating Contact Button - hide if profile/settings open on mobile */}
-  {!panelOpen && <FloatingContactButton />}
     </div>
   )
 }

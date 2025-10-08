@@ -18,8 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Expose port
-EXPOSE 8000
+EXPOSE 8888
 
 # Run the application with PORT environment variable support
-# Render injects $PORT, but we default to 8000 for local development
-CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
+# Render injects $PORT, but we default to 8888 for local development
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8888}
