@@ -205,9 +205,45 @@ git push origin main
 
 ## 🔧 Post-Deployment Configuration
 
+### Make the site public (no Vercel login)
+
+Vercel can optionally protect your site with a login wall. To make your app publicly accessible without changing any of your own app authentication:
+
+1) Open Vercel Dashboard → your FRONTEND project → Settings → Access Control
+2) Turn OFF: “Require Authentication”
+3) Optional: Turn OFF “Protect Preview Deployments” if you want previews public
+4) Remove any password-protection integrations if present
+
+This does not affect your application’s own login. Users will still need to sign in inside the app where required.
+
+### Choose a minimal production URL
+
+Use a clean, stable domain to share publicly.
+
+1) Settings → General → Project Name → set a concise name (e.g., “health-symptom-predictor”)
+2) Settings → Domains → add the production domain you want (e.g., health-symptom-predictor.vercel.app)
+3) Optional: Add your custom domain and point DNS as instructed
+
+### CORS for Vercel deployments (Render backend)
+
+The backend supports both an explicit allowlist and a regex pattern for dynamic Vercel URLs.
+
+Environment variables on Render (Backend → Settings → Environment):
+
+- ALLOWED_ORIGINS
+   - Example:
+      - http://localhost:3000,http://localhost:5173,https://health-symptom-predictor.netlify.app,https://health-symptom-predictor.onrender.com
+- ALLOWED_ORIGIN_REGEX
+   - Example (matches your Vercel deploy URLs safely):
+      - ^https://health-symptom-predictor-frontend-[a-z0-9]+\.vercel\.app$
+
+Notes:
+- Keep production domains in ALLOWED_ORIGINS; use ALLOWED_ORIGIN_REGEX for dynamic deploy URLs.
+- After updating env vars, Redeploy on Render. In logs you should see the regex printed.
+
 ### 1. Update CORS in Backend
 
-After deployment, update `backend/app/main.py` to include your Vercel frontend URL:
+If you prefer a fixed allowlist instead of regex, update `backend/app/main.py` (or ALLOWED_ORIGINS env) to include your Vercel frontend URL:
 
 ```python
 origins = [
