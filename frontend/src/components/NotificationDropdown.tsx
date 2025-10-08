@@ -156,31 +156,44 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
       {/* Dropdown/Modal - Optimized for both desktop and mobile */}
       <div
         ref={dropdownRef}
-        className="
-            notification-modal
-            notification-modal-mobile md:notification-modal-desktop
-            fixed md:absolute
-            bottom-0 md:bottom-auto
-            md:top-full md:right-0
-            left-0 md:left-auto
-            w-full md:w-96
-            h-[90vh] md:h-auto
-            md:mt-2
-            bg-gray-800/98 md:bg-gray-800/95
-            backdrop-blur-md md:backdrop-blur-sm
-            border border-gray-700 
-            rounded-t-3xl md:rounded-xl 
-            shadow-2xl 
-            z-[101]
-            max-h-[90vh] md:max-h-[600px]
-            flex flex-col
-            animate-slide-up md:animate-fade-in
-            overflow-hidden
-            transform translate3d(0,0,0)
-        "
+        className={
+          `notification-modal notification-modal-mobile md:notification-modal-desktop
+          fixed md:absolute
+          bottom-0 md:bottom-auto
+          md:top-full md:right-0
+          left-0 md:left-auto
+          w-full md:w-96
+          h-[90vh] md:h-auto
+          md:mt-2
+          bg-gray-800/98 md:bg-gray-800/95
+          backdrop-blur-md md:backdrop-blur-sm
+          border border-gray-700 
+          rounded-t-3xl md:rounded-xl 
+          shadow-2xl 
+          z-[101]
+          max-h-[90vh] md:max-h-[600px]
+          flex flex-col
+          animate-slide-up md:animate-fade-in
+          overflow-hidden
+          transform translate3d(0,0,0)` +
+          (window.innerWidth <= 768 ? ' notification-modal-mobile' : '')
+        }
         role="dialog"
         aria-modal="true"
         aria-labelledby="notifications-title"
+        style={window.innerWidth <= 768 ? {
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 101,
+          width: '100vw',
+          maxWidth: '100vw',
+          maxHeight: '90vh',
+          borderRadius: '24px 24px 0 0',
+          margin: 0,
+          transform: 'translateY(0)'
+        } : undefined}
       >
         {/* Header */}
           <div className="p-4 pb-3 border-b border-gray-700 flex-shrink-0 sticky top-0 bg-gray-800/98 backdrop-blur-md z-10">

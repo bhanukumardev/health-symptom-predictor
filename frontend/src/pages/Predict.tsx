@@ -249,10 +249,17 @@ export default function Predict() {
                 </div>
                 
                 <div className="space-y-3">
-                  {/* Summary */}
+                  {/* Summary - sanitize to prevent raw JSON/code block rendering */}
                   {result.additional_analysis.summary && (
                     <div className="text-slate-200 bg-black/20 p-3 rounded">
-                      <p className="text-sm leading-relaxed">{result.additional_analysis.summary}</p>
+                      <p className="text-sm leading-relaxed">
+                        {typeof result.additional_analysis.summary === 'string' ?
+                          result.additional_analysis.summary
+                            .replace(/```json[\s\S]*?```/g, '') // Remove code blocks
+                            .replace(/json\s*\{[\s\S]*?\}/g, '') // Remove raw JSON
+                            .replace(/\n{2,}/g, '\n') // Remove extra newlines
+                          : result.additional_analysis.summary}
+                      </p>
                     </div>
                   )}
                   
