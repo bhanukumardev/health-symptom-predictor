@@ -144,7 +144,20 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
   if (!isOpen) return null;
 
   // Mobile portal root for notification modal
-  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' && window.innerWidth <= 768);
+
+  // Listen for window resize/orientation change to update mobile detection
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, []);
   let modalContent = (
     <>
       {/* Mobile Overlay - Higher z-index to ensure it's above everything */}
