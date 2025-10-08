@@ -23,7 +23,7 @@ export default function Login() {
       formData.append('username', email);
       formData.append('password', password);
       
-      const response = await fetch(API_ENDPOINTS.AUTH.LOGIN, {
+  const response = await fetch(API_ENDPOINTS.AUTH.LOGIN, {
         method: 'POST',
         body: formData
       });

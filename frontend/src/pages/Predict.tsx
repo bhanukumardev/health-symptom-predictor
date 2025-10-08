@@ -69,7 +69,7 @@ export default function Predict() {
       console.error('Prediction error:', error);
       const errorMessage = (error as Error).message;
       if (errorMessage.includes('Failed to fetch') || errorMessage.includes('NetworkError')) {
-        alert('Cannot connect to server. Please ensure the backend is running on http://localhost:8888');
+  alert('Cannot connect to server. Please ensure the backend API is reachable.');
       } else {
         alert(`Error: ${errorMessage}`);
       }

@@ -28,7 +28,7 @@ export default function Admin() {
 
   const fetchStats = async (token: string) => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8888';
+  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
       const response = await fetch(`${apiUrl}/api/admin/stats`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });

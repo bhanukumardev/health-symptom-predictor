@@ -22,7 +22,8 @@ interface BackendChatResponse {
   status: string;
 }
 
-const API_BASE_URL = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api` : 'http://localhost:8080/api';
+const ENV_BASE = (import.meta.env.VITE_API_URL || '').trim();
+const API_BASE_URL = `${(ENV_BASE || 'https://health-symptom-predictor.onrender.com')}/api`;
 
 /**
  * Sends a message to the backend chat API and returns AI response
@@ -76,7 +77,7 @@ export const generateHealthResponse = async (
     
     // Provide user-friendly error messages
     if (error.message?.includes('fetch')) {
-      throw new Error('Unable to connect to server. Please ensure the backend is running on http://localhost:8888');
+  throw new Error('Unable to connect to server. Please ensure the backend is reachable (Render/Vercel).');
     } else if (error.message?.includes('rate limit')) {
       throw new Error('Too many requests. Please wait a moment and try again.');
     } else {

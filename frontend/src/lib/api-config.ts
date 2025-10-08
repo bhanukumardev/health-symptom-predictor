@@ -1,5 +1,7 @@
 // API Configuration
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8888';
+// Prefer environment-provided API URL; fall back to production backend on Render
+export const API_BASE_URL =
+  import.meta.env.VITE_API_URL?.trim() || 'https://health-symptom-predictor.onrender.com';
 
 // API endpoints
 export const API_ENDPOINTS = {

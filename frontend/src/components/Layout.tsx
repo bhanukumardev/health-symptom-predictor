@@ -40,7 +40,7 @@ export default function Layout() {
   
   const checkAdminStatus = async (authToken: string) => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8888'
+  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com'
       console.log('🔍 Checking admin status with token:', authToken?.substring(0, 20) + '...')
       console.log('🌐 API URL:', apiUrl)
       const response = await fetch(`${apiUrl}/api/auth/me`, {

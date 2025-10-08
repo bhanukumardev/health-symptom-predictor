@@ -27,7 +27,7 @@ export default function AdminUsers() {
 
   const fetchUsers = async (token: string) => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8888';
+  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
       const response = await fetch(`${apiUrl}/api/admin/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -60,7 +60,7 @@ export default function AdminUsers() {
     if (!token) return;
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8888';
+  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
       const response = await fetch(`${apiUrl}/api/admin/users/${userId}/toggle-admin`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` }
@@ -83,7 +83,7 @@ export default function AdminUsers() {
     if (!token) return;
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8888';
+  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
       const response = await fetch(`${apiUrl}/api/admin/users/${userId}/toggle-active`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` }

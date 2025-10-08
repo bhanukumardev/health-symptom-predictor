@@ -29,7 +29,7 @@ export default function AdminFeedback() {
 
   const fetchFeedback = async (token: string) => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8888';
+  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
       const response = await fetch(`${apiUrl}/api/admin/feedback`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
