@@ -68,10 +68,10 @@ if (-not $loginSuccess) {
     Write-Host ""
     Write-Host "ACTION REQUIRED:" -ForegroundColor Yellow
     Write-Host "1. Go to: https://dashboard.render.com/" -ForegroundColor White
-    Write-Host "2. Select: health-symptom-predictor service" -ForegroundColor White
+    Write-Host "2. Select: your backend service" -ForegroundColor White
     Write-Host "3. Go to: Environment tab" -ForegroundColor White
-    Write-Host "4. Update DATABASE_URL to:" -ForegroundColor White
-    Write-Host "   postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require" -ForegroundColor Cyan
+    Write-Host "4. Update DATABASE_URL to your database connection string:" -ForegroundColor White
+    Write-Host "   Format: postgresql://user:password@host:port/database?sslmode=require" -ForegroundColor Cyan
     Write-Host "5. Save and wait for redeploy (~2 minutes)" -ForegroundColor White
     Write-Host "6. Run this script again" -ForegroundColor White
     Write-Host ""

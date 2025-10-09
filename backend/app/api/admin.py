@@ -252,30 +252,35 @@ async def init_database(db: Session = Depends(get_db)):
         from app.core.database import engine, Base
         Base.metadata.create_all(bind=engine)
         
+        # Use environment variables for admin credentials
+        admin_email = os.getenv("ADMIN_EMAIL", "admin@example.com")
+        admin_password = os.getenv("ADMIN_PASSWORD", "defaultpassword")
+        admin_name = os.getenv("ADMIN_NAME", "Admin User")
+        
         # Check if admin user already exists
-        admin_user = db.query(User).filter(User.email == "kumarbhanu818@gmail.com").first()
+        admin_user = db.query(User).filter(User.email == admin_email).first()
         if admin_user:
             # Update existing admin user with correct credentials
-            admin_user.hashed_password = get_password_hash("Bhanu123@")
+            admin_user.hashed_password = get_password_hash(admin_password)
             admin_user.is_admin = True
             admin_user.is_active = True
-            admin_user.full_name = "Bhanu Kumar Dev"
-            admin_user.age = 21
-            admin_user.gender = "male"
-            admin_user.weight = 75.0
+            admin_user.full_name = admin_name
+            admin_user.age = int(os.getenv("ADMIN_AGE", "30"))
+            admin_user.gender = os.getenv("ADMIN_GENDER", "other")
+            admin_user.weight = float(os.getenv("ADMIN_WEIGHT", "70.0"))
             db.commit()
             logger.info("Admin user credentials updated successfully")
             admin_action = "updated"
         else:
             # Create admin user
             admin_user = User(
-                email="kumarbhanu818@gmail.com",
-                hashed_password=get_password_hash("Bhanu123@"),
-                full_name="Bhanu Kumar Dev",
+                email=admin_email,
+                hashed_password=get_password_hash(admin_password),
+                full_name=admin_name,
                 is_admin=True,
-                age=21,
-                gender="male",
-                weight=75.0
+                age=int(os.getenv("ADMIN_AGE", "30")),
+                gender=os.getenv("ADMIN_GENDER", "other"),
+                weight=float(os.getenv("ADMIN_WEIGHT", "70.0"))
             )
             db.add(admin_user)
             db.commit()
@@ -305,8 +310,8 @@ async def init_database(db: Session = Depends(get_db)):
             "details": {
                 "tables_created": True,
                 "admin_user": admin_action,
-                "admin_email": "kumarbhanu818@gmail.com",
-                "admin_password": "Bhanu123@",
+                "admin_email": os.getenv("ADMIN_EMAIL", "admin@example.com"),
+                "admin_password": "Check ADMIN_PASSWORD environment variable",
                 "sample_data_added": True
             }
         }
