@@ -1,23 +1,31 @@
 """
-Test all Supabase connection methods to find the one that works on Render
+Test database connection methods
 """
 import psycopg2
 import sys
+import os
 
-# Test all possible Supabase connection strings
+# Get database credentials from environment variables
+db_password = os.getenv('DB_PASSWORD', 'password')
+db_user = os.getenv('DB_USER', 'postgres')
+db_host = os.getenv('DB_HOST', 'localhost')
+db_port = os.getenv('DB_PORT', '5432')
+db_name = os.getenv('DB_NAME', 'postgres')
+
+# Test all possible connection strings
 connection_strings = {
-    "1. Transaction Pooler (Port 6543 with project username)":
-        "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require",
+    "1. Transaction Pooler (Port 6543)":
+        f"postgresql://{db_user}:{db_password}@{db_host}:6543/{db_name}?sslmode=require",
 
-    "2. Session Pooler (Port 5432 with project username)":
-        "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require",
+    "2. Session Pooler (Port 5432)":
+        f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}?sslmode=require",
 
     "3. Direct Connection (Port 5432)":
-        "postgresql://postgres:Bhanu123%40@db.txhohvmugqptewlvuhfn.supabase.co:5432/postgres?sslmode=require",
+        f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}?sslmode=require",
 }
 
 print("=" * 80)
-print("TESTING ALL SUPABASE CONNECTION METHODS")
+print("TESTING DATABASE CONNECTION METHODS")
 print("=" * 80)
 print()
 

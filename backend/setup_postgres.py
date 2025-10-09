@@ -1,13 +1,14 @@
 import psycopg2
 from psycopg2 import sql
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+import os
 
-# Database credentials
-DB_HOST = "localhost"
-DB_PORT = "5432"
-DB_USER = "postgres"
-DB_PASSWORD = "Bhanu123@"
-DB_NAME = "health_predictor"
+# Database credentials - use environment variables
+DB_HOST = os.getenv("DB_HOST", "localhost")
+DB_PORT = os.getenv("DB_PORT", "5432")
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "password")
+DB_NAME = os.getenv("DB_NAME", "health_predictor")
 
 def create_database():
     """Create the database if it doesn't exist."""

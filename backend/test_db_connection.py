@@ -1,23 +1,36 @@
-"""Test database connection with different Supabase URLs."""
+"""Test database connection with different database URLs."""
 import psycopg2
 import sys
+import os
+
+# Get database credentials from environment variables
+db_user = os.getenv('DB_USER', 'postgres')
+db_password = os.getenv('DB_PASSWORD', 'password')
+db_host = os.getenv('DB_HOST', 'localhost')
+db_port = os.getenv('DB_PORT', '5432')
+db_name = os.getenv('DB_NAME', 'health_predictor')
 
 # Test different connection URLs
 urls = [
-    # Direct connection (works locally)
-    "postgresql://postgres:Bhanu123%40@db.txhohvmugqptewlvuhfn.supabase.co:5432/postgres",
+    # Direct connection
+    f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}",
     
-    # Session Pooler with SSL
-    "postgresql://postgres:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require",
+    # With SSL
+    f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}?sslmode=require",
     
-    # Transaction Pooler
-    "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres",
+    # Use DATABASE_URL environment variable if set
+    os.getenv('DATABASE_URL', ''),
 ]
 
-print("Testing Supabase connection URLs...\n")
+# Filter out empty URLs
+urls = [url for url in urls if url]
+
+print("Testing database connection URLs...\n")
 
 for i, url in enumerate(urls, 1):
-    print(f"Test {i}: {url[:60]}...")
+    # Mask password in output
+    display_url = url.replace(db_password, '***') if db_password in url else url[:60]
+    print(f"Test {i}: {display_url}...")
     try:
         conn = psycopg2.connect(url)
         cursor = conn.cursor()
@@ -26,10 +39,11 @@ for i, url in enumerate(urls, 1):
         print(f"✅ SUCCESS! Users count: {count}")
         cursor.close()
         conn.close()
-        print(f"✅ This URL works! Use this for Render:\n{url}\n")
+        print(f"✅ This URL works!\n")
         sys.exit(0)
     except Exception as e:
         print(f"❌ FAILED: {str(e)}\n")
 
 print("❌ All connection attempts failed!")
+print("\nTip: Set DATABASE_URL environment variable or DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME")
 sys.exit(1)

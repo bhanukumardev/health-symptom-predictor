@@ -353,46 +353,51 @@ async def database_status(db: Session = Depends(get_db)):
 async def reset_admin_password(db: Session = Depends(get_db)):
     """Reset admin password to default (for recovery purposes)"""
     try:
+        # Use environment variables for admin credentials
+        admin_email = os.getenv("ADMIN_EMAIL", "admin@example.com")
+        admin_password = os.getenv("ADMIN_PASSWORD", "defaultpassword")
+        admin_name = os.getenv("ADMIN_NAME", "Admin User")
+        
         # Find admin user by email
-        admin_user = db.query(User).filter(User.email == "kumarbhanu818@gmail.com").first()
+        admin_user = db.query(User).filter(User.email == admin_email).first()
         
         if admin_user:
             # Update password and ensure admin status
-            admin_user.hashed_password = get_password_hash("Bhanu123@")
+            admin_user.hashed_password = get_password_hash(admin_password)
             admin_user.is_admin = True
             admin_user.is_active = True
-            admin_user.full_name = "Bhanu Kumar Dev"
-            admin_user.age = 21
-            admin_user.gender = "male"
-            admin_user.weight = 75.0
+            admin_user.full_name = admin_name
+            admin_user.age = int(os.getenv("ADMIN_AGE", "30"))
+            admin_user.gender = os.getenv("ADMIN_GENDER", "other")
+            admin_user.weight = float(os.getenv("ADMIN_WEIGHT", "70.0"))
             db.commit()
             
             return {
                 "message": "Admin password reset successfully",
-                "email": "kumarbhanu818@gmail.com",
-                "password": "Bhanu123@",
+                "email": admin_email,
+                "password": "Check ADMIN_PASSWORD environment variable",
                 "is_admin": True,
                 "status": "updated"
             }
         else:
             # Create new admin user if not exists
             admin_user = User(
-                email="kumarbhanu818@gmail.com",
-                hashed_password=get_password_hash("Bhanu123@"),
-                full_name="Bhanu Kumar Dev",
+                email=admin_email,
+                hashed_password=get_password_hash(admin_password),
+                full_name=admin_name,
                 is_admin=True,
                 is_active=True,
-                age=21,
-                gender="male",
-                weight=75.0
+                age=int(os.getenv("ADMIN_AGE", "30")),
+                gender=os.getenv("ADMIN_GENDER", "other"),
+                weight=float(os.getenv("ADMIN_WEIGHT", "70.0"))
             )
             db.add(admin_user)
             db.commit()
             
             return {
                 "message": "Admin user created successfully",
-                "email": "kumarbhanu818@gmail.com",
-                "password": "Bhanu123@",
+                "email": admin_email,
+                "password": "Check ADMIN_PASSWORD environment variable",
                 "is_admin": True,
                 "status": "created"
             }

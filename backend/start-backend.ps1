@@ -9,8 +9,11 @@ Set-Location "c:\Projects\AI Project\health-symptom-predictor\backend"
 # Activate virtual environment
 & ".\venv\Scripts\Activate.ps1"
 
-# Use PostgreSQL database (permanent - reads from .env)
-$env:DATABASE_URL = "postgresql://postgres:Bhanu123%40@localhost:5432/health_predictor"
+# Use PostgreSQL database (reads from .env or environment variable)
+if (-not $env:DATABASE_URL) {
+    $env:DATABASE_URL = "postgresql://postgres:password@localhost:5432/health_predictor"
+    Write-Host "⚠️  Using default DATABASE_URL. Set DATABASE_URL environment variable for custom configuration." -ForegroundColor Yellow
+}
 
 Write-Host "✅ Configuration:" -ForegroundColor Green
 Write-Host "   Database: PostgreSQL (health_predictor)" -ForegroundColor White

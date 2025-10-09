@@ -1,6 +1,6 @@
 """
-Database Migration Script: Render PostgreSQL → Supabase PostgreSQL
-Migrates all tables, schema, and data from Render to Supabase
+Database Migration Script: Source PostgreSQL → Target PostgreSQL
+Migrates all tables, schema, and data from source to target database
 """
 
 import psycopg2
@@ -9,14 +9,15 @@ from psycopg2.extras import RealDictCursor
 import sys
 from datetime import datetime
 import json
+import os
 
-# Source: Render PostgreSQL
+# Source: PostgreSQL - use environment variables
 RENDER_CONFIG = {
-    'host': 'dpg-d3hu2c1gv73c73e0l170-a.oregon-postgres.render.com',
-    'port': 5432,
-    'database': 'health_predictor',
-    'user': 'health_predictor_user',
-    'password': 'WtIo4HLKi9AEveEmlMFYONE3dxWJhfOd',
+    'host': os.getenv('SOURCE_DB_HOST', 'source-host.com'),
+    'port': int(os.getenv('SOURCE_DB_PORT', '5432')),
+    'database': os.getenv('SOURCE_DB_NAME', 'health_predictor'),
+    'user': os.getenv('SOURCE_DB_USER', 'health_predictor_user'),
+    'password': os.getenv('SOURCE_DB_PASSWORD', 'your-password'),
     'sslmode': 'require'
 }
 
