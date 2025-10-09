@@ -1,7 +1,57 @@
-import React from 'react';
-import { FaGithub, FaLinkedin, FaInstagram, FaFacebook, FaEnvelope, FaExternalLinkAlt } from 'react-icons/fa';
+import React, { useRef, useState } from 'react';
+import { FaGithub, FaLinkedin, FaInstagram, FaFacebook, FaExternalLinkAlt, FaCheckCircle, FaPaperPlane } from 'react-icons/fa';
 
 export default function Developer() {
+  // Contact form UX state
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState<string>('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrorMsg('');
+    setStatus('loading');
+
+    try {
+      const fd = new FormData(e.currentTarget);
+      // Compose payload for Web3Forms JSON API (no redirect)
+      const payload = {
+        access_key: 'e3401362-a55c-4dc6-a2c7-b40aa6becf58',
+        name: String(fd.get('name') || ''),
+        email: String(fd.get('email') || ''),
+        subject: String(fd.get('subject') || ''),
+        message: String(fd.get('message') || ''),
+      };
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const json = await res.json();
+      if (json.success) {
+        // Clear the form and show success UI
+        formRef.current?.reset();
+        setStatus('success');
+      } else {
+        setErrorMsg(json.message || 'Something went wrong. Please try again.');
+        setStatus('error');
+      }
+    } catch (err: any) {
+      setErrorMsg(err?.message || 'Network error. Please try again.');
+      setStatus('error');
+    }
+  };
+
+  const resetForm = () => {
+    setStatus('idle');
+    setErrorMsg('');
+    formRef.current?.reset();
+  };
   return (
     <div className="min-h-screen bg-[#101528] px-4 py-10 flex flex-col items-center">
       {/* Header */}
@@ -76,20 +126,46 @@ export default function Developer() {
             Get In Touch
           </h2>
           <p className="text-gray-300 mb-6">Have questions about the app, want to collaborate, or need technical support? Send me a message and I'll get back to you soon!</p>
-          <form
-            action="https://api.web3forms.com/submit"
-            method="POST"
-            className="flex flex-col gap-4"
-          >
-            <input type="hidden" name="access_key" value="e3401362-a55c-4dc6-a2c7-b40aa6becf58" />
-            <input type="text" name="name" required placeholder="Your Name" className="bg-[#222741] p-3 rounded-lg text-white focus:outline-none" />
-            <input type="email" name="email" required placeholder="Email Address" className="bg-[#222741] p-3 rounded-lg text-white focus:outline-none" />
-            <input type="text" name="subject" placeholder="Subject" className="bg-[#222741] p-3 rounded-lg text-white focus:outline-none" />
-            <textarea name="message" required rows={5} placeholder="What's on your mind?" className="bg-[#222741] p-3 rounded-lg text-white focus:outline-none"></textarea>
-            <button type="submit" className="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 rounded-lg mt-2 transition">
-              Send Message
-            </button>
-          </form>
+
+          {/* Idle / Error / Loading states show the form; Success shows a custom success card */}
+          {status !== 'success' ? (
+            <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <input type="text" name="name" required placeholder="Your Name" className="bg-[#222741] p-3 rounded-lg text-white focus:outline-none" />
+              <input type="email" name="email" required placeholder="Email Address" className="bg-[#222741] p-3 rounded-lg text-white focus:outline-none" />
+              <input type="text" name="subject" placeholder="Subject" className="bg-[#222741] p-3 rounded-lg text-white focus:outline-none" />
+              <textarea name="message" required rows={5} placeholder="What's on your mind?" className="bg-[#222741] p-3 rounded-lg text-white focus:outline-none"></textarea>
+
+              {status === 'error' && (
+                <div className="bg-red-500/10 border border-red-500 text-red-300 text-sm px-3 py-2 rounded">
+                  {errorMsg}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={status === 'loading'}
+                className={`flex items-center justify-center gap-2 bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 rounded-lg mt-2 transition disabled:opacity-60 disabled:cursor-not-allowed`}
+                aria-busy={status === 'loading'}
+              >
+                <FaPaperPlane className="opacity-90" />
+                {status === 'loading' ? 'Sending…' : 'Send Message'}
+              </button>
+            </form>
+          ) : (
+            <div className="flex flex-col items-center text-center bg-gradient-to-br from-[#0e1a2f] to-[#1b2340] border border-cyan-800/40 rounded-xl p-8">
+              <FaCheckCircle className="text-green-400 text-5xl mb-3" />
+              <h3 className="text-2xl font-semibold text-cyan-100 mb-2">Message Sent!</h3>
+              <p className="text-gray-300 mb-4 max-w-md">
+                Thank you for reaching out. I’ve received your message and will reply soon. Have a great day!
+              </p>
+              <button
+                onClick={resetForm}
+                className="px-4 py-2 rounded-lg bg-cyan-500 hover:bg-cyan-600 text-white font-semibold"
+              >
+                Send another message
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
