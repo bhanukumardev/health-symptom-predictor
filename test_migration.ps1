@@ -1,16 +1,17 @@
 # ============================================
 # Post-Migration Testing Script
-# Tests all functionality after Supabase migration
+# Tests all functionality after database migration
 # ============================================
 
 Write-Host "`n╔══════════════════════════════════════════════════════════════╗" -ForegroundColor Cyan
 Write-Host "║                                                              ║" -ForegroundColor Cyan
-Write-Host "║     POST-MIGRATION TESTING: Supabase Database               ║" -ForegroundColor Cyan
+Write-Host "║     POST-MIGRATION TESTING: Database                        ║" -ForegroundColor Cyan
 Write-Host "║                                                              ║" -ForegroundColor Cyan
 Write-Host "╚══════════════════════════════════════════════════════════════╝" -ForegroundColor Cyan
 
-$BACKEND_URL = "https://health-symptom-predictor.onrender.com"
-$FRONTEND_URL = "https://health-symptom-predictor.netlify.app"
+# Use environment variables or defaults
+$BACKEND_URL = if ($env:BACKEND_URL) { $env:BACKEND_URL } else { "https://your-backend.app" }
+$FRONTEND_URL = if ($env:FRONTEND_URL) { $env:FRONTEND_URL } else { "https://your-frontend.app" }
 
 # Test Results
 $testResults = @()
@@ -74,12 +75,12 @@ Write-Host "`n━━━━━━━━━━━━━━━━━━━━━━
 Write-Host "PHASE 2: Authentication Tests" -ForegroundColor Cyan
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
 
-# Test 4: Login (you'll need to provide actual credentials)
-Write-Host "`nℹ️  To test login, update this script with your credentials" -ForegroundColor Yellow
+# Test 4: Login (use environment variables for credentials)
+Write-Host "`nℹ️  Using credentials from environment variables" -ForegroundColor Yellow
 
 $loginBody = @{
-    username = os.getenv('ADMIN_EMAIL', 'admin@example.com')
-    password = "YOUR_PASSWORD_HERE"  # Update this!
+    username = if ($env:ADMIN_EMAIL) { $env:ADMIN_EMAIL } else { "admin@example.com" }
+    password = if ($env:ADMIN_PASSWORD) { $env:ADMIN_PASSWORD } else { "YOUR_PASSWORD_HERE" }
 }
 
 if ($loginBody.password -ne "YOUR_PASSWORD_HERE") {

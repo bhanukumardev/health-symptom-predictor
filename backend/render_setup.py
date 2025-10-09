@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Render Backend Setup Script
-Initializes the Supabase PostgreSQL database via the IPv4-compatible connection pooler
+Initializes the PostgreSQL database via the connection pooler
 """
 import os
 import sys
@@ -14,11 +14,12 @@ import json
 # Add the backend directory to Python path
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# Set production environment variables for Render deployment using Supabase
-os.environ["DATABASE_URL"] = "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require"
+# Set production environment variables for Render deployment
+# Use environment variables for sensitive data
+os.environ["DATABASE_URL"] = os.getenv("DATABASE_URL", "postgresql://user:password@host:port/database?sslmode=require")
 os.environ["ENVIRONMENT"] = "production"
 os.environ["DEBUG"] = "False"
-os.environ["ALLOWED_ORIGINS"] = "https://health-symptom-predictor.netlify.app,https://health-symptom-predictor.onrender.com,http://localhost:3000,http://localhost:3001"
+os.environ["ALLOWED_ORIGINS"] = os.getenv("ALLOWED_ORIGINS", "https://your-frontend.app,https://your-backend.app,http://localhost:3000")
 
 def test_database_connection():
     """Test connection to Render PostgreSQL database."""
@@ -77,8 +78,13 @@ def create_admin_user():
         
         db = SessionLocal()
         
+        # Use environment variables for admin credentials
+        admin_email = os.getenv("ADMIN_EMAIL", "admin@example.com")
+        admin_password = os.getenv("ADMIN_PASSWORD", "defaultpassword")
+        admin_name = os.getenv("ADMIN_NAME", "Admin User")
+        
         # Check if admin user exists
-        admin_user = db.query(User).filter(User.email == "kumarbhanu818@gmail.com").first()
+        admin_user = db.query(User).filter(User.email == admin_email).first()
         
         if admin_user:
             print("✅ Admin user already exists!")
@@ -89,10 +95,10 @@ def create_admin_user():
                 print("🔧 Updated user to admin status!")
         else:
             # Create new admin user
-            hashed_password = get_password_hash("Bhanu123@")
+            hashed_password = get_password_hash(admin_password)
             new_admin = User(
-                email="kumarbhanu818@gmail.com",
-                name="Bhanu Kumar",
+                email=admin_email,
+                name=admin_name,
                 hashed_password=hashed_password,
                 is_admin=True,
                 is_active=True
@@ -100,8 +106,8 @@ def create_admin_user():
             db.add(new_admin)
             db.commit()
             print("✅ Admin user created successfully!")
-            print("📧 Email: kumarbhanu818@gmail.com")
-            print("🔐 Password: Bhanu123@")
+            print(f"📧 Email: {admin_email}")
+            print("🔐 Password: Check ADMIN_PASSWORD environment variable")
         
         db.close()
         return True
@@ -112,7 +118,7 @@ def create_admin_user():
 def test_backend_endpoints():
     """Test backend API endpoints."""
     print("🧪 Testing backend endpoints...")
-    base_url = "https://health-symptom-predictor.onrender.com"
+    base_url = os.getenv("BACKEND_URL", "https://your-backend.app")
     
     endpoints = [
         "/health",
@@ -138,7 +144,8 @@ def test_ai_functionality():
     """Test AI chat functionality."""
     print("🤖 Testing AI functionality...")
     try:
-        url = "https://health-symptom-predictor.onrender.com/api/chat"
+        base_url = os.getenv("BACKEND_URL", "https://your-backend.app")
+        url = f"{base_url}/api/chat"
         payload = {"message": "I have a headache and fever, what could it be?"}
         
         print("🔍 Sending test message to AI...")
@@ -162,9 +169,9 @@ def main():
     print("🚀 Starting Render Backend Setup...")
     print("=" * 50)
     
-    print(f"🎯 Service ID: srv-d3hu4l3uibrs73b7kfb0")
-    print(f"🌐 Backend URL: https://health-symptom-predictor.onrender.com")
-    print(f"🗄️ Database: Supabase PostgreSQL via Transaction Pooler")
+    print(f"🎯 Service: {os.getenv('SERVICE_NAME', 'Backend Service')}")
+    print(f"🌐 Backend URL: {os.getenv('BACKEND_URL', 'https://your-backend.app')}")
+    print(f"🗄️ Database: PostgreSQL")
     print("=" * 50)
     
     # Step 1: Test database connection

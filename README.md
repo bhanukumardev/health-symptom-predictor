@@ -266,11 +266,11 @@ Create `backend/.env`:
 
 ```env
 
-DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require- **Styling**: Tailwind CSS 3.4.13- **ASGI Server**: Uvicorn 0.24.0
+DATABASE_URL=postgresql://user:password@host:port/database?sslmode=require
 
 SECRET_KEY=your-secret-key-generate-strong-random-key
 
-ALGORITHM=HS256- **State Management**: Zustand 4.5.4- **AI Integration**: Groq LLM API
+ALGORITHM=HS256
 
 ACCESS_TOKEN_EXPIRE_MINUTES=30
 
@@ -414,15 +414,19 @@ vercel --prod
 
 
 
-**Backend (Vercel Dashboard):**---cd backend
+**Backend (Vercel Dashboard):**
 
 ```env
 
-DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+DATABASE_URL=postgresql://user:password@host:port/database?sslmode=require
 
 SECRET_KEY=<generate-strong-random-key>
 
-GROQ_API_KEY=<your-groq-api-key>## 🚀 Quick Start# Create virtual environment
+GROQ_API_KEY=<your-groq-api-key>
+
+```
+
+## 🚀 Quick Start
 
 ALGORITHM=HS256
 
@@ -538,15 +542,21 @@ Once backend is running:
 
 - **ReDoc**: http://localhost:8888/redoc
 
-```env\q
+```env
+
+DATABASE_URL=postgresql://user:password@host:port/database?sslmode=require
+
+SECRET_KEY=your-secret-key-generate-strong-random-key
+
+```
+
+# Update DATABASE_URL in backend/.env
 
 ### Key API Endpoints
 
-DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
-
 #### Authentication
 
-- `POST /api/auth/register` - Register new userSECRET_KEY=your-secret-key-generate-strong-random-key# Update DATABASE_URL in backend/.env
+- `POST /api/auth/register` - Register new user
 
 - `POST /api/auth/login` - User login (JWT)
 
@@ -814,15 +824,23 @@ ENVIRONMENT=development
 
 **Backend (Vercel Dashboard):**
 
-```env### Frontend Environment Variables
+```env
 
-DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+DATABASE_URL=postgresql://user:password@host:port/database?sslmode=require
 
-SECRET_KEY=<generate-strong-random-key>Create `frontend/.env` with:
+SECRET_KEY=<generate-strong-random-key>
 
 GROQ_API_KEY=<your-groq-api-key>
 
-ALGORITHM=HS256```env
+ALGORITHM=HS256
+
+```
+
+### Frontend Environment Variables
+
+Create `frontend/.env` with:
+
+```env
 
 ACCESS_TOKEN_EXPIRE_MINUTES=30VITE_API_URL=http://localhost:8888
 
