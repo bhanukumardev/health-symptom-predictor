@@ -108,11 +108,11 @@ Region: Oregon (US West)
 
 TARGET DATABASE (Supabase PostgreSQL)
 ─────────────────────────────────────
-Host: db.txhohvmugqptewlvuhfn.supabase.co
+Host: db.YOUR_DB_ID.supabase.co
 Port: 6543 (Connection Pooler) / 5432 (Direct)
 Database: postgres
 User: postgres
-Project URL: https://txhohvmugqptewlvuhfn.supabase.co
+Project URL: https://YOUR_DB_ID.supabase.co
 
 TABLES TO MIGRATE
 ─────────────────
@@ -220,18 +220,18 @@ Log Output: migration_log_TIMESTAMP.txt
 SUPABASE CONNECTION
 ───────────────────
 Connection Pooler (Recommended for production):
-  postgresql://postgres.txhohvmugqptewlvuhfn:[PASSWORD]@aws-0-us-west-1.pooler.supabase.com:6543/postgres
+  postgresql://postgres.YOUR_DB_ID:[PASSWORD]@aws-0-us-west-1.pooler.supabase.com:6543/postgres
 
 Direct Connection (For migrations/admin):
-  postgresql://postgres:[PASSWORD]@db.txhohvmugqptewlvuhfn.supabase.co:5432/postgres
+  postgresql://postgres:[PASSWORD]@db.YOUR_DB_ID.supabase.co:5432/postgres
 
 SSL: Required (sslmode=require)
 
 ENVIRONMENT VARIABLES TO UPDATE
 ────────────────────────────────
 Render Dashboard (srv-d3hu4l3uibrs73b7kfb0):
-  DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:[PASSWORD]@aws-0-us-west-1.pooler.supabase.com:6543/postgres
-  SUPABASE_URL=https://txhohvmugqptewlvuhfn.supabase.co
+  DATABASE_URL=postgresql://postgres.YOUR_DB_ID:[PASSWORD]@aws-0-us-west-1.pooler.supabase.com:6543/postgres
+  SUPABASE_URL=https://YOUR_DB_ID.supabase.co
   SUPABASE_ANON_KEY=[YOUR_ANON_KEY]
   GROQ_API_KEY=[YOUR_API_KEY]
 

@@ -23,7 +23,7 @@
   2. Click: health-symptom-predictor service
   3. Click: Environment tab
   4. Edit: DATABASE_URL
-  5. Paste: postgresql://postgres:Bhanu123%40@db.txhohvmugqptewlvuhfn.supabase.co:5432/postgres?sslmode=require
+  5. Paste: postgresql://postgres:YOUR_PASSWORD@db.YOUR_DB_ID.supabase.co:5432/postgres?sslmode=require
   6. Click: Save Changes
   7. Wait: 2-3 minutes for redeploy
 
@@ -68,7 +68,7 @@
   Try Alternative DATABASE_URL:
   
   Session Pooler:
-  postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+  postgresql://postgres.YOUR_DB_ID:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ ✨ SUCCESS INDICATORS                                                        │

@@ -71,7 +71,7 @@ if (-not $loginSuccess) {
     Write-Host "2. Select: health-symptom-predictor service" -ForegroundColor White
     Write-Host "3. Go to: Environment tab" -ForegroundColor White
     Write-Host "4. Update DATABASE_URL to:" -ForegroundColor White
-    Write-Host "   postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require" -ForegroundColor Cyan
+    Write-Host "   postgresql://postgres.YOUR_DB_ID:YOUR_PASSWORD@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require" -ForegroundColor Cyan
     Write-Host "5. Save and wait for redeploy (~2 minutes)" -ForegroundColor White
     Write-Host "6. Run this script again" -ForegroundColor White
     Write-Host ""
