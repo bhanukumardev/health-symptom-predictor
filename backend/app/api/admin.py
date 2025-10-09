@@ -329,8 +329,9 @@ async def database_status(db: Session = Depends(get_db)):
         user_count = db.query(User).count()
         disease_count = db.query(Disease).count()
         
-        # Check if admin user exists
-        admin_exists = db.query(User).filter(User.email == "kumarbhanu818@gmail.com").first() is not None
+        # Check if admin user exists (use environment variable)
+        admin_email = os.getenv("ADMIN_EMAIL", "admin@example.com")
+        admin_exists = db.query(User).filter(User.email == admin_email).first() is not None
         
         return {
             "database_status": "connected",

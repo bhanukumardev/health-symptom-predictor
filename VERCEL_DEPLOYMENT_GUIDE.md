@@ -20,7 +20,7 @@ Before you begin, ensure you have:
 
 1. ✅ **Vercel Account** - Sign up at [vercel.com](https://vercel.com)
 2. ✅ **GitHub Account** - Your code should be in a GitHub repository
-3. ✅ **Supabase Database** - Already configured (postgres.txhohvmugqptewlvuhfn...)
+3. ✅ **PostgreSQL Database** - Set up your database (e.g., Supabase, Render, AWS RDS)
 4. ✅ **Groq API Key** - For AI chatbot functionality
 5. ✅ **Git CLI** - Installed on your machine
 

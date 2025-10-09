@@ -21,14 +21,13 @@ RENDER_CONFIG = {
     'sslmode': 'require'
 }
 
-# Target: Supabase PostgreSQL
-# Password configured for migration
+# Target: PostgreSQL - use environment variables
 SUPABASE_CONFIG = {
-    'host': 'db.txhohvmugqptewlvuhfn.supabase.co',
-    'port': 5432,  # Using direct connection for migration (not pooler)
-    'database': 'postgres',
-    'user': 'postgres',
-    'password': 'Bhanu123@',
+    'host': os.getenv('TARGET_DB_HOST', 'target-host.com'),
+    'port': int(os.getenv('TARGET_DB_PORT', '5432')),
+    'database': os.getenv('TARGET_DB_NAME', 'postgres'),
+    'user': os.getenv('TARGET_DB_USER', 'postgres'),
+    'password': os.getenv('TARGET_DB_PASSWORD', 'your-password'),
     'sslmode': 'require'
 }
 
@@ -333,9 +332,10 @@ if __name__ == "__main__":
 
 ⚠️  IMPORTANT: Before running this script:
 
-1. Get your Supabase database password:
-   - Go to: https://supabase.com/dashboard/project/txhohvmugqptewlvuhfn
-   - Click: Project Settings → Database
+1. Get your target database credentials and set environment variables:
+   - SOURCE_DB_HOST, SOURCE_DB_PORT, SOURCE_DB_NAME, SOURCE_DB_USER, SOURCE_DB_PASSWORD
+   - TARGET_DB_HOST, TARGET_DB_PORT, TARGET_DB_NAME, TARGET_DB_USER, TARGET_DB_PASSWORD
+   - Or use your database dashboard to get the connection string
    - Find: Database Password (or Connection String)
    - Copy the password
 

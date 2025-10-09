@@ -768,15 +768,13 @@ Frontend will be available at: http://localhost:3000
 
 
 
-## 📞 Support### Backend Environment Variables
+## 📞 Support
 
-
-
-- 📧 Email: kumarbhanu818@gmail.com**For detailed step-by-step instructions, see:**
+**For detailed step-by-step instructions, see:**
 
 - 🐛 Issues: [GitHub Issues](https://github.com/bhanukumardev/health-symptom-predictor/issues)
 
-👉 **[VERCEL_DEPLOYMENT_GUIDE.md](./VERCEL_DEPLOYMENT_GUIDE.md)**Create `backend/.env` with the following:
+👉 **[VERCEL_DEPLOYMENT_GUIDE.md](./VERCEL_DEPLOYMENT_GUIDE.md)**
 
 ---
 

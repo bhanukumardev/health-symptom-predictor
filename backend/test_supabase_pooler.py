@@ -107,8 +107,8 @@ if working_urls:
 else:
     print("\n❌ No working connection methods found!")
     print("\n🆘 Troubleshooting steps:")
-    print("1. Verify Supabase project is active")
-    print("2. Check password is correct: Bhanu123@")
-    print("3. Verify project ID: txhohvmugqptewlvuhfn")
-    print("4. Check Supabase dashboard for connection pooling settings")
+    print("1. Verify database project is active")
+    print("2. Check environment variables are set correctly:")
+    print("   - DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME")
+    print("3. Check database dashboard for connection pooling settings")
     sys.exit(1)
