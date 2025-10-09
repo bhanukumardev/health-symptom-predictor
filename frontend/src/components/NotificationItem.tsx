@@ -88,7 +88,14 @@ const NotificationItem: React.FC<NotificationItemProps> = ({ notification, onMar
           {/* Footer */}
           <div className="flex items-center justify-between gap-2">
             <span className="text-xs text-gray-500">
-              {formatDistanceToNow(new Date(notification.created_at), { addSuffix: true })}
+              {(() => {
+                // Ensure consistent timezone handling: treat timestamps without timezone as UTC
+                const raw = notification.created_at;
+                const hasTZ = /[zZ]|[\+\-]\d{2}:?\d{2}$/.test(raw);
+                const iso = hasTZ ? raw : `${raw.replace(' ', 'T').replace(/Z?$/, '')}Z`;
+                const d = new Date(iso);
+                return formatDistanceToNow(d, { addSuffix: true });
+              })()}
             </span>
 
             {/* Delete button (only for non-announcement notifications) */}

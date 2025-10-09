@@ -35,6 +35,15 @@ const NotificationDropdown: React.FC<NotificationDropdownProps> = ({ isOpen, onC
     }
   }, [isOpen, showUnreadOnly]);
 
+  // Auto-refresh notifications every 30s while the dropdown is open
+  useEffect(() => {
+    if (!isOpen) return;
+    const interval = setInterval(() => {
+      fetchNotifications();
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [isOpen, showUnreadOnly]);
+
   useEffect(() => {
     try {
       const full = localStorage.getItem('user_full_name') || '';
