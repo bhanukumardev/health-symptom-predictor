@@ -27,7 +27,7 @@
   Username: postgres ❌
   
   Should use:
-  Username: postgres.txhohvmugqptewlvuhfn ✅
+  Username: postgres.YOUR_DB_ID ✅
   (Project-specific format required by Supabase poolers)
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -42,7 +42,7 @@
   ════════════════════════════
   Environment → Edit DATABASE_URL → Paste this:
 
-  postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+  postgresql://postgres.YOUR_DB_ID:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
 
   Step 3: SAVE
   ════════════
@@ -59,7 +59,7 @@
 │ 📋 COPY-PASTE READY DATABASE_URL                                             │
 └──────────────────────────────────────────────────────────────────────────────┘
 
-postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+postgresql://postgres.YOUR_DB_ID:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ 🔄 IF SESSION POOLER STILL FAILS                                             │
@@ -67,7 +67,7 @@ postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.s
 
   Try Transaction Pooler (Port 6543):
 
-  postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+  postgresql://postgres.YOUR_DB_ID:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ 🎉 AFTER SUCCESS                                                             │
@@ -92,14 +92,14 @@ postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.s
 
   The key difference:
   postgres                      ❌ Generic username (doesn't work with pooler)
-  postgres.txhohvmugqptewlvuhfn ✅ Project-specific username (required)
+  postgres.YOUR_DB_ID ✅ Project-specific username (required)
 
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                              ║
 ║  You're ONE username change away from success! 🚀                           ║
 ║                                                                              ║
 ║  Click: https://dashboard.render.com/web/srv-d3hu4l3uibrs73b7kfb0          ║
-║  Update: DATABASE_URL with postgres.txhohvmugqptewlvuhfn                    ║
+║  Update: DATABASE_URL with postgres.YOUR_DB_ID                    ║
 ║  Time: 2 minutes                                                             ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝

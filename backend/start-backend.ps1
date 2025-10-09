@@ -10,7 +10,7 @@ Set-Location "c:\Projects\AI Project\health-symptom-predictor\backend"
 & ".\venv\Scripts\Activate.ps1"
 
 # Use PostgreSQL database (permanent - reads from .env)
-$env:DATABASE_URL = "postgresql://postgres:Bhanu123%40@localhost:5432/health_predictor"
+$env:DATABASE_URL = "postgresql://postgres:YOUR_LOCAL_PASSWORD@localhost:5432/health_predictor"
 
 Write-Host "✅ Configuration:" -ForegroundColor Green
 Write-Host "   Database: PostgreSQL (health_predictor)" -ForegroundColor White

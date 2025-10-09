@@ -131,7 +131,7 @@ Write-Host "PHASE 5: Database Verification (Supabase)" -ForegroundColor Cyan
 Write-Host "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" -ForegroundColor Cyan
 
 Write-Host "`nℹ️  Supabase Dashboard:" -ForegroundColor Cyan
-Write-Host "https://supabase.com/dashboard/project/txhohvmugqptewlvuhfn" -ForegroundColor White
+Write-Host "https://supabase.com/dashboard/project/YOUR_DB_ID" -ForegroundColor White
 
 Write-Host "`nVerify these tables exist in Supabase:" -ForegroundColor Yellow
 $tables = @("users", "symptoms", "diseases", "predictions", "feedback", "notifications")

@@ -11,7 +11,7 @@
   Root Cause: RENDER DOESN'T SUPPORT IPv6
   
   Error from logs:
-  connection to server at "db.txhohvmugqptewlvuhfn.supabase.co" 
+  connection to server at "db.YOUR_DB_ID.supabase.co" 
   (2406:da1a:...) ← This is IPv6 address
   Network is unreachable ← Render can't connect via IPv6
 
@@ -34,7 +34,7 @@
   2. Find: DATABASE_URL variable
   3. Check if it shows:
   
-     postgresql://postgres:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+     postgresql://postgres:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
      
   4. If WRONG → Click Edit → Paste above URL → Save
   5. If CORRECT → Proceed to Step 3
@@ -51,7 +51,7 @@
   1. Click: "Logs" tab (left sidebar)
   2. Watch deployment progress
   3. Look for: "Your service is live 🎉"
-  4. VERIFY: Should NOT see "db.txhohvmugqptewlvuhfn.supabase.co" errors
+  4. VERIFY: Should NOT see "db.YOUR_DB_ID.supabase.co" errors
   5. VERIFY: Should see "Application startup complete"
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -83,15 +83,15 @@
 
   1️⃣ Session Pooler with Project Username:
   ═══════════════════════════════════════
-  postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+  postgresql://postgres.YOUR_DB_ID:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
 
   2️⃣ Transaction Pooler (Port 6543):
   ═══════════════════════════════════
-  postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+  postgresql://postgres.YOUR_DB_ID:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
 
   3️⃣ Session Pooler without SSL (temporary test):
   ════════════════════════════════════════════════
-  postgresql://postgres:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres
+  postgresql://postgres:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres
 
   For each attempt:
   - Update DATABASE_URL on Render
@@ -106,7 +106,7 @@
   ❌ WRONG (Current - IPv6 Error):
   ═════════════════════════════════
   sqlalchemy.exc.OperationalError: connection to server at 
-  "db.txhohvmugqptewlvuhfn.supabase.co" (2406:da1a:...)
+  "db.YOUR_DB_ID.supabase.co" (2406:da1a:...)
   Network is unreachable
 
   ✅ CORRECT (After Fix):
@@ -178,6 +178,6 @@
 SESSION POOLER URL (COPY-PASTE READY):
 ═══════════════════════════════════════════════════════════════════════════════
 
-postgresql://postgres:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+postgresql://postgres:YOUR_PASSWORD@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
 
 ═══════════════════════════════════════════════════════════════════════════════
