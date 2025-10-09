@@ -13,7 +13,7 @@ load_dotenv()
 # Get database URL from environment
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require",
+    "postgresql://user:password@host:port/database?sslmode=require",
 )
 
 def run_migration():

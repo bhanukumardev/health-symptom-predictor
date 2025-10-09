@@ -27,7 +27,7 @@
   Username: postgres ❌
   
   Should use:
-  Username: postgres.txhohvmugqptewlvuhfn ✅
+  Username: postgres.PROJECT_ID ✅
   (Project-specific format required by Supabase poolers)
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
@@ -36,13 +36,13 @@
 
   Step 1: GO TO RENDER
   ════════════════════
-  https://dashboard.render.com/web/srv-d3hu4l3uibrs73b7kfb0
+  https://dashboard.render.com/web/srv-YOUR-SERVICE-ID
 
   Step 2: UPDATE DATABASE_URL
   ════════════════════════════
-  Environment → Edit DATABASE_URL → Paste this:
+  Environment → Edit DATABASE_URL → Paste your database URL:
 
-  postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+  postgresql://user:password@host:port/database?sslmode=require
 
   Step 3: SAVE
   ════════════
@@ -51,15 +51,15 @@
   Step 4: TEST
   ════════════
   $body = @{username=$env:ADMIN_EMAIL ?? 'admin@example.com'; password=$env:ADMIN_PASSWORD ?? 'defaultpassword'}
-  Invoke-RestMethod -Uri 'https://health-symptom-predictor.onrender.com/api/auth/login' -Method Post -Body $body -ContentType 'application/x-www-form-urlencoded'
+  Invoke-RestMethod -Uri 'https://your-backend-url.com/api/auth/login' -Method Post -Body $body -ContentType 'application/x-www-form-urlencoded'
 
   Expected: Returns access_token ✅
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
-│ 📋 COPY-PASTE READY DATABASE_URL                                             │
+│ 📋 DATABASE URL FORMAT                                                       │
 └──────────────────────────────────────────────────────────────────────────────┘
 
-postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+postgresql://user:password@host:port/database?sslmode=require
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ 🔄 IF SESSION POOLER STILL FAILS                                             │
@@ -67,7 +67,7 @@ postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.s
 
   Try Transaction Pooler (Port 6543):
 
-  postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+  postgresql://user:password@host:6543/database?sslmode=require
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ 🎉 AFTER SUCCESS                                                             │
@@ -78,7 +78,7 @@ postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.s
      .\TEST_AFTER_DATABASE_UPDATE.ps1
 
   2. Test frontend:
-     Open: https://health-symptom-predictor.netlify.app
+     Open: https://your-frontend-url.app
      Login: Use admin credentials from environment variables or register
 
   3. Celebrate! 🎊 Your app will be FULLY OPERATIONAL!
@@ -91,15 +91,15 @@ postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.s
   Attempt 2: postgres.PROJECT_ID@pooler    → Should work! ✅
 
   The key difference:
-  postgres                      ❌ Generic username (doesn't work with pooler)
-  postgres.txhohvmugqptewlvuhfn ✅ Project-specific username (required)
+  postgres                 ❌ Generic username (doesn't work with pooler)
+  postgres.PROJECT_ID      ✅ Project-specific username (required)
 
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                              ║
 ║  You're ONE username change away from success! 🚀                           ║
 ║                                                                              ║
-║  Click: https://dashboard.render.com/web/srv-d3hu4l3uibrs73b7kfb0          ║
-║  Update: DATABASE_URL with postgres.txhohvmugqptewlvuhfn                    ║
+║  Click: https://dashboard.render.com/web/srv-YOUR-SERVICE-ID               ║
+║  Update: DATABASE_URL with postgres.PROJECT_ID                              ║
 ║  Time: 2 minutes                                                             ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Final System Test - Verify Complete Health Symptom Predictor Deployment
-Tests both Render backend and Netlify frontend after DATABASE_URL fix
+Tests both backend and frontend after database migration
 """
 import requests
 import json
@@ -10,10 +10,10 @@ import sys
 import os
 from datetime import datetime
 
-# Configuration
-BACKEND_URL = "https://health-symptom-predictor.onrender.com"
-FRONTEND_URL = "https://health-symptom-predictor.netlify.app"
-# Admin credentials - use environment variables in production
+# Configuration - Use environment variables
+BACKEND_URL = os.getenv('BACKEND_URL', 'https://your-backend.app')
+FRONTEND_URL = os.getenv('FRONTEND_URL', 'https://your-frontend.app')
+# Admin credentials - use environment variables
 ADMIN_EMAIL = os.getenv('ADMIN_EMAIL', 'admin@example.com')
 ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD', 'defaultpassword')
 
@@ -169,21 +169,21 @@ def main():
         print(f"   API Docs: {BACKEND_URL}/docs")
         print(f"\n👑 Admin Login:")
         print(f"   Email: {ADMIN_EMAIL}")
-        print(f"   Password: {ADMIN_PASSWORD}")
+        print(f"   Password: Check ADMIN_PASSWORD environment variable")
         print("\n🚀 Your app is ready for users!")
         
     else:
         print("❌ Some tests failed. Issues to address:")
         print("\n📋 Common Solutions:")
-        print("1. DATABASE_URL not updated on Render")
-        print("   → Check RENDER_DATABASE_URL_URGENT_FIX.md")
-        print("2. Render service not fully deployed")
+        print("1. DATABASE_URL not updated on deployment platform")
+        print("   → Check your deployment platform's environment variables")
+        print("2. Service not fully deployed")
         print("   → Wait 2-3 minutes after DATABASE_URL change")
         print("3. Database connection issues")
-        print("   → Verify Supabase pooler string is correct")
+        print("   → Verify database connection string is correct")
         print(f"\n🔍 Debug URLs:")
-        print(f"   Render Dashboard: https://dashboard.render.com/")
-        print(f"   Render Logs: https://dashboard.render.com/web/srv-d3hu4l3uibrs73b7kfb0")
+        print(f"   Backend: {BACKEND_URL}")
+        print(f"   Frontend: {FRONTEND_URL}")
         
     print("\n" + "="*60)
     return 0 if all_tests_passed else 1

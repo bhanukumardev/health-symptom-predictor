@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-Setup script for the Supabase PostgreSQL database (used by Render deployment).
-This script creates the necessary tables for the health symptom predictor application
-over the IPv4-compatible transaction pooler.
+Setup script for the PostgreSQL database (used by Render deployment).
+This script creates the necessary tables for the health symptom predictor application.
 """
 
 import os
@@ -12,8 +11,8 @@ from app.core.database import Base
 from app.models.models import User, Symptom, Disease, Prediction, Feedback
 from app.models.notification import Notification
 
-# Supabase transaction pooler connection string (IPv4 compatible for Render)
-RENDER_DATABASE_URL = "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require"
+# Database connection string - use environment variable
+RENDER_DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@host:port/database?sslmode=require")
 
 def setup_render_database():
     """Setup the Supabase PostgreSQL database with all required tables."""

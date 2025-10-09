@@ -8,24 +8,25 @@ from psycopg2 import sql
 from psycopg2.extras import RealDictCursor
 import sys
 from datetime import datetime
+import os
 
-# Source: Render PostgreSQL
+# Source: Render PostgreSQL - Use environment variables
 RENDER_CONFIG = {
-    'host': 'dpg-d3hu2c1gv73c73e0l170-a.oregon-postgres.render.com',
-    'port': 5432,
-    'database': 'health_predictor',
-    'user': 'health_predictor_user',
-    'password': 'WtIo4HLKi9AEveEmlMFYONE3dxWJhfOd',
+    'host': os.getenv('SOURCE_DB_HOST', 'source-host.com'),
+    'port': int(os.getenv('SOURCE_DB_PORT', 5432)),
+    'database': os.getenv('SOURCE_DB_NAME', 'health_predictor'),
+    'user': os.getenv('SOURCE_DB_USER', 'health_predictor_user'),
+    'password': os.getenv('SOURCE_DB_PASSWORD', 'your-password'),
     'sslmode': 'require'
 }
 
-# Target: Supabase PostgreSQL
+# Target: Supabase PostgreSQL - Use environment variables
 SUPABASE_CONFIG = {
-    'host': 'db.txhohvmugqptewlvuhfn.supabase.co',
-    'port': 5432,
-    'database': 'postgres',
-    'user': 'postgres',
-    'password': 'Bhanu123@',
+    'host': os.getenv('TARGET_DB_HOST', 'target-host.com'),
+    'port': int(os.getenv('TARGET_DB_PORT', 5432)),
+    'database': os.getenv('TARGET_DB_NAME', 'postgres'),
+    'user': os.getenv('TARGET_DB_USER', 'postgres'),
+    'password': os.getenv('TARGET_DB_PASSWORD', 'your-password'),
     'sslmode': 'require'
 }
 

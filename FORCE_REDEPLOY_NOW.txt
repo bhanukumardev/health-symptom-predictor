@@ -26,17 +26,17 @@
 
   Step 1: GO TO RENDER DASHBOARD
   ════════════════════════════════
-  Direct link: https://dashboard.render.com/web/srv-d3hu4l3uibrs73b7kfb0
+  Direct link: https://dashboard.render.com/
 
   Step 2: VERIFY DATABASE_URL (CRITICAL!)
   ════════════════════════════════════════
   1. Click: Environment tab (left sidebar)
   2. Find: DATABASE_URL variable
-  3. Check if it shows:
+  3. Check if it shows the correct format:
   
-     postgresql://postgres:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+     postgresql://user:password@host:port/database?sslmode=require
      
-  4. If WRONG → Click Edit → Paste above URL → Save
+  4. If WRONG → Click Edit → Paste your database URL → Save
   5. If CORRECT → Proceed to Step 3
 
   Step 3: FORCE MANUAL REDEPLOY
@@ -51,8 +51,7 @@
   1. Click: "Logs" tab (left sidebar)
   2. Watch deployment progress
   3. Look for: "Your service is live 🎉"
-  4. VERIFY: Should NOT see "db.txhohvmugqptewlvuhfn.supabase.co" errors
-  5. VERIFY: Should see "Application startup complete"
+  4. VERIFY: Should see "Application startup complete"
 
 ┌──────────────────────────────────────────────────────────────────────────────┐
 │ ✅ HOW TO KNOW IT WORKED                                                     │
@@ -63,7 +62,7 @@
   PowerShell:
   ───────────
   $body = @{username=$env:ADMIN_EMAIL ?? 'admin@example.com'; password=$env:ADMIN_PASSWORD ?? 'defaultpassword'}
-  Invoke-RestMethod -Uri 'https://health-symptom-predictor.onrender.com/api/auth/login' -Method Post -Body $body -ContentType 'application/x-www-form-urlencoded'
+  Invoke-RestMethod -Uri 'https://your-backend-url.com/api/auth/login' -Method Post -Body $body -ContentType 'application/x-www-form-urlencoded'
 
   Expected Success:
   ─────────────────
@@ -83,15 +82,15 @@
 
   1️⃣ Session Pooler with Project Username:
   ═══════════════════════════════════════
-  postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+  postgresql://user.PROJECT_ID:password@host:5432/database?sslmode=require
 
   2️⃣ Transaction Pooler (Port 6543):
   ═══════════════════════════════════
-  postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+  postgresql://user.PROJECT_ID:password@host:6543/database?sslmode=require
 
   3️⃣ Session Pooler without SSL (temporary test):
   ════════════════════════════════════════════════
-  postgresql://postgres:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres
+  postgresql://user:password@host:5432/database
 
   For each attempt:
   - Update DATABASE_URL on Render
@@ -129,7 +128,7 @@
   Expected: ✅ ALL TESTS PASSED!
 
   Then test frontend:
-  1. Open: https://health-symptom-predictor.netlify.app
+  1. Open: https://your-frontend-url.app
   2. Login: Use admin credentials from environment variables or register
   3. Test: Predictions, History, Notifications, Profile
 
@@ -151,33 +150,33 @@
 
   If all pooler formats fail:
   
-  1. Check Supabase Dashboard:
+  1. Check Database Dashboard:
      - Project Settings → Database
      - Verify "Connection Pooling" is enabled
-     - Get the exact pooler connection string from there
+     - Get the exact pooler connection string
   
-  2. Contact Supabase Support:
-     - Ask: "How to connect from IPv4-only environment (Render.com)?"
+  2. Contact Database Provider Support:
+     - Ask: "How to connect from IPv4-only environment?"
      - Request: IPv4-compatible connection string
   
   3. Alternative (temporary):
-     - Use Supabase REST API instead of direct PostgreSQL
+     - Use REST API instead of direct PostgreSQL
      - Or add IPv6-to-IPv4 proxy service
 
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                              ║
-║  🎯 IMMEDIATE ACTION: Click this link and Manual Deploy                     ║
+║  🎯 IMMEDIATE ACTION: Manual Deploy                                         ║
 ║                                                                              ║
-║  👉 https://dashboard.render.com/web/srv-d3hu4l3uibrs73b7kfb0               ║
+║  👉 https://dashboard.render.com/                                           ║
 ║                                                                              ║
 ║  Steps: Environment → Verify DATABASE_URL → Manual Deploy → Wait            ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 
 ═══════════════════════════════════════════════════════════════════════════════
-SESSION POOLER URL (COPY-PASTE READY):
+DATABASE URL FORMAT (EXAMPLE):
 ═══════════════════════════════════════════════════════════════════════════════
 
-postgresql://postgres:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require
+postgresql://user:password@host:port/database?sslmode=require
 
 ═══════════════════════════════════════════════════════════════════════════════

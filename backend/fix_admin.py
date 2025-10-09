@@ -1,14 +1,18 @@
 import sys
 import psycopg2
+import os
+
+# Get admin credentials from environment variables
+admin_email = os.getenv("ADMIN_EMAIL", "admin@example.com")
 
 try:
-    # Connect to PostgreSQL
+    # Connect to PostgreSQL - use environment variables
     conn = psycopg2.connect(
-        host="127.0.0.1",
-        port=5432,
-        database="health_db",
-        user="health_user",
-        password="health_password"
+        host=os.getenv("DB_HOST", "127.0.0.1"),
+        port=int(os.getenv("DB_PORT", "5432")),
+        database=os.getenv("DB_NAME", "health_db"),
+        user=os.getenv("DB_USER", "health_user"),
+        password=os.getenv("DB_PASSWORD", "health_password")
     )
     cursor = conn.cursor()
     
@@ -16,8 +20,8 @@ try:
     cursor.execute("""
         UPDATE users 
         SET is_admin = TRUE, is_active = TRUE
-        WHERE email = 'kumarbhanu818@gmail.com'
-    """)
+        WHERE email = %s
+    """, (admin_email,))
     
     rows_affected = cursor.rowcount
     conn.commit()
@@ -29,8 +33,8 @@ try:
         cursor.execute("""
             SELECT email, is_admin, is_active 
             FROM users 
-            WHERE email = 'kumarbhanu818@gmail.com'
-        """)
+            WHERE email = %s
+        """, (admin_email,))
         user = cursor.fetchone()
         print(f"\n📋 User Status:")
         print(f"   Email: {user[0]}")
@@ -49,7 +53,8 @@ try:
             print("\n❌ ERROR: is_admin is still FALSE!")
             sys.exit(1)
     else:
-        print("❌ ERROR: User not found!")
+        print(f"❌ ERROR: User '{admin_email}' not found!")
+        print("Tip: Set ADMIN_EMAIL environment variable to match your user email")
         sys.exit(1)
         
     cursor.close()

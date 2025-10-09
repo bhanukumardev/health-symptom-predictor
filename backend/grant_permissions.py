@@ -1,12 +1,13 @@
 import psycopg2
+import os
 
-# Connect as postgres superuser
+# Connect as postgres superuser - use environment variables
 conn = psycopg2.connect(
-    host="127.0.0.1",
-    port=5432,
-    database="health_db",
-    user="postgres",
-    password="Bhanu123@"
+    host=os.getenv("DB_HOST", "127.0.0.1"),
+    port=int(os.getenv("DB_PORT", "5432")),
+    database=os.getenv("DB_NAME", "health_db"),
+    user=os.getenv("DB_USER", "postgres"),
+    password=os.getenv("DB_PASSWORD", "password")
 )
 conn.autocommit = True
 cursor = conn.cursor()
