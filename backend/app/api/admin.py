@@ -1,10 +1,11 @@
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy import func
 from typing import List
 from app.core.database import get_db
 from app.models.models import User, Disease, Prediction, Feedback
-from app.schemas.schemas import DiseaseResponse, DiseaseCreate
+from app.schemas.schemas import DiseaseResponse, DiseaseCreate, UserResponse
 from app.api.auth import get_current_user
 from app.core.security import get_password_hash
 import logging
@@ -12,6 +13,28 @@ import logging
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+
+def verify_admin(current_user: User = Depends(get_current_user)):
+    """Verify user is admin."""
+    if not current_user.is_admin:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Admin access required"
+        )
+    return current_user
+
+# Get full profile info for a user (admin only)
+@router.get("/users/{user_id}", response_model=UserResponse)
+def get_user_profile_admin(
+    user_id: int,
+    db: Session = Depends(get_db),
+    admin: User = Depends(verify_admin)
+):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
 
 
 def verify_admin(current_user: User = Depends(get_current_user)):

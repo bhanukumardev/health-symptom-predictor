@@ -11,10 +11,26 @@ interface User {
   prediction_count: number;
 }
 
+interface UserProfile {
+  id: number;
+  email: string;
+  full_name: string;
+  age?: number;
+  gender?: string;
+  weight?: number;
+  created_at: string;
+  is_active: boolean;
+  is_admin: boolean;
+}
+
 export default function AdminUsers() {
   const navigate = useNavigate();
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
+  const [profileModal, setProfileModal] = useState<{ open: boolean; userId?: number }>({ open: false });
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [profileLoading, setProfileLoading] = useState(false);
+  const [profileError, setProfileError] = useState('');
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -27,7 +43,7 @@ export default function AdminUsers() {
 
   const fetchUsers = async (token: string) => {
     try {
-  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
+      const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
       const response = await fetch(`${apiUrl}/api/admin/users`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -60,7 +76,7 @@ export default function AdminUsers() {
     if (!token) return;
 
     try {
-  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
+      const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
       const response = await fetch(`${apiUrl}/api/admin/users/${userId}/toggle-admin`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` }
@@ -83,7 +99,7 @@ export default function AdminUsers() {
     if (!token) return;
 
     try {
-  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
+      const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
       const response = await fetch(`${apiUrl}/api/admin/users/${userId}/toggle-active`, {
         method: 'PATCH',
         headers: { 'Authorization': `Bearer ${token}` }
@@ -99,6 +115,39 @@ export default function AdminUsers() {
     } catch (error) {
       alert((error as Error).message);
     }
+  };
+
+  // Fetch profile info for modal
+  const openProfileModal = async (userId: number) => {
+    setProfileModal({ open: true, userId });
+    setProfile(null);
+    setProfileLoading(true);
+    setProfileError('');
+    const token = localStorage.getItem('token');
+    if (!token) return;
+    try {
+      const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com';
+      const response = await fetch(`${apiUrl}/api/admin/users/${userId}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!response.ok) {
+        setProfileError('Failed to load profile');
+        setProfileLoading(false);
+        return;
+      }
+      const data = await response.json();
+      setProfile(data);
+    } catch (err) {
+      setProfileError('Network error');
+    } finally {
+      setProfileLoading(false);
+    }
+  };
+
+  const closeProfileModal = () => {
+    setProfileModal({ open: false });
+    setProfile(null);
+    setProfileError('');
   };
 
   if (loading) {
@@ -185,6 +234,13 @@ export default function AdminUsers() {
                       >
                         {user.is_active ? '🔒' : '🔓'}
                       </button>
+                      <button
+                        onClick={() => openProfileModal(user.id)}
+                        className="btn btn-ghost text-xs py-1 px-2"
+                        title="View Profile"
+                      >
+                        🧑‍💼
+                      </button>
                     </div>
                   </td>
                 </tr>
@@ -193,6 +249,38 @@ export default function AdminUsers() {
           </table>
         </div>
       </div>
+
+      {/* Profile Modal */}
+      {profileModal.open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-[#161b2a] rounded-2xl shadow-2xl p-8 w-full max-w-md relative">
+            <button
+              className="absolute top-3 right-3 text-xl text-cyan-400 hover:text-cyan-600"
+              onClick={closeProfileModal}
+              title="Close"
+            >
+              ×
+            </button>
+            <h2 className="text-2xl font-bold text-cyan-300 mb-4 text-center">User Profile</h2>
+            {profileLoading ? (
+              <div className="text-center text-cyan-400">Loading…</div>
+            ) : profileError ? (
+              <div className="text-center text-red-400">{profileError}</div>
+            ) : profile ? (
+              <div className="space-y-3">
+                <div><span className="font-semibold text-cyan-200">Email:</span> {profile.email}</div>
+                <div><span className="font-semibold text-cyan-200">Full Name:</span> {profile.full_name}</div>
+                <div><span className="font-semibold text-cyan-200">Age:</span> {profile.age ?? '—'}</div>
+                <div><span className="font-semibold text-cyan-200">Gender:</span> {profile.gender ?? '—'}</div>
+                <div><span className="font-semibold text-cyan-200">Weight:</span> {profile.weight ?? '—'} kg</div>
+                <div><span className="font-semibold text-cyan-200">Joined:</span> {new Date(profile.created_at).toLocaleDateString()}</div>
+                <div><span className="font-semibold text-cyan-200">Active:</span> {profile.is_active ? 'Yes' : 'No'}</div>
+                <div><span className="font-semibold text-cyan-200">Admin:</span> {profile.is_admin ? 'Yes' : 'No'}</div>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
