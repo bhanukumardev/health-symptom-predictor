@@ -11,6 +11,7 @@ export default function Register() {
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
   const [weight, setWeight] = useState(''); // Weight in kg for personalized dosage
+  const [height, setHeight] = useState(''); // Height in cm for BMI
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -35,6 +36,7 @@ export default function Register() {
           age: age ? parseInt(age) : undefined,
           gender: gender || undefined,
           weight: weight ? parseFloat(weight) : undefined,
+          height: height ? parseFloat(height) : undefined,
         }),
       });
       
@@ -96,7 +98,6 @@ export default function Register() {
               <span>💡</span>
               <span>Optional: Add health info for personalized recommendations</span>
             </p>
-            
             <div className="grid grid-cols-2 gap-2 md:gap-3">
               <div className="grid gap-1.5">
                 <label htmlFor="age" className="label text-xs md:text-sm">Age</label>
@@ -109,7 +110,6 @@ export default function Register() {
                   placeholder="25" 
                 />
               </div>
-              
               <div className="grid gap-1.5">
                 <label htmlFor="gender" className="label text-xs md:text-sm">Gender</label>
                 <select 
@@ -125,20 +125,31 @@ export default function Register() {
                 </select>
               </div>
             </div>
-            
-            <div className="grid gap-1.5 mt-2 md:mt-3">
-              <label htmlFor="weight" className="label text-xs md:text-sm">
-                Weight (kg)
-              </label>
-              <input 
-                id="weight" 
-                type="number" 
-                step="0.1"
-                className="input text-sm md:text-base p-2 md:p-3" 
-                value={weight} 
-                onChange={(e) => setWeight(e.target.value)} 
-                placeholder="65.5"
-              />
+            <div className="grid grid-cols-2 gap-2 md:gap-3 mt-2 md:mt-3">
+              <div className="grid gap-1.5">
+                <label htmlFor="weight" className="label text-xs md:text-sm">Weight (kg)</label>
+                <input 
+                  id="weight" 
+                  type="number" 
+                  step="0.1"
+                  className="input text-sm md:text-base p-2 md:p-3" 
+                  value={weight} 
+                  onChange={(e) => setWeight(e.target.value)} 
+                  placeholder="65.5"
+                />
+              </div>
+              <div className="grid gap-1.5">
+                <label htmlFor="height" className="label text-xs md:text-sm">Height (cm)</label>
+                <input 
+                  id="height" 
+                  type="number" 
+                  step="0.1"
+                  className="input text-sm md:text-base p-2 md:p-3" 
+                  value={height} 
+                  onChange={(e) => setHeight(e.target.value)} 
+                  placeholder="170"
+                />
+              </div>
             </div>
           </div>
           

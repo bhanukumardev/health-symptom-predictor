@@ -1,108 +1,87 @@
-import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import LanguageSwitcher from './LanguageSwitcher'
-import NotificationBell from './NotificationBell'
+import React, { useState, useEffect } from 'react';
+import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './LanguageSwitcher';
+import NotificationBell from './NotificationBell';
+import InstallPWA from './InstallPWA';
 
-export default function Layout() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { t } = useTranslation()
-  const [isAdmin, setIsAdmin] = useState(false)
-  const [token, setToken] = useState(localStorage.getItem('token'))
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  
-  useEffect(() => {
-    // Check token on mount and whenever storage changes
-    const checkToken = () => {
-      const currentToken = localStorage.getItem('token')
-      setToken(currentToken)
-      if (currentToken) {
-        checkAdminStatus(currentToken)
-      } else {
-        setIsAdmin(false)
-      }
-    }
-    
-    checkToken()
-    
-    // Listen for storage changes (e.g., login in another tab)
-    window.addEventListener('storage', checkToken)
-    
-    // Also check periodically (every 2 seconds) to catch same-tab logins
-    const interval = setInterval(checkToken, 2000)
-    
-    return () => {
-      window.removeEventListener('storage', checkToken)
-      clearInterval(interval)
-    }
-  }, [])
-  
-  const checkAdminStatus = async (authToken: string) => {
-    try {
-  const apiUrl = (import.meta.env.VITE_API_URL && import.meta.env.VITE_API_URL.trim()) || 'https://health-symptom-predictor.onrender.com'
-      console.log('🔍 Checking admin status with token:', authToken?.substring(0, 20) + '...')
-      console.log('🌐 API URL:', apiUrl)
-      const response = await fetch(`${apiUrl}/api/auth/me`, {
-        headers: { 'Authorization': `Bearer ${authToken}` }
-      })
-      console.log('📡 Response status:', response.status)
-      if (response.ok) {
-        const user = await response.json()
-        console.log('👤 User data:', user)
-        console.log('🔐 Is Admin:', user.is_admin)
-        setIsAdmin(user.is_admin || false)
-        // Persist full name for lightweight UI personalization (e.g., notifications greeting)
-        try {
-          if (user?.full_name) {
-            localStorage.setItem('user_full_name', user.full_name)
-          } else {
-            localStorage.removeItem('user_full_name')
-          }
-        } catch (e) {
-          console.warn('Could not persist user_full_name:', e)
-        }
-      } else {
-        console.log('❌ Response not OK')
-        setIsAdmin(false)
-      }
-    } catch (error) {
-      console.error('❌ Failed to check admin status:', error)
-      setIsAdmin(false)
-    }
-  }
-  
-  const onLogout = () => { 
-    localStorage.removeItem('token')
-    setToken(null)
-    setIsAdmin(false)
-    setMobileMenuOpen(false)
-    navigate('/login')
-  }
+const Layout: React.FC = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [panelOpen, setPanelOpen] = useState<boolean>(false);
+  const apiUrl = import.meta.env.VITE_API_URL || '';
 
-  // Close mobile menu when route changes
-  useEffect(() => {
-    setMobileMenuOpen(false)
-  }, [location.pathname])
-
-  // Track if profile/settings panel is open (for hiding floating widget)
-  const [panelOpen, setPanelOpen] = useState(false);
-
-  // Listen for route changes to detect profile/settings panel
   useEffect(() => {
     setPanelOpen(location.pathname === '/profile' || location.pathname === '/settings');
   }, [location.pathname]);
 
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const checkAdmin = async () => {
+      const authToken = localStorage.getItem('token');
+      if (!authToken || !apiUrl) {
+        setIsAdmin(false);
+        return;
+      }
+      try {
+        console.log('🔍 Checking admin status with token:', authToken?.substring(0, 20) + '...');
+        console.log('🌐 API URL:', apiUrl);
+        const response = await fetch(`${apiUrl}/api/auth/me`, {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        console.log('📡 Response status:', response.status);
+        if (response.ok) {
+          const user = await response.json();
+          console.log('👤 User data:', user);
+          console.log('🔐 Is Admin:', user.is_admin);
+          setIsAdmin(user.is_admin || false);
+          try {
+            if (user?.full_name) {
+              localStorage.setItem('user_full_name', user.full_name);
+            } else {
+              localStorage.removeItem('user_full_name');
+            }
+          } catch (e) {
+            // error handling
+          }
+        } else {
+          console.log('❌ Response not OK');
+          setIsAdmin(false);
+        }
+      } catch (error) {
+        console.error('❌ Failed to check admin status:', error);
+        setIsAdmin(false);
+      }
+    };
+    checkAdmin();
+  }, [token, apiUrl]);
+
+  const onLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+    setIsAdmin(false);
+    setMobileMenuOpen(false);
+    navigate('/login');
+  };
+
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Desktop & Mobile Header */}
-      <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-md">
-        <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-3 md:px-4">
-          {/* Logo */}
-          <Link to="/" className="font-semibold text-sm md:text-base truncate flex items-center gap-2">
-            <span className="text-cyan-400">🏥</span>
-            <span className="hidden sm:inline">{t('app.title')}</span>
-            <span className="sm:hidden">Health Predictor</span>
+    <>
+      <div className="min-h-screen flex flex-col">
+        {/* Desktop & Mobile Header */}
+        <header className="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/95 backdrop-blur-md">
+          <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-3 md:px-4">
+            {/* Logo */}
+            <Link to="/" className="font-semibold text-sm md:text-base truncate flex items-center gap-2">
+              <span className="text-cyan-400">🏥</span>
+              <span className="hidden sm:inline">{t('app.title')}</span>
+              <span className="sm:hidden">Health Predictor</span>
           </Link>
           
           {/* Desktop Navigation - Hidden on Mobile */}
@@ -273,7 +252,6 @@ export default function Layout() {
           <div className="mb-3 rounded-lg bg-slate-900/50 p-2 md:p-3 text-center text-xs text-yellow-400/90 border border-yellow-500/20">
             <strong>ℹ️</strong> {t('footer.disclaimer')}
           </div>
-          
           {/* Footer Credit Section */}
           <div className="flex flex-col items-center justify-center gap-1 md:gap-2 text-xs md:text-sm text-slate-400">
             <div className="flex flex-wrap items-center justify-center gap-1 md:gap-2 text-center">
@@ -308,5 +286,9 @@ export default function Layout() {
         </div>
       </footer>
     </div>
-  )
-}
+      <InstallPWA />
+    </>
+  );
+};
+
+export default Layout;
