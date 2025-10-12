@@ -1,14 +1,15 @@
 import requests
 import json
+import os
 
-BASE_URL = "http://localhost:8888"
+BASE_URL = os.getenv("BACKEND_URL", "http://localhost:8888")
 
-# Test 1: Login
+# Test 1: Login - Use environment variables
 print("=" * 50)
 print("Testing Login...")
 login_data = {
-    "email": "kumarbhanu818@gmail.com",
-    "password": "Bhanu123@"
+    "email": os.getenv("ADMIN_EMAIL", "admin@example.com"),
+    "password": os.getenv("ADMIN_PASSWORD", "defaultpassword")
 }
 response = requests.post(f"{BASE_URL}/api/auth/login", json=login_data)
 print(f"Status: {response.status_code}")

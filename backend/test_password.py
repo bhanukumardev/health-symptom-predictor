@@ -1,10 +1,17 @@
 from passlib.context import CryptContext
 import psycopg2
+import os
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
-conn = psycopg2.connect('postgresql://postgres:Bhanu123%40@db.txhohvmugqptewlvuhfn.supabase.co:5432/postgres?sslmode=require')
+
+# Use environment variable for database connection
+db_url = os.getenv('DATABASE_URL', 'postgresql://user:password@host:port/database?sslmode=require')
+conn = psycopg2.connect(db_url)
 cur = conn.cursor()
-cur.execute('SELECT email, hashed_password FROM users WHERE email = %s', ('kumarbhanu818@gmail.com',))
+
+# Use environment variable for admin email
+admin_email = os.getenv('ADMIN_EMAIL', 'admin@example.com')
+cur.execute('SELECT email, hashed_password FROM users WHERE email = %s', (admin_email,))
 user = cur.fetchone()
 
 if user:
@@ -12,7 +19,7 @@ if user:
     print(f'\nTesting passwords:')
     
     # Test different password combinations
-    passwords = ['Bhanu@123', 'Bhanu123@', 'bhanu@123']
+    passwords = os.getenv('TEST_PASSWORDS', 'password1,password2,password3').split(',')
     
     for pwd in passwords:
         is_valid = pwd_context.verify(pwd, user[1])

@@ -1,23 +1,31 @@
 """
-Test all Supabase connection methods to find the one that works on Render
+Test database connection methods
 """
 import psycopg2
 import sys
+import os
 
-# Test all possible Supabase connection strings
+# Get database credentials from environment variables
+db_password = os.getenv('DB_PASSWORD', 'password')
+db_user = os.getenv('DB_USER', 'postgres')
+db_host = os.getenv('DB_HOST', 'localhost')
+db_port = os.getenv('DB_PORT', '5432')
+db_name = os.getenv('DB_NAME', 'postgres')
+
+# Test all possible connection strings
 connection_strings = {
-    "1. Transaction Pooler (Port 6543 with project username)":
-        "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require",
+    "1. Transaction Pooler (Port 6543)":
+        f"postgresql://{db_user}:{db_password}@{db_host}:6543/{db_name}?sslmode=require",
 
-    "2. Session Pooler (Port 5432 with project username)":
-        "postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-1-ap-south-1.pooler.supabase.com:5432/postgres?sslmode=require",
+    "2. Session Pooler (Port 5432)":
+        f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}?sslmode=require",
 
     "3. Direct Connection (Port 5432)":
-        "postgresql://postgres:Bhanu123%40@db.txhohvmugqptewlvuhfn.supabase.co:5432/postgres?sslmode=require",
+        f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}?sslmode=require",
 }
 
 print("=" * 80)
-print("TESTING ALL SUPABASE CONNECTION METHODS")
+print("TESTING DATABASE CONNECTION METHODS")
 print("=" * 80)
 print()
 
@@ -99,8 +107,8 @@ if working_urls:
 else:
     print("\n❌ No working connection methods found!")
     print("\n🆘 Troubleshooting steps:")
-    print("1. Verify Supabase project is active")
-    print("2. Check password is correct: Bhanu123@")
-    print("3. Verify project ID: txhohvmugqptewlvuhfn")
-    print("4. Check Supabase dashboard for connection pooling settings")
+    print("1. Verify database project is active")
+    print("2. Check environment variables are set correctly:")
+    print("   - DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME")
+    print("3. Check database dashboard for connection pooling settings")
     sys.exit(1)

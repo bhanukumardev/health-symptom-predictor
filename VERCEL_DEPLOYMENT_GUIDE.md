@@ -20,7 +20,7 @@ Before you begin, ensure you have:
 
 1. ✅ **Vercel Account** - Sign up at [vercel.com](https://vercel.com)
 2. ✅ **GitHub Account** - Your code should be in a GitHub repository
-3. ✅ **Supabase Database** - Already configured (postgres.txhohvmugqptewlvuhfn...)
+3. ✅ **PostgreSQL Database** - Set up your database (e.g., Supabase, Render, AWS RDS)
 4. ✅ **Groq API Key** - For AI chatbot functionality
 5. ✅ **Git CLI** - Installed on your machine
 
@@ -38,7 +38,7 @@ Before you begin, ensure you have:
 
 | Variable | Value | Description |
 |----------|-------|-------------|
-| `DATABASE_URL` | `postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require` | Supabase PostgreSQL connection string |
+| `DATABASE_URL` | `postgresql://user:password@host:port/database?sslmode=require` | Your PostgreSQL connection string (e.g., from Supabase) |
 | `SECRET_KEY` | Generate strong random key | JWT secret (use: `openssl rand -hex 32`) |
 | `GROQ_API_KEY` | Your Groq API key | AI chatbot API key |
 | `ALGORITHM` | `HS256` | JWT algorithm |
@@ -91,7 +91,7 @@ Go to your Vercel dashboard:
 
 **IMPORTANT**: Add these variables:
 ```
-DATABASE_URL=postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+DATABASE_URL=postgresql://user:password@host:port/database?sslmode=require
 SECRET_KEY=<generate-strong-random-key>
 GROQ_API_KEY=<your-groq-api-key>
 ALGORITHM=HS256
@@ -308,9 +308,9 @@ npm install
 
 #### Issue 4: Database Connection Error
 
-**Solution**: Verify `DATABASE_URL` is correct:
+**Solution**: Verify `DATABASE_URL` is correct in your environment variables. Use the format:
 ```
-postgresql://postgres.txhohvmugqptewlvuhfn:Bhanu123%40@aws-0-ap-south-1.pooler.supabase.com:6543/postgres?sslmode=require
+postgresql://user:password@host:port/database?sslmode=require
 ```
 
 #### Issue 5: API Routes 404
