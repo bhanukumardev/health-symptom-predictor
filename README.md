@@ -15,9 +15,9 @@
 
 <div align="center">
 
-### 👉 **[Launch Health Symptom Predictor](https://health-symptom-predictor-vbrf.vercel.app)** 👈
+### 👉 **[Launch Health Symptom Predictor](https://health-symptom-predictor.vercel.app)** 👈
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Try_Now-brightgreen?style=for-the-badge)](https://health-symptom-predictor-vbrf.vercel.app)
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Try_Now-brightgreen?style=for-the-badge)](https://health-symptom-predictor.vercel.app)
 
 *Experience the power of AI-driven health predictions in real-time!*
 
